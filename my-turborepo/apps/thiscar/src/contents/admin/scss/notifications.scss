@@ -1,0 +1,258 @@
+.postion_set {
+    right: 4px; //-31px !important;
+}
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 200;
+    margin-top: 0;
+    .admin-loading {
+        position: relative;
+        top: 50%;
+        margin-right: 20rem;
+    }
+}
+.notifications-styles {
+    .notifications {
+        .purple-text {
+            color: #4f20f5; // #2c074b;
+        }
+
+        .notification-type {
+            // display: inline-block;
+            padding: unset;
+            .type-available {
+                background-color: #dcf4e2;
+                color: #30af50;
+            }
+
+            .type-hour-hold {
+                color: #f87f0f;
+                background-color: #fce7d4;
+            }
+
+            .type-purchase {
+                color: #5e38e7;
+                background-color: #eee9ff;
+            }
+            .type-default {
+                background-color: unset;
+            }
+
+            .oval {
+                width: 100%;
+                height: 24px;
+                border-radius: 24px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-weight: bold;
+                // padding-left: 0.5rem;
+                // padding-right: 0.5em;
+                // padding-bottom: 0.5rem;
+                // padding-top: 0.5rem;
+                //text-transform: uppercase;
+            }
+        }
+        .notification-status {
+            position: relative;
+            //  display: flex;
+            //  align-items: center;
+            // justify-content: left;
+            //  margin-top: 13px;
+            .status-circle {
+                display: inline-block;
+                width: 10px;
+                //    position: absolute;
+                //   left: 0;
+                height: 10px;
+                border-radius: 50%;
+                margin-left: 0;
+                margin-right: 3px;
+            }
+
+            .status-accepted {
+                background-color: #34c759;
+            }
+            .status-submitted {
+                background-color: #4f20f5;
+            }
+            .status-expired {
+                background-color: #AF7AC5//#ff9534;
+            }
+            .status-declined {
+                background-color: #fa2a5c;
+            }
+            .status-conflicted {
+                background-color: #641e16; //darkred; //rgb(163, 47, 47);
+            }
+            .status-default {
+                background-color: black;
+            }
+        }
+    }
+    .notifications-found-label {
+        margin-top: -10px;
+        color: #9d9ca9;
+    }
+    .notification-response-message-modal {
+        .modal-dialog {
+            margin-top: 5%;
+            min-width: 35%;
+        }
+        .modal-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1em;
+            text-align: left;
+            white-space: pre-wrap !important;
+            overflow-wrap: break-word !important;
+            word-wrap: break-word !important;
+            p {
+                box-sizing: border-box;
+                border: 0 solid #e2e8f0;
+                margin-bottom: 0.5em;
+                font-family: "Avenir-Medium";
+                font-size: 18px;
+                // white-space: pre-wrap !important;
+                // overflow-wrap: break-word !important;
+                // word-wrap: break-word !important;
+                @media screen and (max-width: 575px) {
+                    font-size: 13px;
+                }
+            }
+        }
+
+        .modal-header {
+            border-bottom: none;
+        }
+        .closeModal {
+            background: none;
+            border: none;
+        }
+        .modal-footer {
+            border-top: none;
+        }
+    }
+    div#logsModal {
+        background-color: rgba(0, 0, 0, 0.5) !important;
+    }
+    #template-admin-offsite-notifications #kt_ecommerce_products_table td {
+        padding: 10px 0;
+    }
+
+    .notification-response-message-modal .modal-body {
+        white-space: pre-wrap !important;
+        overflow-wrap: break-word !important;
+        word-wrap: break-word !important;
+    }
+    .notification-logs-table {
+        td {
+            padding: 10px 0 !important;
+        }
+        td.cursor-pointer.text-start.pe-0 {
+            color: #00a3ff;
+            &:hover {
+                color: #0082cb;
+            }
+        }
+    }
+
+    .filter-by-dealership {
+        flex-basis: 62%;
+        display: flex;
+        justify-content: end;
+    }
+    .css-t3ipsp-control {
+        border-color: #cccccc !important;
+        box-shadow: none !important;
+    }
+}
+.right-custom {
+    right: 32px;
+}
+.handle-filter-width {
+    width: 250px !important;
+}
+#template-admin-offsite-notifications table td {
+    padding: 8px;
+}
+.cursor-pointer-none {
+    pointer-events: none;
+}
+
+.notification-log-body {
+    max-height: 400px;
+    overflow-y: auto;
+    scrollbar-width: none;
+}
+.notification-log-footer {
+    display: flex;
+    justify-content: flex-start;
+    .notification-log-footer-wrap {
+        display: flex;
+        flex-direction: column;
+        .notification-log-footer-row {
+            display: flex;
+            align-items: center;
+            h6 {
+                margin: 0;
+                margin-right: 5px;
+            }
+        }
+    }
+}
+.cell-number {
+    white-space: nowrap;
+}
+.user-mobile-listing {
+    display: none;
+}
+
+@media only screen and (max-width: 992px) {
+    .user-desktop-listing {
+        display: none;
+    }
+    .user-mobile-listing {
+        display: block;
+    }
+    input[data-kt-ecommerce-product-filter] {
+        min-width: 100%;
+    }
+    .mobile-users {
+        width: 90%;
+    }
+}
+
+.desktop-view {
+    display: none;
+    @media (min-width: 568px) {
+        display: block;
+    }
+}
+.mobile-view {
+    display: none;
+    @media (max-width: 567px) {
+        display: block;
+    }
+}
+.display-inline {
+    display: inline !important;
+}
+.searchbar-width {
+    width: 100% !important;
+}
+.searchbtn-width {
+    width: 99% !important;
+}
+#kt_ecommerce_products_table_wrapper {
+    .table-responsive {
+        overflow-y: hidden;
+    }
+}
+

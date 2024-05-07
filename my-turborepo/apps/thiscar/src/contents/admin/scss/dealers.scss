@@ -1,0 +1,76 @@
+.dataTable th {
+    cursor: pointer;
+}
+.ki-plus-square {
+    cursor: pointer;
+}
+.dealers-found-label {
+    margin-top: -10px;
+    color: #9d9ca9;
+}
+
+.card-title {
+    .btn-primary {
+        color: white;
+
+        &:hover {
+            color: white;
+            background: var(--bs-primary);
+        }
+    }
+    .right-custom {
+        right: 32px;
+    }
+}
+//////////////////////////////
+.cell-number {
+    white-space: nowrap;
+}
+.dealer-mobile-listing {
+    display: none;
+}
+//@media only screen and (max-width: 600px) {
+// @media only screen and (max-width: 991px) {
+//     .dealer-desktop-listing {
+//         display: none;
+//     }
+//     .dealer-mobile-listing {
+//         display: block;
+//     }
+//     input[data-kt-ecommerce-product-filter] {
+//         min-width: 100%;
+//     }
+//     .mobile-dealers {
+//         width: 90%;
+//     }
+
+//     .dealer-info {
+//         display: flex;
+//         flex-direction: column;
+//     }
+
+//     .heading {
+//         font-weight: bold;
+//         margin-bottom: 5px;
+//     }
+
+//     .name,
+//     .website-link {
+//         margin-bottom: 5px;
+//         word-wrap: break-word;
+//     }
+//     tr td {
+//         border-bottom: 1px solid #987831 !important; //#dee2e6;
+//     }
+//     // .buttonContainer-search {
+//     //     width: 100%;
+//     // }
+
+//     // .closeButton-search {
+//     //     position: absolute;
+//     //     right: 0;
+//     //     top: 0;
+//     //     background: transparent;
+//     //     border: none;
+//     // }
+// }

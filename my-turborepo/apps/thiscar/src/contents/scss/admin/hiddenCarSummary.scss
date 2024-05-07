@@ -1,0 +1,14 @@
+.parent-div-alignment {
+    padding: 10px;
+}
+.summary-header {
+    margin-top: 25px;
+}
+#kt_docs_google_chart_pie rect {
+    fill: transparent !important;
+}
+@media only screen and (max-width: 767px) {
+    .summary-header {
+        display: block !important;
+    }
+}

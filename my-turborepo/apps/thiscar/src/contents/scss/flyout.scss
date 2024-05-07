@@ -1,0 +1,252 @@
+.btn-flyout {
+    display: flex;
+    position: fixed;
+    top: 87%;
+    left: -116px; //-112px; //-106px;
+    transform: translateY(-170%) rotate(90deg) translateX(-7%);
+    background-color: #e2e42b !important;
+    border: none;
+    cursor: pointer;
+    z-index: 9999;
+    // font-family: 'Avenir-Book';
+    line-height: 27px;
+    letter-spacing: 0em;
+    word-spacing: 0.2rem;
+    text-align: left;
+    padding: 10px 16px 10px 16px; //4px 13px 4px 13px; //6px 34px;
+    border-top-left-radius: 24px;
+    border-top-right-radius: 24px;
+    h1 {
+        font-size: 20px;
+        font-weight: 800;
+        color: #1a1919;
+    }
+    //   word-spacing: 6px;
+    @media screen and (max-width: 991px) {
+        h1 {
+            font-size: 16px !important;
+            line-height: 22px;
+        }
+        left: -100px; //-96px; //-92px;
+        padding: 2px 10px 10px 10px; //6px 14px 6px 14px;
+        border-top-left-radius: 18px;
+        border-top-right-radius: 18px;
+    }
+    @media screen and (max-width: 575px) {
+        h1 {
+            font-size: 12px;
+            line-height: 14px;
+        }
+        left: -100px; //-75px; //-70px; //-86px;
+        padding: 4px 13px 4px 13px;
+        border-top-left-radius: 16px;
+        border-top-right-radius: 16px;
+    }
+}
+:root {
+    --base-padding: 9px; /* Set your base padding value here */
+}
+
+#flyout-modal-dialog {
+    z-index: 1200 !important;
+    .modal-dialog {
+        display: flex;
+        align-items: center;
+        background-color: #e2e42b;
+        height: 294px;
+        top: 48%;
+        left: 0px;
+        border-radius: 16px;
+        margin-left: 46px;
+
+        .modal-content {
+            background-size: contain;
+            width: 495px;
+            background-repeat: no-repeat;
+            background-color: transparent !important;
+            border: none !important;
+            position: relative;
+            padding: 0px 0;
+
+            .modal-header {
+                border-bottom: none !important;
+                padding: 40px 0px 0px 104px;
+                display: block;
+                color: #2a0a4d;
+
+                // .heading{
+                //   width:100%;
+                //   margin-left: 3%;
+                h4 {
+                    font-size: x-large;
+                    // word-spacing: 0.3rem;
+                }
+                // }
+                .svg-close {
+                    position: absolute;
+                    right: 37px;
+                    top: 33px;
+                    color: #2a0a4d;
+                    cursor: pointer;
+                }
+
+                @media screen and (max-width: 575px) {
+                    padding: 20px 0 10px;
+                    text-align: center;
+                    .svg-close {
+                        right: 18%;
+                        top: 16%;
+                    }
+                    h4 {
+                        font-size: large;
+                        padding: 0px 14px 0px 0px;
+                        margin: 0 30px 0 0;
+                    }
+                    svg {
+                        margin: 0 0 0 56px;
+                        padding: 4px 0px 4px 0;
+                    }
+                }
+                @media screen and (min-width: 576px) and (max-width: 768px) {
+                    .svg-close {
+                        position: relative;
+                        right: 106px;
+                        top: 0px;
+                    }
+                    h4 {
+                        padding-top: 7px;
+                    }
+                }
+
+                @media screen and (min-width: 769px) and (max-width: 991px) {
+                    padding: 24px 0 0 96px;
+                    .svg-close {
+                        right: 40px;
+                        top: 17px;
+                    }
+                }
+            }
+
+            .modal-body {
+                border-bottom: none !important;
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+                align-items: center;
+
+                p {
+                    color: #2a0a4d;
+                    font-family: "Avenir-Medium";
+                    font-size: 18px;
+                    font-weight: 600;
+                    line-height: 24px;
+                    letter-spacing: 0em;
+                    text-align: left;
+                    margin: 17px 16px 0px 16px;
+
+                    & {
+                        @media (min-width: 536px) and (max-width: 575px) {
+                            line-height: 20px;
+                            font-weight: 800;
+                            text-align: center;
+                            color: #2a0a4d;
+                            font-size: 14px;
+                            margin: 0px 16px 0px 0px; //0px 7px 0px 43px; //0px 165px 0 10px;
+                        }
+                        @media (max-width: 535px) {
+                            line-height: 20px;
+                            font-weight: 800;
+                            text-align: center;
+                            color: #2a0a4d;
+                            font-size: 14px;
+                            margin: 0px 10px 0 10px;
+                        }
+                        @media screen and (min-width: 576px) and (max-width: 680px) {
+                            //   padding: //18px 117px 10px 0px;
+                            padding: calc(var(--base-padding) * 2) calc(var(--base-padding) * 13) var(--base-padding)
+                                0px;
+
+                            line-height: 20px;
+                            font-weight: 800;
+                            text-align: center;
+                            color: #2a0a4d;
+                            font-size: 16px;
+                            margin: 0px 10px 0 10px;
+                        }
+
+                        //   @media (max-width: 320px) {
+                        //     padding: 0 27px;
+                        //     font-size: 11px;
+                        //   }
+                    }
+                }
+                svg {
+                    margin-top: 13px;
+                    @media screen and (min-width: 536px) and (max-width: 575px) {
+                        margin: 0px 4px 0px 4px;
+                        padding: 0px 0px 14px 0px;
+                    }
+                    @media screen and (min-width: 576px) and (max-width: 768px) {
+                        width: 60px;
+                        height: 60px;
+                    }
+                }
+                @media screen and (max-width: 575px) {
+                    padding: 10px 0px 10px 40px;
+                }
+            }
+            .modal-footer {
+                display: flex;
+                justify-content: center;
+                border-top: none !important;
+                position: relative;
+                bottom: 16px;
+
+                .custom_btn {
+                    @media screen and (max-width: 575px) {
+                        width: 73%; //83%;
+                    }
+                }
+                @media screen and (max-width: 575px) {
+                    padding: 10px 10px 0 0;
+                }
+            }
+
+            @media screen and (max-width: 575px) {
+                width: 90%;
+                margin: 0 auto;
+                padding: 20px;
+            }
+            @media screen and (min-width: 576px) and (max-width: 610px) {
+                width: 615px;
+            }
+            @media screen and (min-width: 611px) and (max-width: 768px) {
+                width: 706px;
+            }
+        }
+
+        @media screen and (max-width: 575px) {
+            margin-left: 0;
+            max-width: 100%;
+            width: 100%;
+            left: 0;
+            top: 56%;
+            border-radius: unset;
+        }
+
+        @media screen and (min-width: 576px) and (max-width: 768px) {
+            max-width: 92%; //95%;
+            width: 100%;
+            left: -39px; //-34px;
+            top: 50%;
+        }
+
+        @media screen and (min-width: 769px) and (max-width: 991px) {
+            top: 44%;
+            left: 0px;
+        }
+        @media screen and (max-width: 1260px) {
+            top: 43%;
+        }
+    }
+}

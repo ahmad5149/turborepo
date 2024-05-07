@@ -1,0 +1,63 @@
+import { NextResponse } from "next/server";
+import { bigQueryClient } from "@/services/bigQueryClient";
+import { appConfig } from "@/appConfig";
+
+export async function POST(req) {
+    try {
+        const payload = await req.text();
+
+        const { startDate, endDate, dealer } = JSON.parse(payload);
+
+        const callProcedure = `CALL ${appConfig.BIG_QUERY_DATASET_ID}.SP_NotificationResponseCount(${
+            dealer?.value || null
+        },${startDate || null},${endDate || null})`;
+
+        const [rows] = await bigQueryClient(callProcedure);
+
+        const { total, accepted, declined } = rows?.reduce(
+            (acc, el) => {
+                acc.total += el.status_count;
+                if (el.status === "accepted") {
+                    acc.accepted = el.status_count;
+                } else if (el.status === "declined") {
+                    acc.declined = el.status_count;
+                }
+                return acc;
+            },
+            { total: 0, accepted: 0, declined: 0 }
+        );
+
+        return NextResponse.json({ Message: "Success", total, accepted, declined });
+    } catch (error) {
+        console.error("Error getting bigQuery rows:", error.message);
+        return null;
+    }
+}
+
+// --==========================================================================================================================
+// --Author: Ahmad Ali
+// --Descriptions: To get the notification count from Notifications Collection
+// --Application: THIScar
+// --Created Date: 23-04-2024
+// --Modified Date : 23-04-2024
+// --==========================================================================================================================
+
+// CREATE OR REPLACE PROCEDURE dev_export.SP_NotificationResponseCount(dealerId INT64, startDate INT64, endDate INT64)
+// BEGIN
+
+//    SELECT
+//     JSON_EXTRACT_SCALAR(data, '$.status') AS status,
+//     COUNT(*) AS status_count
+// FROM
+//     development-390801.dev_export.notification_raw_changelog
+// WHERE
+//     JSON_EXTRACT_SCALAR(data, '$.status') IN ("accepted","declined")
+//     AND (startDate IS NULL AND endDate IS NULL OR
+//          (startDate IS NOT NULL AND endDate IS NOT NULL AND
+//           CAST(JSON_EXTRACT(data, '$.dateOfAttempt._seconds') AS INT64) > startDate
+//           AND
+//           CAST(JSON_EXTRACT(data, '$.dateOfAttempt._seconds') AS INT64) < endDate))
+//     AND (dealerId IS NULL OR CAST(JSON_EXTRACT_SCALAR(data, '$.dealerId') AS INT64) = dealerId)
+// GROUP BY
+//     status;
+// END;

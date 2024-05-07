@@ -1,0 +1,142 @@
+@import './global_fonts.scss';
+.support_page {
+  background-image: url('../../../public/media/Support-bg.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  // background: url(../../../public/media/Support-bg.jpg);
+
+  @media (min-width: 576px) and (max-width: 991px) {
+    background-repeat: round;
+  }
+
+  .support_left {
+    h2 {
+      color: #2a0a4d;
+      font-size: 26px;
+      font-weight: 800;
+      line-height: 32px;
+      letter-spacing: 0em;
+      text-align: left;
+    }
+    .terms_policy_color {
+      color: #1a1919;
+    }
+    p {
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 21px;
+      letter-spacing: 0em;
+      text-align: left;
+      color: #1a1919;
+      margin-top: 16px;
+      margin-bottom: 24px;
+    }
+
+    .support_form {
+      input {
+        border-radius: 25px;
+        border: 1px solid #2a0a4d;
+
+        &::placeholder {
+          color: #5c666f;
+          padding-left: 12px;
+          font-size: 13px;
+          text-align: left;
+        }
+      }
+
+      .sp-btn {
+        display: flex;
+        justify-content: flex-start;
+      }
+
+      textarea {
+        border-radius: 15px;
+        border: 1px solid #2a0a4d;
+
+        &::placeholder {
+          color: #5c666f;
+          padding-left: 12px;
+          font-size: 13px;
+          text-align: left;
+        }
+      }
+    }
+    .error-field {
+      color: #d6254f;
+      font-size: 15px;
+      font-weight: 500;
+      font-family: 'Avenir';
+      margin: 0px 0px 14px 0px;
+    }
+    .success {
+      color: green;
+      font-size: 16px;
+      font-weight: 500;
+      font-family: 'Avenir';
+      margin: 0px 0px 14px 0px;
+    }
+    
+  }
+
+  .support_right {
+    .bg-yellow-card {
+      background-color: #e2e42b;
+      border-radius: 18px;
+      padding: 25px;
+      border: 1px solid #e2e42b;
+
+      h2 {
+        color: #2a0a4d;
+        font-size: 26px;
+        font-weight: 800;
+        line-height: 32px;
+        letter-spacing: 0em;
+        text-align: left;
+      }
+
+      p {
+        font-size: 15px;
+        font-weight: 500;
+        line-height: 21px;
+        letter-spacing: 0em;
+        text-align: left;
+        color: #1a1919;
+        margin-top: 16px;
+        margin-bottom: 24px;
+      }
+
+      .sp-btn-right {
+        display: flex;
+        justify-content: flex-start;
+
+        .custom_fill {
+          min-width: 100% !important;
+
+          @media (max-width: 991px) and (min-width: 575px) {
+            min-width: 240px !important;
+          }
+          // @media (max-width:575) {
+          //     min-width: unset !important;
+          //     width: 100% !important;
+          //     text-align: center;
+          // }
+
+          svg {
+            path {
+              fill: none !important;
+            }
+          }
+        }
+      }
+    }
+  }
+  .hover_btn {
+    transition: background-color 0.3s ease, color 0.3s ease;
+    &:focus {
+      background-color: #53119b;
+      color: white;
+      outline: none;
+    }
+  }
+}

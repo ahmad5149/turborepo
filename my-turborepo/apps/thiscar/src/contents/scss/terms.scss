@@ -1,0 +1,95 @@
+.terms-of-use {
+    text-align: justify;
+
+    .terms-of-use-container {
+        width: 80%;
+        margin: auto;
+        font-family: "Avenir-Medium";
+        font-weight: normal;
+        line-height: normal;
+        @media screen and (max-width: 991px) {
+            width:96%;
+            // text-align: left;
+            // padding-left: 1.5rem;
+            // padding-right: 1.5rem;
+
+        }
+        @media screen and (max-width: 991px) {
+            text-align: left;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+        // @media (max-width: 575px) {
+        //     width: 94%;
+        // }
+        p,
+        span {
+            font-size: 16px;
+            line-height: normal;
+        }
+        a {
+            font-weight: 900;
+        }
+        li {
+            font-size: 16px;
+        }
+        table {
+            font-size: 16px;
+        }
+        .underline {
+            text-decoration: underline;
+        }
+        .contact-us p {
+            margin-bottom: 4px;
+        }
+        .sub-title {
+            font-size: 18px;
+            font-family: "Avenir-Heavy";
+        }
+        h5 {
+            font-family: "Avenir-Heavy";
+            margin-bottom: 2px;
+        }
+        h3.title {
+            margin-bottom: 0px;
+            font-weight: bold;
+        }
+
+        @media (max-width: 425px) {
+            p,
+            li,
+            table,
+            span {
+                //font-size: calc(13px + 5 * (100vw - 320px) / 1600);
+            }
+
+            text-align: left;
+        }
+
+        @media (max-width: 310px) {
+            h5,
+            h4,
+            h3,
+            h2,
+            h1 {
+                text-align: left;
+            }
+            p,
+            li,
+            table,
+            span {
+                //font-size: calc(14px + 6 * (100vw - 320px) / 1600);
+            }
+            h3 {
+                font-size: calc(1.3rem + 2.5vw);
+            }
+        }
+    }
+}
+
+a {
+    --text-opacity: 1;
+    color: #3182ce;
+    color: rgba(49, 130, 206, var(--text-opacity));
+    text-decoration: none;
+}

@@ -1,0 +1,28 @@
+.add-dealer {
+    @media screen and (min-width: 992px) {
+        text-align: left !important;
+    }
+    @media screen and (min-width: 992px) and (max-width: 1130px) {
+        text-align: left !important;
+        margin-left: 1rem;
+    }
+    @media screen and (max-width: 575px) {
+        .pull-left {
+            //get the nth child 1st in case
+            a:nth-child(1) {
+                width: 100%;
+            }
+        }
+    }
+}
+.add-btn {
+    @media screen and (min-width: 992px) and (max-width: 1400px) {
+        margin-left: 6rem;
+    }
+    @media screen and (max-width: 575px) {
+        > button:first-child {
+            //get the first button
+            width: 100%;
+        }
+    }
+}

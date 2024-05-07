@@ -1,0 +1,37 @@
+.settings-wrapper input:disabled {
+    background-color: none !important;
+}
+.settings-wrapper {
+    width: 250px;
+    right: 0;
+    top: 90px;
+    transition: 0.5s;
+    z-index: 201;
+    i.bi.bi-x-square {
+        color: #99a1b7;
+    }
+    .bi {
+        font-size: 25px;
+        margin-right: 30px;
+    }
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 200;
+    margin-top: 0;
+    .admin-loading {
+        position: relative;
+        top: 50%;
+        margin-right: 20rem;
+    }
+}
+
+.modal-body .error {
+    min-height: 4rem !important;
+}

@@ -1,0 +1,24 @@
+.s-dealership-mobile {
+    display: none;
+    .dealership-selection > div:first-child {
+        width: 100%;
+    }
+}
+@media only screen and (max-width: 767px) {
+    .s-dealership-desktop {
+        display: none;
+    }
+    .s-dealership-mobile {
+        display: block;
+    }
+    .user-buttons button[type="submit"] {
+        margin-top: 10px;
+    }
+}
+
+@media screen and (max-width: 575px) {
+    a.btn.color-white.btn-dealer,
+    .user-buttons button[type="submit"] {
+        width: 100%;
+    }
+}

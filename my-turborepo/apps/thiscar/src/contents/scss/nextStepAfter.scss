@@ -1,0 +1,197 @@
+.next-step {
+  .row {
+    padding: 50px 100px;
+
+    @media (max-width: 768px) {
+      padding: 50px;
+    }
+
+    @media (max-width: 575px) {
+      padding: 20px;
+    }
+
+    .left {
+      display: flex;
+      align-items: center;
+
+      h2 {
+        font-size: 30px;
+        text-align: right;
+        // margin-bottom: 14px;
+        line-height: 45px;
+
+        @media (max-width: 991px) {
+          text-align: left;
+        }
+      }
+    }
+
+    .right {
+      display: flex;
+
+      h2 {
+        font-size: 30px;
+        text-align: left;
+        margin-bottom: 14px;
+      }
+
+      .bg_slider {
+        // padding: 42px;
+        padding: 28px;
+        // padding: 40px 20px 20px 20px;
+        height: 350px;
+        width: 100%;
+        border-radius: 8px;
+        background-image: url("../../../public/media/Block-2.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        margin-right: 30px;
+        border-radius: 20px;
+        position: relative;
+
+        & {
+          @media (max-width: 991px) {
+            margin-top: 23px;
+          }
+
+          @media (max-width: 575px) {
+            margin-right: 0;
+          }
+        }
+
+        svg {
+          position: absolute;
+          bottom: 28px;
+          width: 93px;
+          right: 30px;
+
+          path {
+            fill: #2a0a4d;
+          }
+        }
+
+        p {
+          font-size: 16px;
+          text-align: left;
+        }
+
+        &.active {
+          background-image: linear-gradient(#e2e42b, #e2e42b);
+          // background-color: #E2E42B;
+
+          svg {
+            path {
+              fill: white !important;
+            }
+          }
+        }
+
+        // @media (max-width:912px) and (min-width:575px) {
+
+        //     & {
+        //         // display: flex;
+        //         height: 144px;
+
+        //         .tablet-width {
+        //             width: 50%;
+        //         }
+
+        //         svg {
+        //             right: 38px;
+        //         }
+
+        //         p {
+        //             text-align: left;
+        //             font-size: 15px;
+        //             padding-left: 10px;
+
+        //             width: 50%;
+        //         }
+        //     }
+
+        // }
+      }
+
+      .bg_slider-1 {
+        // padding: 42px;
+        padding: 28px;
+        // padding: 40px 20px 20px 20px;
+        height: 350px;
+        width: 100%;
+        border-radius: 8px;
+        background-image: url("../../../public/media/Block-1.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        margin-right: 30px;
+        border-radius: 20px;
+        position: relative;
+
+        & {
+          @media (max-width: 991px) {
+            margin-top: 23px;
+          }
+
+          @media (max-width: 575px) {
+            margin-right: 0;
+          }
+        }
+
+        svg {
+          position: absolute;
+          bottom: 28px;
+          width: 93px;
+          right: 30px;
+
+          path {
+            fill: #2a0a4d;
+          }
+        }
+
+        p {
+          font-size: 16px;
+          text-align: left;
+        }
+
+        &.active {
+          background-image: linear-gradient(#e2e42b, #e2e42b);
+          // background-color: #E2E42B;
+
+          svg {
+            path {
+              fill: white !important;
+            }
+          }
+        }
+
+        // @media (max-width:912px) and (min-width:575px) {
+
+        //     & {
+        //         // display: flex;
+        //         height: 144px;
+
+        //         .tablet-width {
+        //             width: 50%;
+        //         }
+
+        //         svg {
+        //             right: 38px;
+        //         }
+
+        //         p {
+        //             text-align: left;
+        //             font-size: 15px;
+        //             padding-left: 10px;
+
+        //             width: 50%;
+        //         }
+        //     }
+
+        // }
+      }
+
+      @media (max-width: 991px) {
+        flex-direction: column;
+      }
+    }
+  }
+}

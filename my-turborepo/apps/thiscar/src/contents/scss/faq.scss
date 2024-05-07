@@ -1,0 +1,104 @@
+@import "./global_fonts.scss";
+.faq-grey {
+    background-color: #f2f1ef;
+
+    .Faq_container {
+        width: 80%;
+        margin: auto;
+        @media screen and (max-width: 991px) {
+            width: 96%;
+        }
+        h2 {
+            font-size: 25px;
+        }
+        @media (max-width: 575px) {
+            width: 94%;
+        }
+    }
+}
+
+.accordion-faq {
+    .accordion-item {
+        margin-bottom: 20px;
+        border-radius: 11px;
+        border: 1px solid white;
+
+        .accordion-header {
+            .accordion-button {
+                color: #2a0a4d !important;
+                padding: 26px;
+                line-height: 20px !important;
+                font-weight: 800;
+                letter-spacing: 0em;
+                text-align: left;
+                border-bottom-left-radius: 11px;
+                border-bottom-right-radius: 11px;
+                font-size: 16px !important;
+                &::after {
+                    transform: rotate(271deg) !important;
+                    content: "" !important;
+
+                }
+                &:not(.collapsed)::after {
+                    transform: rotate(360deg) !important;
+                    content: "" !important;
+
+                }
+                &:not(.collapsed) {
+                    color: #2a0a4d !important;
+                    background-color: white !important;
+                    box-shadow: none !important;
+                    content: "" !important;
+
+                }
+
+                &:focus {
+                    color: #2a0a4d !important;
+                    background-color: white !important;
+                    box-shadow: none !important;
+                    outline: none;
+                    content: "" !important;
+
+                }
+
+                &:focus-visible {
+                    color: #2a0a4d !important;
+                    background-color: white !important;
+                    box-shadow: none !important;
+                    outline: none;
+                    content: "" !important;
+
+                }
+            }
+        }
+
+        .accordion-body {
+            padding: 0 28px 28px 28px;
+
+            p {
+                margin-bottom: 0 !important;
+                text-align: left;
+                padding-top: 0;
+                font-size: 13px !important;
+                font-weight: 400;
+                line-height: 18px !important;
+                letter-spacing: 0em;
+                text-align: left;
+            }
+        }
+    }
+}
+.sp-btn {
+    display: flex;
+    justify-content: flex-start;
+    .hover_btn {
+        transition: background-color 0.3s ease, color 0.3s ease;
+        &:focus {
+            //background-color: #53119b;
+            color: white;
+            outline: none;
+            content: "" !important;
+
+        }
+    }
+}

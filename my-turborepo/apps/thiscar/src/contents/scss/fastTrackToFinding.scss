@@ -1,0 +1,73 @@
+@import "./variable.scss";
+@import "./global_fonts.scss";
+
+.fast_track {
+  h2 {
+    color: map-get($color, primary-1);
+    text-align: left;
+    font-family: "Avenir-Black";
+    width: 75%;
+  }
+
+  p {
+    text-align: left;
+    width: 75%;
+  }
+
+  .image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .custom_btn {
+    float: left;
+    margin-bottom: 35px;
+  }
+
+  hr {
+    width: 50%;
+    margin-right: auto;
+    margin-left: unset;
+    @media screen and (max-width: 991px) {
+      width: 30%;
+    }
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+    // white-space: nowrap;
+
+    li {
+      position: relative;
+      padding-left: 1em;
+      font-family:"Avenir-Medium" !important;//"Avenir-Light";
+      text-align: left;
+      font-size: 17.5px;
+      //line-height: 1.6;
+      word-spacing: 0px;
+
+      &::before {
+        content: "+";
+        position: absolute;
+        /* position the symbol absolutely within the list item */
+        left: 0;
+      }
+      // @media screen and (min-width:1201px) and (max-width:1400px){
+      //   font-size: calc(11.1px + (18 - 10) * ((100vw - 320px) / (1920 - 320))) !important;
+      // }
+      // @media screen and (min-width:992px) and (max-width:1200px){
+      //   font-size: calc(9.4px + (18 - 10) * ((100vw - 320px) / (1920 - 320))) !important;
+      // }
+      // @media screen and (max-width: 991px) {
+      //   font-size: calc(14.4px + (18 - 10) * ((100vw - 320px) / (1920 - 320))) !important;
+      // }
+    }
+  }
+
+  @media screen and (max-width: 991px) {
+    flex-direction: column-reverse;
+  }
+}

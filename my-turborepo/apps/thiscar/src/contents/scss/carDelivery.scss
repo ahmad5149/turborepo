@@ -1,0 +1,30 @@
+.image {
+  height: 75%;
+  width: 75%;
+}
+
+.text-width {
+  width: 17rem;
+}
+
+.alternate-text {
+  white-space: nowrap;
+  // margin-top: -15px;
+  margin-left: 0.25em;
+}
+
+.heading-carDelivery {
+  /* white-space: nowrap; */
+  width: 75%;
+  text-align: left !important;
+  margin-left: 18%;
+  @media screen and (max-width: 800px) {
+    margin-left: 20%;
+  }
+}
+
+.parent-span {
+  top: 14%;
+  left: 17%;
+  white-space: nowrap;
+}

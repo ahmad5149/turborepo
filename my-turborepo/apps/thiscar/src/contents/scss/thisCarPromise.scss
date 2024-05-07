@@ -1,0 +1,39 @@
+@import "./variable.scss";
+@import "./global_fonts.scss";
+@import "../fonts/stylesheet.css";
+
+.thisCarPromise {
+  h2 {
+    margin: 0;
+  }
+  @media screen and (max-width: 575px) {
+    p {
+      font-size: 15px;
+    }
+  }
+  @media (min-width: 576px) and (max-width: 767) {
+    p {
+      font-size: 17px;
+    }
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    p {
+      font-size: 20px;
+    }
+  }
+  @media (min-width: 1024px) {
+    p {
+      font-size: 23px;
+    }
+  }
+
+  // div {
+  //   margin-right: 100px;
+  // }
+
+  @media (min-width: 767px) {
+    div {
+      margin-right: 100px;
+    }
+  }
+}

@@ -1,0 +1,43 @@
+@import "./variable.scss";
+@import "./global_fonts.scss";
+@import "../fonts/stylesheet.css";
+
+
+.bg-image-footer {
+  height: 743px;
+  width: 100%;
+  background-size: cover;
+  background-position: 95% 100%;
+  position: relative;
+  background-repeat: no-repeat;
+
+  button {
+    transform: translate(-50%, -50%);
+    font-size: 15px;
+    white-space: nowrap;
+    // position: absolute;
+    min-width:340px;
+    top: 13%;
+    left: 50%;
+    @media (max-width: 575px) {
+      width:88%;
+      min-width: unset;
+
+    }
+  }
+
+  @media (max-width: 991px) {
+    height: 407px;
+    width: 100%;
+    // position: absolute;
+    background-position: 25% 100%;
+  }
+
+  @media (max-width: 575px) {
+    height: 401px;
+    width: 100%;
+    // min-width: unset;
+    // position: absolute;
+    background-position: 62% 97%;
+  }
+}

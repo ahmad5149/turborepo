@@ -1,0 +1,101 @@
+.privacy-policy {
+
+  
+  //background-color: #f2f1ef;
+      text-align: justify;
+
+
+      .Privacy_container {
+        width: 80%;
+        margin: auto;
+        @media screen and (max-width: 991px) {
+          width: 96%;
+        }
+        @media (max-width: 575px) {
+          width: 94%;
+        }
+        font-family: "Avenir-Medium";
+          font-weight: normal;
+          line-height: normal;
+        p,span {
+          font-size: 16px;
+          line-height: normal;
+        }
+        a{
+          font-weight: 900;
+        }
+        li {
+          font-size: 16px;
+          //font-size: calc(12px + 5 * (100vw - 320px) / 1600);
+        }
+        table {
+          font-size: 16px;
+          //font-size: calc(12px + 5 * (100vw - 320px) / 1600);
+        }
+        .underline{
+          text-decoration: underline;
+        }
+        .contact-us p{
+          margin-bottom: 4px;
+        }
+        .sub-title{
+          //font-size: calc(14px + 5 * (100vw - 320px) / 1600);
+          font-size: 18px;
+          font-family: "Avenir-Heavy";
+        }
+        h5{
+          font-family: "Avenir-Heavy";
+          margin-bottom: 2px;
+        }
+        h3.title{
+          margin-bottom: 0px;
+          font-weight: bold;
+        }
+        a.email{
+          font-weight: normal;
+          color: rgb(33, 37, 41);
+        }
+
+        @media (max-width: 425px) {
+          
+          //font-size: calc(14px + 6 * (100vw - 320px) / 1600);
+
+
+          text-align: left;
+          
+        }
+
+        @media (max-width: 310px) {
+          //font-size: calc(14px + 6 * (100vw - 320px) / 1600);
+          h5,h4,h3,h2,h1{
+            text-align: left;
+          }
+          h3{
+            font-size: calc(1.3rem + 2.5vw);
+          }
+        }
+      }
+    // @media screen and (max-width:768px) {
+    //   text-align: left;
+    //   padding-left: 1.5rem;
+    //   padding-right: 1.5rem;
+    // }
+  }
+  
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  td,
+  th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  a{
+    --text-opacity: 1;
+    color: #3182ce;
+    color: rgba(49,130,206,var(--text-opacity));
+    text-decoration: none;
+  }

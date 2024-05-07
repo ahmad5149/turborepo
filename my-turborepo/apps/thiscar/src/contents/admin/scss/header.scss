@@ -1,0 +1,14 @@
+.side-view-panel
+{
+    visibility: hidden !important;
+    @media (max-width: 991px) {
+        visibility: visible !important;
+    }
+}
+.logout-btn-view
+{
+    visibility: visible !important;
+    @media (max-width: 991px) {
+        visibility: hidden !important;
+    }
+}

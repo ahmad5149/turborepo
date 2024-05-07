@@ -1,0 +1,150 @@
+@import "./variable.scss";
+@import "./global_fonts.scss";
+@import "../fonts/stylesheet.css";
+
+.fPS {
+  background: url("../../../public/media/personal_shopper_desktop_bg.png");
+  background-size: cover;
+
+  .image {
+    height: 100%;
+    width: 100%;
+  }
+  .d_none {
+    @media screen and (max-width: 991px) {
+      display: none;
+    }
+  }
+
+  .left-row {
+    justify-content: space-evenly;
+
+    // >:first-child{
+    //     margin-left: -10%;
+    // }
+    @media screen and (max-width: 991px) and (min-width: 576px) {
+      justify-content: center;
+
+      .image {
+        width: 50%;
+        height: auto;
+      }
+    }
+  }
+
+  .right-row {
+    justify-content: space-evenly;
+
+    //     >:last-child{
+    //         margin-right: -10%;
+    //     }
+    @media screen and (max-width: 991px) and (min-width: 576px) {
+      justify-content: center;
+
+      .image {
+        margin-top: 10%;
+        width: 50%;
+      }
+    }
+  }
+
+  @media screen and (max-width: 991px) {
+    background-image: url("../../../public/media/personal_shopper_tab_bg.png");
+    background-position: top left;
+    background-size: cover;
+  }
+}
+
+.small-ss-btn {
+  @media (max-width: 991px) {
+    width: 100%;
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 991px) {
+  .mobile_dis-none {
+    display: none;
+  }
+}
+
+.mob-veiw {
+  @media (max-width: 425px) {
+    h2 {
+      margin-top: 23px;
+    }
+  }
+}
+
+.tab-veiw {
+  @media screen and (min-width: 425px) and (max-width: 766px) {
+    div {
+      width: 50%;
+      margin: 0 auto;
+    }
+  }
+  @media (min-width: 767px) and (max-width: 991px) {
+    div {
+      width: 30%;
+      margin: 0 auto;
+    }
+  }
+  @media (min-width: 992px) and (max-width: 999px) {
+    h2 {
+      font-size: 18px;
+    }
+    p {
+      font-size: 12px;
+    }
+  }
+
+  @media (min-width: 1000px) and (max-width: 1049px) {
+    h2 {
+      font-size: 18px;
+    }
+    p {
+      font-size: 11px;
+    }
+  }
+  @media (min-width: 1050px) and (max-width: 1099px) {
+    h2 {
+      font-size: 20px;
+    }
+    p {
+      font-size: 12px;
+    }
+  }
+  @media (min-width: 1100px) and (max-width: 1189px) {
+    h2 {
+      font-size: 21px;
+    }
+    p {
+      font-size: 12px;
+    }
+  }
+
+  @media (min-width: 1190px) and (max-width: 1259px) {
+    h2 {
+      font-size: 23px;
+    }
+    p {
+      font-size: 13px;
+    }
+  }
+  @media (min-width: 1260px) and (max-width: 1329px) {
+    h2 {
+      font-size: 24px;
+    }
+    p {
+      font-size: 14px;
+    }
+  }
+  @media (min-width: 1330px) {
+    h2 {
+      font-size: 26px;
+    }
+    p {
+      font-size: 16px;
+    }
+  }
+}

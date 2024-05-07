@@ -1,0 +1,208 @@
+@import "./global_fonts.scss";
+.parent-div-color {
+    background-color: #f2f1ef;
+}
+.sell-car {
+    .left {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        // padding: 0 80px;
+
+        h2 {
+            text-align: left;
+            font-size: 30px;
+            font-weight: 800;
+            line-height: 37px;
+            letter-spacing: 0em;
+            margin-bottom: 20px;
+            width: 70%;
+
+            @media (max-width: 520px) {
+                width: 100%;
+            }
+
+            span {
+                white-space: nowrap;
+            }
+        }
+
+        p {
+            font-size: 15px;
+            line-height: 20px;
+            text-align: left;
+            width: 80%;
+
+            @media (max-width: 991px) {
+                width: 100%;
+            }
+        }
+
+        .border_bottom {
+            border-bottom: 4px solid #e2e42b;
+            margin-bottom: 13px;
+            width: 40%;
+            margin-bottom: 20px;
+
+            @media (max-width: 575px) {
+                width: 100%;
+            }
+        }
+
+        button {
+            width: 38%;
+            text-align: center;
+            position: relative;
+
+            svg {
+                position: absolute;
+                right: 5px;
+            }
+
+            @media (max-width: 575px) {
+                width: 100%;
+            }
+            @media (min-width: 576px) and (max-width: 991px) {
+                width: 20%;
+            }
+        }
+
+        @media (max-width: 1098px) {
+            padding: 0 46px;
+        }
+
+        @media (max-width: 991px) {
+            padding: 44px 20px;
+        }
+    }
+
+    .right {
+        position: relative;
+        overflow: hidden;
+        padding: 0;
+
+        .bg-color {
+            background-color: yellow;
+            height: 664px;
+            width: 70%;
+            margin-left: auto;
+
+            .image {
+                position: absolute;
+                height: auto;
+                // top: calc(50% - 211px);
+                top: 50%;
+                transform: translateY(-50%);
+                width: 180%;
+                left: 0;
+
+                @media (max-width: 991px) and (min-width: 575px) {
+                    position: absolute;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    width: 136%;
+                    left: 6px;
+                }
+
+                @media (max-width: 575px) {
+                    position: absolute;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    width: 206%;
+                    left: -2px;
+                }
+            }
+            @media (max-width: 520px) {
+                width: 65%;
+                height: 390px;
+            }
+
+            @media (min-width: 521px) and (max-width: 575px) {
+                height: 450px;
+                width: 65%;
+            }
+            @media (min-width: 576px) and (max-width: 700px) {
+                height: 390px;
+                width: 75%;
+            }
+            @media (min-width: 700px) and (max-width: 991px) {
+                height: 550px;
+                width: 77%;
+            }
+        }
+    }
+
+    @media (max-width: 991px) {
+        max-width: 100%;
+    }
+    .customModal {
+        .modal-dialog {
+            margin-top: 2%;
+            min-width: 35%;
+            margin-left: auto;
+            margin-right: auto;
+
+            .modal-header {
+                padding-bottom: 0;
+
+                h3 {
+                    color: #2c074b;
+                }
+            }
+        }
+        .modal-content {
+            padding-top: 1em;
+
+            @media (min-width: 567px) {
+                padding: 1em;
+            }
+            .custom_btn {
+                min-width: 210px;
+                min-height: 45px;
+            }
+        }
+        .closeModal {
+            background: none;
+            border: none;
+        }
+        .modal-header {
+            border-bottom: none;
+        }
+    }
+
+    .modal-dialog-responsive {
+        display: flex;
+        // align-items: center;
+        justify-content: center;
+        height: 90%;
+        max-width: 80%;
+        @media (max-width: 567px) {
+            max-width: 99%;
+        }
+    }
+
+    .modal-dialog-responsive .modal-content {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        padding-bottom: 3rem;
+    }
+    .modal-style-body {
+        height: 100%;
+        width: 100%;
+        padding: 15;
+    }
+    .buttonContainer {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .closeButton {
+        background-color: #e53e3e !important;
+        border: none;
+        border-radius: 100%;
+        width: 15px !important;
+        cursor: pointer;
+        color: white;
+    }
+}

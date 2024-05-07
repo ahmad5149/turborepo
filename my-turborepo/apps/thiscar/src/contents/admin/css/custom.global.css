@@ -1,0 +1,56 @@
+.page-link{
+    cursor: pointer;
+}
+
+.dealer-form .form-floating>.form-control:not(:placeholder-shown)~label::after{
+    left: 10px;
+}
+.dealer-form .form-floating>label{
+    top: 2px;
+}
+
+.dealer-form .color-white {
+    background-color: #fff !important;    
+    border: 1px solid #4F20F5 !important;
+    color: #4F20F5;
+}
+
+.btn-dealer i.fa-solid.fa-arrow-left{
+    color: #4F20F5;
+}
+.btn-dealer i.fa-solid.fa-arrow-left:hover{
+    background-color: #fff !important;  
+}
+
+
+.dealer-form .btn-theme,
+.dealer-form .btn-theme>i {
+    background-color: #4F20F5 !important;
+    /* border: 1px solid #4F20F5; */
+    color: #fff;
+}
+
+.dealer-form .btn-dealer {
+    border-radius: 26px;
+    width: 160px;
+    height: 44px;
+    font-weight: 600;
+}
+
+.dealer-form .btn-contact {  
+    width: 180px;
+    height: 44px;
+    border-radius: 26px;
+    border: 1px solid #4F20F5 !important;
+    color: #4F20F5;
+    padding: 8px !important;
+    font-weight: 600;
+    height: 44px;
+}
+
+i.ki-duotone.ki-plus-circle.fs-2qx {
+    color: #4F20F5;
+}
+#kt_post .container-xxl {
+    max-width: inherit;
+  }

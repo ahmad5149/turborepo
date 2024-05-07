@@ -1,0 +1,44 @@
+@import "./variable.scss";
+@import "./global_fonts.scss";
+
+
+.thisRoll {
+  background-color: #f8f8f8;
+
+  .howRoll {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-right: 5px solid map-get($color, "border-color");
+
+    h2 {
+      .this-img {
+        position: relative;
+
+        .img-dimensions {
+          @media screen and (max-width: 576px) {
+            width: 23%;
+          }
+        }
+
+        span {
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 10%;
+          bottom: 0;
+        }
+      }
+    }
+
+    @media screen and (max-width: 991px) {
+      border-right: unset;
+    }
+  }
+
+  .howRollDetail {
+    @media screen and (max-width: 991px) {
+      border-left: 5px solid map-get($color, "border-color");
+    }
+  }
+}

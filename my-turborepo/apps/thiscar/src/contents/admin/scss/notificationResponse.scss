@@ -1,0 +1,32 @@
+.icon-container {
+    position: relative;
+    width: fit-content;
+}
+
+.ki-arrows-circle {
+    cursor: pointer;
+}
+
+/* Define animation for rotating */
+@keyframes rotateAnimation {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.rotate {
+    animation: rotateAnimation 1s linear;
+}
+.zero-count {
+    width: 280px;
+}
+.response-dealer-select > div {
+    width: 160px;
+}
+.error{
+    color: red;
+    margin-top: 5px;
+}

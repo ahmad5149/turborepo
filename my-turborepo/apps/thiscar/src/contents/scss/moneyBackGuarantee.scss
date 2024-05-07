@@ -1,0 +1,255 @@
+.money_back {
+  .row {
+    .left {
+      padding-top: 27px;
+      padding-right: 23px;
+      background: #f8f8f8;
+
+      .card-counter {
+        background: url(../../../public/media/money-back.png);
+        background-size: cover;
+        background-repeat: no-repeat;
+        display: flex;
+        justify-content: space-around;
+        padding: 23px;
+        border-top-right-radius: 18px;
+        border-bottom-right-radius: 18px;
+        border-bottom-right-radius: 18px;
+        margin-bottom: 23px;
+
+        .image-counter {
+          img {
+            // height: 105px !important;
+            margin-right: 25px;
+            // width: 428px;
+
+            @media (max-width: 991px) {
+              // width: 100% !important;
+            }
+          }
+        }
+
+        .selection-image {
+          @media (max-width: 991px) {
+            margin-bottom: 20px;
+          }
+
+          img {
+            margin-right: 53px;
+          }
+        }
+
+        .text_section {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+
+          h1 {
+            text-align: left;
+            font-size: xx-large;
+            font-weight: 900;
+          }
+
+          p {
+            text-align: left;
+            font-size: 16px; //13px;
+          }
+
+          span {
+            p {
+              text-align: left;
+              font-size: 16px;
+              color: #5c666f;
+            }
+          }
+        }
+
+        @media (max-width: 575px) {
+          background-image: url(../../../public/media/mob-mul.png);
+          padding: 30px;
+          flex-direction: column;
+          align-items: flex-start !important;
+        }
+      }
+
+      .card-counter2 {
+        background-color: #e2e42b;
+        // background: url(../../../public/media/money-back.png);
+        // background-size: cover;
+        // background-repeat: no-repeat;
+        display: flex;
+        justify-content: space-around;
+        padding: 23px;
+        border-top-right-radius: 18px;
+        border-bottom-right-radius: 18px;
+        border-bottom-right-radius: 18px;
+        margin-bottom: 23px;
+
+        .image-counter {
+          img {
+            // height: 105px !important;
+            margin-right: 25px;
+            margin-bottom: 20px;
+            // width: 428px;
+
+            @media (max-width: 991px) {
+              // width: 100% !important;
+            }
+          }
+        }
+
+        .selection-image {
+          @media (max-width: 991px) {
+            margin-bottom: 20px;
+          }
+
+          img {
+            margin-right: 53px;
+          }
+        }
+
+        .text_section {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+
+          h1 {
+            text-align: left;
+            font-size: xx-large;
+            font-weight: 900;
+          }
+
+          p {
+            text-align: left;
+            font-size: 16px;
+            padding-bottom: 13px;
+          }
+
+          // span {
+          //   p {
+          //     text-align: left;
+          //     font-size: 16px;
+          //     color: #5c666f;
+          //   }
+          // }
+        }
+
+        @media (max-width: 575px) {
+          flex-direction: column;
+          align-items: flex-start !important;
+        }
+      }
+
+      .card-counter3 {
+        background: url(../../../public/media/smile-bg.png);
+        background-size: cover;
+        background-repeat: no-repeat;
+        display: flex;
+        justify-content: space-around;
+        padding: 23px;
+        border-top-right-radius: 18px;
+        border-bottom-right-radius: 18px;
+        border-bottom-right-radius: 18px;
+        margin-bottom: 23px;
+
+        .image-counter {
+          img {
+            // height: 105px !important;
+            margin-right: 25px;
+            // width: 428px;
+
+            @media (max-width: 991px) {
+              // width: 100% !important;
+            }
+          }
+        }
+
+        .selection-image {
+          @media (max-width: 991px) {
+            margin-bottom: 20px;
+
+            // }
+
+            // img {
+            //     margin-right: 53px;
+            // }
+            img {
+              margin-right: 43px;
+              padding-left: 0px;
+              padding-top: 17px;
+            }
+          }
+
+          img {
+            margin-right: 43px; //53px;
+            padding-left: 13px;
+            padding-top: 26px;
+          }
+          //
+        }
+
+        .text_section {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          padding-top: 30px;
+          padding-bottom: 40px;
+
+          h1 {
+            text-align: left;
+            font-size: xx-large;
+            font-weight: 900;
+          }
+
+          p {
+            text-align: left;
+            font-size: 16px;
+          }
+
+          // span {
+          //   p {
+          //     text-align: left;
+          //     font-size: 16px;
+          //     color: #5c666f;
+          //   }
+          // }
+        }
+
+        @media (max-width: 575px) {
+          background-image: url(../../../public/media/mob-sec.png);
+          padding: 30px;
+          flex-direction: column;
+          align-items: flex-start !important;
+        }
+      }
+
+      @media (max-width: 991px) {
+        padding-right: 17px;
+        background-image: url("../../../public/media/car-mobile.png") !important;
+      }
+    }
+
+    .right {
+      // .h-image {
+      //     height: 626px;
+      //     width: 100%;
+
+      img {
+        border-left: 4px solid #e2e42b;
+        height: 100%;
+        width: 100%;
+      }
+
+      // }
+
+      @media (max-width: 991px) {
+        display: none;
+      }
+    }
+
+    @media (max-width: 991px) {
+      margin-top: 80px;
+      margin-bottom: 40px;
+    }
+  }
+}

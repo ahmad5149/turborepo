@@ -1,0 +1,56 @@
+.cell-number {
+    white-space: nowrap;
+}
+.mobile-listing {
+    display: none;
+}
+@media only screen and (max-width: 991px) {
+    .desktop-listing {
+        display: none;
+    }
+
+    .mobile-listing {
+        display: block;
+    }
+    input[data-kt-ecommerce-product-filter] {
+        min-width: 100%;
+    }
+    .mobile-dealers {
+        width: 90%;
+        .card-header.align-items-center.py-5.gap-2.gap-md-5 {
+            padding: 0;
+            .card-toolbar.flex-row-fluid.justify-content-end.gap-5 {
+                flex-wrap: nowrap;
+            }
+        }
+    }
+
+    .dealer-info {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .heading {
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .name,
+    .website-link {
+        margin-bottom: 5px;
+        word-wrap: break-word;
+    }
+    tr td {
+        border-bottom: 1px solid #dee2e6; //#987831 !important;
+    }
+    .accordion-header button[data-bs-target^="#collapse"] {
+        padding-left: 10px;
+    }
+    .accordion-item > [id^="collapse"] {
+        padding-left: 13px;
+    }
+
+    // .accordion-header button[data-bs-target] {
+    //     padding-left: 10px;
+    // }
+}

@@ -1,0 +1,65 @@
+.bg-grey-career {
+  background-color: #f2f1ef;
+  position: relative;
+
+  .image {
+    object-fit: contain;
+    height: 500px;
+    width: 100%;
+    left: -185px;
+    position: relative;
+
+    @media (max-width: 991px) {
+      height: 100%;
+      left: 0;
+    }
+  }
+
+  .bg-career {
+    background-image: url("../../../public/media/career-gradient.jpg");
+
+    width: 40%;
+    background-repeat: round;
+    padding: 57px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 50%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+    p {
+      width: 78%; //80%;
+
+      @media (max-width: 575px) {
+        width: 100%;
+      }
+    }
+
+    // position: absolute;
+    // top: 17%;
+    // left: 50%;
+    // transform: translate(116px, -50px);
+    @media (max-width: 991px) {
+      width: 60%;
+      height: 56%;
+      transform: translate(-50%, -50%);
+      h2 {
+        font-size: 30px;
+        margin-bottom: 6%;
+      }
+    }
+
+    @media (max-width: 575px) {
+      padding: 24px;
+      width: 80%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    padding: 90px;
+  }
+}

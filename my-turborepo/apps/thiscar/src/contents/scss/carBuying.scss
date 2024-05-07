@@ -1,0 +1,234 @@
+@import "./variable.scss";
+@import "./global_fonts.scss";
+@import "../fonts/stylesheet.css";
+
+.slider_section {
+  overflow: hidden;
+  background-color: #f8f8f8;
+  padding: 50px 30px;
+
+  .padding-right {
+    padding-right: 116px;
+
+    @media (max-width: 768px) {
+      padding-right: 0 !important;
+    }
+  }
+
+  .left {
+    h2,
+    p {
+      text-align: left;
+
+      margin-bottom: 30px;
+    }
+
+    span {
+      font-weight: bold;
+      color: black;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      font-size: 35px;
+      width: 367px;
+      margin-bottom: 20px;
+
+      @media (max-width: 768px) {
+        width: 100% !important;
+      }
+    }
+
+    .yellow {
+      color: #e2e42b;
+    }
+
+    .separator {
+      border-right: 1px solid black;
+      margin: 0 12px;
+    }
+
+    & {
+      @media (max-width: 991px) {
+        margin-bottom: 3rem;
+      }
+    }
+  }
+
+  .right {
+    .tab-pane {
+      // padding: 42px;
+      padding: 28px;
+      // padding: 40px 20px 20px 20px;
+      height: 350px;
+      width: 100%;
+      border-radius: 8px;
+      background-image: linear-gradient(to bottom, #d0e194, #bce2c9, #b0e6d5);
+      margin-right: 12px;
+      border-radius: 20px;
+      position: relative;
+
+      & {
+        @media (max-width: 575px) {
+          margin-right: 0;
+        }
+      }
+
+      p {
+        font-size: 15px;
+        text-align: left;
+      }
+
+      &.active {
+        @media (min-width: 576px) {
+          background-image: linear-gradient(#e2e42b, #e2e42b);
+          // background-color: #E2E42B;
+
+          svg {
+            path {
+              fill: white !important;
+            }
+          }
+        }
+      }
+
+      @media (max-width: 912px) and (min-width: 576px) {
+        & {
+          // display: flex;
+          height: 144px;
+
+          .tablet-width {
+            width: 50%;
+          }
+
+          svg {
+            right: 38px;
+          }
+
+          p {
+            text-align: left;
+            font-size: 15px;
+            padding-left: 10px;
+
+            width: 50%;
+          }
+        }
+      }
+    }
+
+    .fade:not(.show) {
+      opacity: 1;
+    }
+  }
+
+  @media (max-width: 575px) {
+    padding: 33px 6px;
+  }
+}
+
+.nav {
+  li {
+    a {
+      cursor: pointer;
+      color: black;
+      text-decoration: none;
+      padding: 0;
+      font-size: 16px;
+      text-transform: uppercase;
+
+      &.active {
+        color: #e2e42b !important;
+        background-color: white;
+      }
+
+      &:hover {
+        color: #e2e42b !important;
+        background-color: #f8f8f8 !important;
+      }
+    }
+  }
+  @media screen and (max-width: 991px) {
+    justify-content: center;
+  }
+  @media screen and (max-width: 575px) {
+    display: none;
+  }
+}
+
+.nav-pills > li.active > a,
+.nav-pills > li.active > a:focus,
+.nav-pills > li.active > a:hover {
+  color: #e2e42b !important;
+  background-color: #f8f8f8 !important;
+}
+
+.desktop-display-slider {
+  display: flex;
+
+  @media (max-width: 991px) {
+    flex-direction: column;
+  }
+
+  #home,
+  #menu1,
+  #menu2 {
+    margin-bottom: 24px;
+    position: relative;
+
+    @media screen and (max-width: 991px) {
+      display:flex;
+      align-items: center;
+      height: auto;
+      min-height: 186px;
+    }
+  }
+  .mobile-heading {
+    text-align: left;
+    // padding-left: 10px;
+
+    @media screen and (min-width:576px) {
+      display: none;
+    }
+  }
+
+  .tab-pane {
+    height: 350px;
+    // width: 285px !important;
+    border-radius: 8px;
+    background-image: url(http://localhost:3000/static/media/card_bg.37438d1….png);
+    margin-right: 9px !important;
+
+    .bg_slider {
+      .svg-class {
+        position: absolute;
+        bottom: 10%;
+        right: 10%;
+      }
+      @media screen and (max-width: 991px) {
+      //  position: relative;
+        width:100%;
+        p {
+          width: 75%;
+          margin:0;
+        }
+        .svg-class {
+          position: absolute;
+          top:calc(50% - 38.5px);
+          bottom: unset;
+          //  top: 5%;
+          right: 5%;
+        }
+      }
+      @media screen and (max-width: 576px) {
+        position: relative;
+        p {
+          width: 75%;
+        }
+        .svg-class {
+          position: relative;
+          float: right;
+        }
+      }
+    }
+  }
+}
