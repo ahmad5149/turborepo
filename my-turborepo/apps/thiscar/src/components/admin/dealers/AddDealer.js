@@ -90,9 +90,9 @@ function AddDealer({ dealer, submitDealer, makes }) {
 
             const currentDate = new Date()
                 .toISOString()
-                .replace(/:/g, "-")
-                .replace(/\.\d{3}/, "");
-            name = (name.includes(" ") ? name.replace(/ /g, "-") : name).toLowerCase() + "_" + currentDate;
+                ?.replace(/:/g, "-")
+                ?.replace(/\.\d{3}/, "");
+            name = (name.includes(" ") ? name?.replace(/ /g, "-") : name).toLowerCase() + "_" + currentDate;
 
             const parts = image.type.split("/");
             const extension = parts[parts.length - 1];
@@ -611,7 +611,7 @@ function AddDealer({ dealer, submitDealer, makes }) {
                                                                         src={`/media/maker-icons/${(make.value.includes(
                                                                             " "
                                                                         )
-                                                                            ? make.value.replace(/ /g, "-")
+                                                                            ? make.value?.replace(/ /g, "-")
                                                                             : make.value
                                                                         ).toLowerCase()}.png`}
                                                                         width={25}
@@ -665,7 +665,7 @@ function AddDealer({ dealer, submitDealer, makes }) {
                                                                         src={`/media/maker-icons/${(make.value.includes(
                                                                             " "
                                                                         )
-                                                                            ? make.value.replace(/ /g, "-")
+                                                                            ? make.value?.replace(/ /g, "-")
                                                                             : make.value
                                                                         ).toLowerCase()}.png`}
                                                                         width={25}

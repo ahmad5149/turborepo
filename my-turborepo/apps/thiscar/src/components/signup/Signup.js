@@ -40,7 +40,7 @@ function Signup(props) {
         }
     };
     const handlePhoneChange = (e) => {
-        const rawPhoneNumber = e.target.value.replace(/\D/g, ""); // Remove non-digit characters
+        const rawPhoneNumber = e.target.value?.replace(/\D/g, ""); // Remove non-digit characters
         const formattedPhoneNumber = formatPhoneNumber(rawPhoneNumber);
         setPhone(formattedPhoneNumber);
         setErrors((prevErrors) => ({

@@ -7,16 +7,16 @@ function extractDomain(url) {
     if (!url || url.trim() === "") {
         return ""; // or handle empty input as needed
     }
-    let domain = url.replace(/^(https?:\/\/)?/i, "");
+    let domain = url?.replace(/^(https?:\/\/)?/i, "");
 
     // Remove www subdomain if present
-    domain = domain.replace(/^www\./i, "");
+    domain = domain?.replace(/^www\./i, "");
 
     // Extract domain (including subdomains)
     domain = domain.split("/")[0];
 
     // Remove common top-level domains (TLDs)
-    domain = domain.replace(/\.(com|net|org|uk|us|io|info)$/i, "");
+    domain = domain?.replace(/\.(com|net|org|uk|us|io|info)$/i, "");
 
     return domain.toLowerCase();
 }

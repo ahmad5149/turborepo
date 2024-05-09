@@ -1,8 +1,14 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('@form-validation/core')) :
-    typeof define === 'function' && define.amd ? define(['@form-validation/core'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, (global.FormValidation = global.FormValidation || {}, global.FormValidation.validators = global.FormValidation.validators || {}, global.FormValidation.validators.vat = factory(global.FormValidation)));
-})(this, (function (core) { 'use strict';
+    typeof exports === "object" && typeof module !== "undefined"
+        ? (module.exports = factory(require("@form-validation/core")))
+        : typeof define === "function" && define.amd
+          ? define(["@form-validation/core"], factory)
+          : ((global = typeof globalThis !== "undefined" ? globalThis : global || self),
+            ((global.FormValidation = global.FormValidation || {}),
+            (global.FormValidation.validators = global.FormValidation.validators || {}),
+            (global.FormValidation.validators.vat = factory(global.FormValidation))));
+})(this, function (core) {
+    "use strict";
 
     /**
      * FormValidation (https://formvalidation.io)
@@ -17,14 +23,14 @@
      */
     function arVat(value) {
         // Replace `-` with empty
-        var v = value.replace('-', '');
+        var v = value?.replace("-", "");
         if (/^AR[0-9]{11}$/.test(v)) {
             v = v.substr(2);
         }
         if (!/^[0-9]{11}$/.test(v)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         var weight = [5, 4, 3, 2, 7, 6, 5, 4, 3, 2];
@@ -38,7 +44,7 @@
         }
         return {
             meta: {},
-            valid: "".concat(sum) === v.substr(10),
+            valid: "".concat(sum) === v.substr(10)
         };
     }
 
@@ -60,7 +66,7 @@
         if (!/^U[0-9]{8}$/.test(v)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         v = v.substr(1);
@@ -80,7 +86,7 @@
         }
         return {
             meta: {},
-            valid: "".concat(sum) === v.substr(7, 1),
+            valid: "".concat(sum) === v.substr(7, 1)
         };
     }
 
@@ -102,22 +108,22 @@
         if (!/^[0]?[0-9]{9}$/.test(v)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         if (v.length === 9) {
             v = "0".concat(v);
         }
-        if (v.substr(1, 1) === '0') {
+        if (v.substr(1, 1) === "0") {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         var sum = parseInt(v.substr(0, 8), 10) + parseInt(v.substr(8, 2), 10);
         return {
             meta: {},
-            valid: sum % 97 === 0,
+            valid: sum % 97 === 0
         };
     }
 
@@ -140,7 +146,7 @@
         if (!/^[0-9]{9,10}$/.test(v)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         var sum = 0;
@@ -161,10 +167,9 @@
             sum = sum % 10;
             return {
                 meta: {},
-                valid: "".concat(sum) === v.substr(8),
+                valid: "".concat(sum) === v.substr(8)
             };
-        }
-        else {
+        } else {
             // Physical persons, foreigners and others
             // Validate Bulgarian national identification numbers
             var isEgn = function (input) {
@@ -175,8 +180,7 @@
                 if (month > 40) {
                     year += 100;
                     month -= 40;
-                }
-                else if (month > 20) {
+                } else if (month > 20) {
                     year -= 100;
                     month -= 20;
                 }
@@ -219,7 +223,7 @@
             };
             return {
                 meta: {},
-                valid: isEgn(v) || isPnf(v) || isVat(v),
+                valid: isEgn(v) || isPnf(v) || isVat(v)
             };
         }
     }
@@ -235,33 +239,35 @@
      * @returns {ValidateResult}
      */
     function brVat(value) {
-        if (value === '') {
+        if (value === "") {
             return {
                 meta: {},
-                valid: true,
+                valid: true
             };
         }
-        var cnpj = value.replace(/[^\d]+/g, '');
-        if (cnpj === '' || cnpj.length !== 14) {
+        var cnpj = value?.replace(/[^\d]+/g, "");
+        if (cnpj === "" || cnpj.length !== 14) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         // Remove invalids CNPJs
-        if (cnpj === '00000000000000' ||
-            cnpj === '11111111111111' ||
-            cnpj === '22222222222222' ||
-            cnpj === '33333333333333' ||
-            cnpj === '44444444444444' ||
-            cnpj === '55555555555555' ||
-            cnpj === '66666666666666' ||
-            cnpj === '77777777777777' ||
-            cnpj === '88888888888888' ||
-            cnpj === '99999999999999') {
+        if (
+            cnpj === "00000000000000" ||
+            cnpj === "11111111111111" ||
+            cnpj === "22222222222222" ||
+            cnpj === "33333333333333" ||
+            cnpj === "44444444444444" ||
+            cnpj === "55555555555555" ||
+            cnpj === "66666666666666" ||
+            cnpj === "77777777777777" ||
+            cnpj === "88888888888888" ||
+            cnpj === "99999999999999"
+        ) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         // Validate verification digits
@@ -281,7 +287,7 @@
         if (result !== parseInt(digits.charAt(0), 10)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         length = length + 1;
@@ -297,7 +303,7 @@
         result = sum % 11 < 2 ? 0 : 11 - (sum % 11);
         return {
             meta: {},
-            valid: result === parseInt(digits.charAt(1), 10),
+            valid: result === parseInt(digits.charAt(1), 10)
         };
     }
 
@@ -319,7 +325,7 @@
         if (!/^E[0-9]{9}(MWST|TVA|IVA|TPV)?$/.test(v)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         v = v.substr(1);
@@ -332,7 +338,7 @@
         if (sum === 10) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         if (sum === 11) {
@@ -340,7 +346,7 @@
         }
         return {
             meta: {},
-            valid: "".concat(sum) === v.substr(8, 1),
+            valid: "".concat(sum) === v.substr(8, 1)
         };
     }
 
@@ -362,14 +368,14 @@
         if (!/^[0-5|9][0-9]{7}[A-Z]$/.test(v)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         // Do not allow to start with "12"
-        if (v.substr(0, 2) === '12') {
+        if (v.substr(0, 2) === "12") {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         // Extract the next digit and multiply by the counter.
@@ -384,7 +390,7 @@
             6: 15,
             7: 17,
             8: 19,
-            9: 21,
+            9: 21
         };
         for (var i = 0; i < 8; i++) {
             var temp = parseInt(v.charAt(i), 10);
@@ -395,7 +401,7 @@
         }
         return {
             meta: {},
-            valid: "".concat('ABCDEFGHIJKLMNOPQRSTUVWXYZ'[sum % 26]) === v.substr(8, 1),
+            valid: "".concat("ABCDEFGHIJKLMNOPQRSTUVWXYZ"[sum % 26]) === v.substr(8, 1)
         };
     }
 
@@ -418,17 +424,17 @@
         if (!/^[0-9]{8,10}$/.test(v)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         var sum = 0;
         var i = 0;
         if (v.length === 8) {
             // Do not allow to start with '9'
-            if ("".concat(v.charAt(0)) === '9') {
+            if ("".concat(v.charAt(0)) === "9") {
                 return {
                     meta: {},
-                    valid: false,
+                    valid: false
                 };
             }
             sum = 0;
@@ -444,10 +450,9 @@
             }
             return {
                 meta: {},
-                valid: "".concat(sum) === v.substr(7, 1),
+                valid: "".concat(sum) === v.substr(7, 1)
             };
-        }
-        else if (v.length === 9 && "".concat(v.charAt(0)) === '6') {
+        } else if (v.length === 9 && "".concat(v.charAt(0)) === "6") {
             sum = 0;
             // Skip the first (which is 6)
             for (i = 0; i < 7; i++) {
@@ -463,10 +468,9 @@
             sum = [8, 7, 6, 5, 4, 3, 2, 1, 0, 9, 10][sum - 1];
             return {
                 meta: {},
-                valid: "".concat(sum) === v.substr(8, 1),
+                valid: "".concat(sum) === v.substr(8, 1)
             };
-        }
-        else if (v.length === 9 || v.length === 10) {
+        } else if (v.length === 9 || v.length === 10) {
             // Validate Czech birth number (Rodné číslo), which is also national identifier
             var year = 1900 + parseInt(v.substr(0, 2), 10);
             var month = (parseInt(v.substr(2, 2), 10) % 50) % 20;
@@ -478,17 +482,16 @@
                 if (year > 1953) {
                     return {
                         meta: {},
-                        valid: false,
+                        valid: false
                     };
                 }
-            }
-            else if (year < 1954) {
+            } else if (year < 1954) {
                 year += 100;
             }
             if (!isValidDate$1(year, month, day)) {
                 return {
                     meta: {},
-                    valid: false,
+                    valid: false
                 };
             }
             // Check that the birth date is not in the future
@@ -499,17 +502,17 @@
                 }
                 return {
                     meta: {},
-                    valid: "".concat(check) === v.substr(9, 1),
+                    valid: "".concat(check) === v.substr(9, 1)
                 };
             }
             return {
                 meta: {},
-                valid: true,
+                valid: true
             };
         }
         return {
             meta: {},
-            valid: false,
+            valid: false
         };
     }
 
@@ -532,12 +535,12 @@
         if (!/^[1-9][0-9]{8}$/.test(v)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         return {
             meta: {},
-            valid: mod11And10$1(v),
+            valid: mod11And10$1(v)
         };
     }
 
@@ -559,7 +562,7 @@
         if (!/^[0-9]{8}$/.test(v)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         var sum = 0;
@@ -569,7 +572,7 @@
         }
         return {
             meta: {},
-            valid: sum % 11 === 0,
+            valid: sum % 11 === 0
         };
     }
 
@@ -591,7 +594,7 @@
         if (!/^[0-9]{9}$/.test(v)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         var sum = 0;
@@ -601,7 +604,7 @@
         }
         return {
             meta: {},
-            valid: sum % 10 === 0,
+            valid: sum % 10 === 0
         };
     }
 
@@ -627,30 +630,29 @@
         if (!/^[0-9A-Z][0-9]{7}[0-9A-Z]$/.test(v)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         var dni = function (input) {
             var check = parseInt(input.substr(0, 8), 10);
-            return "".concat('TRWAGMYFPDXBNJZSQVHLCKE'[check % 23]) === input.substr(8, 1);
+            return "".concat("TRWAGMYFPDXBNJZSQVHLCKE"[check % 23]) === input.substr(8, 1);
         };
         var nie = function (input) {
-            var check = ['XYZ'.indexOf(input.charAt(0)), input.substr(1)].join('');
-            var cd = 'TRWAGMYFPDXBNJZSQVHLCKE'[parseInt(check, 10) % 23];
+            var check = ["XYZ".indexOf(input.charAt(0)), input.substr(1)].join("");
+            var cd = "TRWAGMYFPDXBNJZSQVHLCKE"[parseInt(check, 10) % 23];
             return "".concat(cd) === input.substr(8, 1);
         };
         var cif = function (input) {
             var firstChar = input.charAt(0);
             var check;
-            if ('KLM'.indexOf(firstChar) !== -1) {
+            if ("KLM".indexOf(firstChar) !== -1) {
                 // K: Spanish younger than 14 year old
                 // L: Spanish living outside Spain without DNI
                 // M: Granted the tax to foreigners who have no NIE
                 check = parseInt(input.substr(1, 8), 10);
-                check = 'TRWAGMYFPDXBNJZSQVHLCKE'[check % 23];
+                check = "TRWAGMYFPDXBNJZSQVHLCKE"[check % 23];
                 return "".concat(check) === input.substr(8, 1);
-            }
-            else if ('ABCDEFGHJNPQRSUVW'.indexOf(firstChar) !== -1) {
+            } else if ("ABCDEFGHJNPQRSUVW".indexOf(firstChar) !== -1) {
                 var weight = [2, 1, 2, 1, 2, 1, 2];
                 var sum = 0;
                 var temp = 0;
@@ -665,7 +667,7 @@
                 if (sum === 10) {
                     sum = 0;
                 }
-                return "".concat(sum) === input.substr(8, 1) || 'JABCDEFGHI'[sum] === input.substr(8, 1);
+                return "".concat(sum) === input.substr(8, 1) || "JABCDEFGHI"[sum] === input.substr(8, 1);
             }
             return false;
         };
@@ -673,25 +675,23 @@
         if (/^[0-9]$/.test(first)) {
             return {
                 meta: {
-                    type: 'DNI',
+                    type: "DNI"
                 },
-                valid: dni(v),
+                valid: dni(v)
             };
-        }
-        else if (/^[XYZ]$/.test(first)) {
+        } else if (/^[XYZ]$/.test(first)) {
             return {
                 meta: {
-                    type: 'NIE',
+                    type: "NIE"
                 },
-                valid: nie(v),
+                valid: nie(v)
             };
-        }
-        else {
+        } else {
             return {
                 meta: {
-                    type: 'CIF',
+                    type: "CIF"
                 },
-                valid: cif(v),
+                valid: cif(v)
             };
         }
     }
@@ -714,7 +714,7 @@
         if (!/^[0-9]{8}$/.test(v)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         var weight = [7, 9, 10, 5, 8, 4, 2, 1];
@@ -724,7 +724,7 @@
         }
         return {
             meta: {},
-            valid: sum % 11 === 0,
+            valid: sum % 11 === 0
         };
     }
 
@@ -748,36 +748,34 @@
         if (!/^[0-9A-Z]{2}[0-9]{9}$/.test(v)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
-        if (v.substr(2, 4) !== '000') {
+        if (v.substr(2, 4) !== "000") {
             return {
                 meta: {},
-                valid: luhn$2(v.substr(2)),
+                valid: luhn$2(v.substr(2))
             };
         }
         if (/^[0-9]{2}$/.test(v.substr(0, 2))) {
             // First two characters are digits
             return {
                 meta: {},
-                valid: v.substr(0, 2) === "".concat(parseInt(v.substr(2) + '12', 10) % 97),
+                valid: v.substr(0, 2) === "".concat(parseInt(v.substr(2) + "12", 10) % 97)
             };
-        }
-        else {
+        } else {
             // The first characters cann't be O and I
-            var alphabet = '0123456789ABCDEFGHJKLMNPQRSTUVWXYZ';
+            var alphabet = "0123456789ABCDEFGHJKLMNPQRSTUVWXYZ";
             var check = void 0;
             // First one is digit
             if (/^[0-9]$/.test(v.charAt(0))) {
                 check = alphabet.indexOf(v.charAt(0)) * 24 + alphabet.indexOf(v.charAt(1)) - 10;
-            }
-            else {
+            } else {
                 check = alphabet.indexOf(v.charAt(0)) * 34 + alphabet.indexOf(v.charAt(1)) - 100;
             }
             return {
                 meta: {},
-                valid: (parseInt(v.substr(2), 10) + 1 + Math.floor(check / 11)) % 11 === check % 11,
+                valid: (parseInt(v.substr(2), 10) + 1 + Math.floor(check / 11)) % 11 === check % 11
             };
         }
     }
@@ -794,21 +792,25 @@
      */
     function gbVat(value) {
         var v = value;
-        if (/^GB[0-9]{9}$/.test(v) /* Standard */ ||
+        if (
+            /^GB[0-9]{9}$/.test(v) /* Standard */ ||
             /^GB[0-9]{12}$/.test(v) /* Branches */ ||
             /^GBGD[0-9]{3}$/.test(v) /* Government department */ ||
             /^GBHA[0-9]{3}$/.test(v) /* Health authority */ ||
-            /^GB(GD|HA)8888[0-9]{5}$/.test(v)) {
+            /^GB(GD|HA)8888[0-9]{5}$/.test(v)
+        ) {
             v = v.substr(2);
         }
-        if (!/^[0-9]{9}$/.test(v) &&
+        if (
+            !/^[0-9]{9}$/.test(v) &&
             !/^[0-9]{12}$/.test(v) &&
             !/^GD[0-9]{3}$/.test(v) &&
             !/^HA[0-9]{3}$/.test(v) &&
-            !/^(GD|HA)8888[0-9]{5}$/.test(v)) {
+            !/^(GD|HA)8888[0-9]{5}$/.test(v)
+        ) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         var length = v.length;
@@ -817,23 +819,23 @@
             var lastThree = parseInt(v.substr(2), 10);
             return {
                 meta: {},
-                valid: ('GD' === firstTwo && lastThree < 500) || ('HA' === firstTwo && lastThree >= 500),
+                valid: ("GD" === firstTwo && lastThree < 500) || ("HA" === firstTwo && lastThree >= 500)
             };
-        }
-        else if (length === 11 && ('GD8888' === v.substr(0, 6) || 'HA8888' === v.substr(0, 6))) {
-            if (('GD' === v.substr(0, 2) && parseInt(v.substr(6, 3), 10) >= 500) ||
-                ('HA' === v.substr(0, 2) && parseInt(v.substr(6, 3), 10) < 500)) {
+        } else if (length === 11 && ("GD8888" === v.substr(0, 6) || "HA8888" === v.substr(0, 6))) {
+            if (
+                ("GD" === v.substr(0, 2) && parseInt(v.substr(6, 3), 10) >= 500) ||
+                ("HA" === v.substr(0, 2) && parseInt(v.substr(6, 3), 10) < 500)
+            ) {
                 return {
                     meta: {},
-                    valid: false,
+                    valid: false
                 };
             }
             return {
                 meta: {},
-                valid: parseInt(v.substr(6, 3), 10) % 97 === parseInt(v.substr(9, 2), 10),
+                valid: parseInt(v.substr(6, 3), 10) % 97 === parseInt(v.substr(9, 2), 10)
             };
-        }
-        else if (length === 9 || length === 12) {
+        } else if (length === 9 || length === 12) {
             var weight = [8, 7, 6, 5, 4, 3, 2, 10, 1];
             var sum = 0;
             for (var i = 0; i < 9; i++) {
@@ -843,12 +845,12 @@
             var isValid = parseInt(v.substr(0, 3), 10) >= 100 ? sum === 0 || sum === 42 || sum === 55 : sum === 0;
             return {
                 meta: {},
-                valid: isValid,
+                valid: isValid
             };
         }
         return {
             meta: {},
-            valid: true,
+            valid: true
         };
     }
 
@@ -870,7 +872,7 @@
         if (!/^[0-9]{9}$/.test(v)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         if (v.length === 8) {
@@ -884,7 +886,7 @@
         sum = (sum % 11) % 10;
         return {
             meta: {},
-            valid: "".concat(sum) === v.substr(8, 1),
+            valid: "".concat(sum) === v.substr(8, 1)
         };
     }
 
@@ -907,12 +909,12 @@
         if (!/^[0-9]{11}$/.test(v)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         return {
             meta: {},
-            valid: mod11And10(v),
+            valid: mod11And10(v)
         };
     }
 
@@ -934,7 +936,7 @@
         if (!/^[0-9]{8}$/.test(v)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         var weight = [9, 7, 3, 1, 9, 7, 3, 1];
@@ -944,7 +946,7 @@
         }
         return {
             meta: {},
-            valid: sum % 10 === 0,
+            valid: sum % 10 === 0
         };
     }
 
@@ -966,7 +968,7 @@
         if (!/^[0-9][0-9A-Z*+][0-9]{5}[A-Z]{1,2}$/.test(v)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         var getCheckDigit = function (inp) {
@@ -974,7 +976,7 @@
             while (input.length < 7) {
                 input = "0".concat(input);
             }
-            var alphabet = 'WABCDEFGHIJKLMNOPQRSTUV';
+            var alphabet = "WABCDEFGHIJKLMNOPQRSTUV";
             var sum = 0;
             for (var i = 0; i < 7; i++) {
                 sum += parseInt(input.charAt(i), 10) * (8 - i);
@@ -987,19 +989,18 @@
             // New system
             return {
                 meta: {},
-                valid: v.charAt(7) === getCheckDigit("".concat(v.substr(0, 7)).concat(v.substr(8))),
+                valid: v.charAt(7) === getCheckDigit("".concat(v.substr(0, 7)).concat(v.substr(8)))
             };
-        }
-        else if ('ABCDEFGHIJKLMNOPQRSTUVWXYZ+*'.indexOf(v.charAt(1)) !== -1) {
+        } else if ("ABCDEFGHIJKLMNOPQRSTUVWXYZ+*".indexOf(v.charAt(1)) !== -1) {
             // Old system
             return {
                 meta: {},
-                valid: v.charAt(7) === getCheckDigit("".concat(v.substr(2, 5)).concat(v.substr(0, 1))),
+                valid: v.charAt(7) === getCheckDigit("".concat(v.substr(2, 5)).concat(v.substr(0, 1)))
             };
         }
         return {
             meta: {},
-            valid: true,
+            valid: true
         };
     }
 
@@ -1020,7 +1021,7 @@
         }
         return {
             meta: {},
-            valid: /^[0-9]{5,6}$/.test(v),
+            valid: /^[0-9]{5,6}$/.test(v)
         };
     }
 
@@ -1046,25 +1047,25 @@
         if (!/^[0-9]{11}$/.test(v)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         if (parseInt(v.substr(0, 7), 10) === 0) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         var lastThree = parseInt(v.substr(7, 3), 10);
         if (lastThree < 1 || (lastThree > 201 && lastThree !== 999 && lastThree !== 888)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         return {
             meta: {},
-            valid: luhn$1(v),
+            valid: luhn$1(v)
         };
     }
 
@@ -1089,7 +1090,7 @@
         if (!/^([0-9]{7}1[0-9]|[0-9]{10}1[0-9])$/.test(v)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         var length = v.length;
@@ -1109,7 +1110,7 @@
         check = (check % 11) % 10;
         return {
             meta: {},
-            valid: "".concat(check) === v.charAt(length - 1),
+            valid: "".concat(check) === v.charAt(length - 1)
         };
     }
 
@@ -1131,12 +1132,12 @@
         if (!/^[0-9]{8}$/.test(v)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         return {
             meta: {},
-            valid: parseInt(v.substring(0, 6), 10) % 89 === parseInt(v.substring(6, 8), 10),
+            valid: parseInt(v.substring(0, 6), 10) % 89 === parseInt(v.substring(6, 8), 10)
         };
     }
 
@@ -1159,7 +1160,7 @@
         if (!/^[0-9]{11}$/.test(v)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         var first = parseInt(v.charAt(0), 10);
@@ -1177,10 +1178,9 @@
             sum = sum % 11;
             return {
                 meta: {},
-                valid: sum === 3,
+                valid: sum === 3
             };
-        }
-        else {
+        } else {
             // Check birth date
             var day = parseInt(v.substr(0, 2), 10);
             var month = parseInt(v.substr(2, 2), 10);
@@ -1189,7 +1189,7 @@
             if (!isValidDate(year, month, day)) {
                 return {
                     meta: {},
-                    valid: false,
+                    valid: false
                 };
             }
             // Check personal code
@@ -1201,7 +1201,7 @@
             sum = ((sum + 1) % 11) % 10;
             return {
                 meta: {},
-                valid: "".concat(sum) === v.charAt(length - 1),
+                valid: "".concat(sum) === v.charAt(length - 1)
             };
         }
     }
@@ -1224,7 +1224,7 @@
         if (!/^[0-9]{8}$/.test(v)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         var weight = [3, 4, 6, 7, 8, 9, 10, 1];
@@ -1234,7 +1234,7 @@
         }
         return {
             meta: {},
-            valid: sum % 37 === 0,
+            valid: sum % 37 === 0
         };
     }
 
@@ -1254,7 +1254,7 @@
         if (value.length < 8) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         var v = value;
@@ -1264,14 +1264,14 @@
         if (!/^[0-9]{4}[.]{0,1}[0-9]{2}[.]{0,1}[0-9]{3}$/.test(v)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
-        v = v.replace(/\./g, '');
+        v = v?.replace(/\./g, "");
         if (parseInt(v, 10) === 0) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         var sum = 0;
@@ -1285,7 +1285,7 @@
         }
         return {
             meta: {},
-            valid: "".concat(sum) === v.charAt(length - 1),
+            valid: "".concat(sum) === v.charAt(length - 1)
         };
     }
     /**
@@ -1301,13 +1301,13 @@
         if (!/^[0-9]{9}B[0-9]{2}$/.test(v)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         var id = v.substr(0, 9);
         return {
             meta: {},
-            valid: nlId(id).valid || mod97And10("NL".concat(v)),
+            valid: nlId(id).valid || mod97And10("NL".concat(v))
         };
     }
 
@@ -1330,7 +1330,7 @@
         if (!/^[0-9]{9}$/.test(v)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         var weight = [3, 2, 7, 6, 5, 4, 3, 2];
@@ -1344,7 +1344,7 @@
         }
         return {
             meta: {},
-            valid: "".concat(sum) === v.substr(8, 1),
+            valid: "".concat(sum) === v.substr(8, 1)
         };
     }
 
@@ -1366,7 +1366,7 @@
         if (!/^[0-9]{10}$/.test(v)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         var weight = [6, 5, 7, 2, 3, 4, 5, 6, 7, -1];
@@ -1376,7 +1376,7 @@
         }
         return {
             meta: {},
-            valid: sum % 11 === 0,
+            valid: sum % 11 === 0
         };
     }
 
@@ -1398,7 +1398,7 @@
         if (!/^[0-9]{9}$/.test(v)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         var weight = [9, 8, 7, 6, 5, 4, 3, 2];
@@ -1412,7 +1412,7 @@
         }
         return {
             meta: {},
-            valid: "".concat(sum) === v.substr(8, 1),
+            valid: "".concat(sum) === v.substr(8, 1)
         };
     }
 
@@ -1434,7 +1434,7 @@
         if (!/^[1-9][0-9]{1,9}$/.test(v)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         var length = v.length;
@@ -1446,7 +1446,7 @@
         sum = ((10 * sum) % 11) % 10;
         return {
             meta: {},
-            valid: "".concat(sum) === v.substr(length - 1, 1),
+            valid: "".concat(sum) === v.substr(length - 1, 1)
         };
     }
 
@@ -1468,7 +1468,7 @@
         if (!/^[0-9]{9}$/.test(v)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         var sum = 10;
@@ -1482,7 +1482,7 @@
         }
         return {
             meta: {},
-            valid: (sum + parseInt(v.substr(8, 1), 10)) % 10 === 1,
+            valid: (sum + parseInt(v.substr(8, 1), 10)) % 10 === 1
         };
     }
 
@@ -1504,7 +1504,7 @@
         if (!/^([0-9]{10}|[0-9]{12})$/.test(v)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         var i = 0;
@@ -1520,10 +1520,9 @@
             }
             return {
                 meta: {},
-                valid: "".concat(sum) === v.substr(9, 1),
+                valid: "".concat(sum) === v.substr(9, 1)
             };
-        }
-        else if (v.length === 12) {
+        } else if (v.length === 12) {
             var weight1 = [7, 2, 4, 10, 3, 5, 9, 4, 6, 8, 0];
             var weight2 = [3, 7, 2, 4, 10, 3, 5, 9, 4, 6, 8, 0];
             var sum1 = 0;
@@ -1542,12 +1541,12 @@
             }
             return {
                 meta: {},
-                valid: "".concat(sum1) === v.substr(10, 1) && "".concat(sum2) === v.substr(11, 1),
+                valid: "".concat(sum1) === v.substr(10, 1) && "".concat(sum2) === v.substr(11, 1)
             };
         }
         return {
             meta: {},
-            valid: true,
+            valid: true
         };
     }
 
@@ -1570,13 +1569,13 @@
         if (!/^[0-9]{10}01$/.test(v)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         v = v.substr(0, 10);
         return {
             meta: {},
-            valid: luhn(v),
+            valid: luhn(v)
         };
     }
 
@@ -1596,7 +1595,7 @@
         if (!res) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         var v = res[1] ? value.substr(2) : value;
@@ -1611,7 +1610,7 @@
         }
         return {
             meta: {},
-            valid: "".concat(sum) === v.substr(7, 1),
+            valid: "".concat(sum) === v.substr(7, 1)
         };
     }
 
@@ -1633,12 +1632,12 @@
         if (!/^[1-9][0-9][(2-4)|(6-9)][0-9]{7}$/.test(v)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         return {
             meta: {},
-            valid: parseInt(v, 10) % 11 === 0,
+            valid: parseInt(v, 10) % 11 === 0
         };
     }
 
@@ -1660,7 +1659,7 @@
         if (!/^[VEJPG][0-9]{9}$/.test(v)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         var types = {
@@ -1668,7 +1667,7 @@
             G: 20,
             J: 12,
             P: 16,
-            V: 4,
+            V: 4
         };
         var weight = [3, 2, 7, 6, 5, 4, 3, 2];
         var sum = types[v.charAt(0)];
@@ -1681,7 +1680,7 @@
         }
         return {
             meta: {},
-            valid: "".concat(sum) === v.substr(9, 1),
+            valid: "".concat(sum) === v.substr(9, 1)
         };
     }
 
@@ -1702,7 +1701,7 @@
         }
         return {
             meta: {},
-            valid: /^4[0-9]{9}$/.test(v),
+            valid: /^4[0-9]{9}$/.test(v)
         };
     }
 
@@ -1711,48 +1710,49 @@
      * The best validation library for JavaScript
      * (c) 2013 - 2023 Nguyen Huu Phuoc <me@phuoc.ng>
      */
-    var format = core.utils.format, removeUndefined = core.utils.removeUndefined;
+    var format = core.utils.format,
+        removeUndefined = core.utils.removeUndefined;
     function vat() {
         // Supported country codes
         var COUNTRY_CODES = [
-            'AR',
-            'AT',
-            'BE',
-            'BG',
-            'BR',
-            'CH',
-            'CY',
-            'CZ',
-            'DE',
-            'DK',
-            'EE',
-            'EL',
-            'ES',
-            'FI',
-            'FR',
-            'GB',
-            'GR',
-            'HR',
-            'HU',
-            'IE',
-            'IS',
-            'IT',
-            'LT',
-            'LU',
-            'LV',
-            'MT',
-            'NL',
-            'NO',
-            'PL',
-            'PT',
-            'RO',
-            'RU',
-            'RS',
-            'SE',
-            'SK',
-            'SI',
-            'VE',
-            'ZA',
+            "AR",
+            "AT",
+            "BE",
+            "BG",
+            "BR",
+            "CH",
+            "CY",
+            "CZ",
+            "DE",
+            "DK",
+            "EE",
+            "EL",
+            "ES",
+            "FI",
+            "FR",
+            "GB",
+            "GR",
+            "HR",
+            "HU",
+            "IE",
+            "IS",
+            "IT",
+            "LT",
+            "LU",
+            "LV",
+            "MT",
+            "NL",
+            "NO",
+            "PL",
+            "PT",
+            "RO",
+            "RU",
+            "RS",
+            "SE",
+            "SK",
+            "SI",
+            "VE",
+            "ZA"
         ];
         return {
             /**
@@ -1760,15 +1760,14 @@
              */
             validate: function (input) {
                 var value = input.value;
-                if (value === '') {
+                if (value === "") {
                     return { valid: true };
                 }
-                var opts = Object.assign({}, { message: '' }, removeUndefined(input.options));
+                var opts = Object.assign({}, { message: "" }, removeUndefined(input.options));
                 var country = value.substr(0, 2);
-                if ('function' === typeof opts.country) {
+                if ("function" === typeof opts.country) {
                     country = opts.country.call(this);
-                }
-                else {
+                } else {
                     country = opts.country;
                 }
                 if (COUNTRY_CODES.indexOf(country) === -1) {
@@ -1776,133 +1775,135 @@
                 }
                 var result = {
                     meta: {},
-                    valid: true,
+                    valid: true
                 };
                 switch (country.toLowerCase()) {
-                    case 'ar':
+                    case "ar":
                         result = arVat(value);
                         break;
-                    case 'at':
+                    case "at":
                         result = atVat(value);
                         break;
-                    case 'be':
+                    case "be":
                         result = beVat(value);
                         break;
-                    case 'bg':
+                    case "bg":
                         result = bgVat(value);
                         break;
-                    case 'br':
+                    case "br":
                         result = brVat(value);
                         break;
-                    case 'ch':
+                    case "ch":
                         result = chVat(value);
                         break;
-                    case 'cy':
+                    case "cy":
                         result = cyVat(value);
                         break;
-                    case 'cz':
+                    case "cz":
                         result = czVat(value);
                         break;
-                    case 'de':
+                    case "de":
                         result = deVat(value);
                         break;
-                    case 'dk':
+                    case "dk":
                         result = dkVat(value);
                         break;
-                    case 'ee':
+                    case "ee":
                         result = eeVat(value);
                         break;
                     // EL is traditionally prefix of Greek VAT numbers
-                    case 'el':
+                    case "el":
                         result = grVat(value);
                         break;
-                    case 'es':
+                    case "es":
                         result = esVat(value);
                         break;
-                    case 'fi':
+                    case "fi":
                         result = fiVat(value);
                         break;
-                    case 'fr':
+                    case "fr":
                         result = frVat(value);
                         break;
-                    case 'gb':
+                    case "gb":
                         result = gbVat(value);
                         break;
-                    case 'gr':
+                    case "gr":
                         result = grVat(value);
                         break;
-                    case 'hr':
+                    case "hr":
                         result = hrVat(value);
                         break;
-                    case 'hu':
+                    case "hu":
                         result = huVat(value);
                         break;
-                    case 'ie':
+                    case "ie":
                         result = ieVat(value);
                         break;
-                    case 'is':
+                    case "is":
                         result = isVat(value);
                         break;
-                    case 'it':
+                    case "it":
                         result = itVat(value);
                         break;
-                    case 'lt':
+                    case "lt":
                         result = ltVat(value);
                         break;
-                    case 'lu':
+                    case "lu":
                         result = luVat(value);
                         break;
-                    case 'lv':
+                    case "lv":
                         result = lvVat(value);
                         break;
-                    case 'mt':
+                    case "mt":
                         result = mtVat(value);
                         break;
-                    case 'nl':
+                    case "nl":
                         result = nlVat(value);
                         break;
-                    case 'no':
+                    case "no":
                         result = noVat(value);
                         break;
-                    case 'pl':
+                    case "pl":
                         result = plVat(value);
                         break;
-                    case 'pt':
+                    case "pt":
                         result = ptVat(value);
                         break;
-                    case 'ro':
+                    case "ro":
                         result = roVat(value);
                         break;
-                    case 'rs':
+                    case "rs":
                         result = rsVat(value);
                         break;
-                    case 'ru':
+                    case "ru":
                         result = ruVat(value);
                         break;
-                    case 'se':
+                    case "se":
                         result = seVat(value);
                         break;
-                    case 'si':
+                    case "si":
                         result = siVat(value);
                         break;
-                    case 'sk':
+                    case "sk":
                         result = skVat(value);
                         break;
-                    case 've':
+                    case "ve":
                         result = veVat(value);
                         break;
-                    case 'za':
+                    case "za":
                         result = zaVat(value);
                         break;
                 }
-                var message = format(input.l10n && input.l10n.vat ? opts.message || input.l10n.vat.country : opts.message, input.l10n && input.l10n.vat && input.l10n.vat.countries
-                    ? input.l10n.vat.countries[country.toUpperCase()]
-                    : country.toUpperCase());
+                var message = format(
+                    input.l10n && input.l10n.vat ? opts.message || input.l10n.vat.country : opts.message,
+                    input.l10n && input.l10n.vat && input.l10n.vat.countries
+                        ? input.l10n.vat.countries[country.toUpperCase()]
+                        : country.toUpperCase()
+                );
                 return Object.assign({}, { message: message }, result);
-            },
+            }
         };
     }
 
     return vat;
-
-}));
+});

@@ -218,7 +218,7 @@ export async function GetUsers(query) {
             responseSecondary.hits.forEach((res) => {
                 uuidStr = "`" + res.document.userUuid + "`," + uuidStr;
             });
-            uuidStr = "[" + uuidStr.replace(/,\s*$/, "") + "]";
+            uuidStr = "[" + uuidStr?.replace(/,\s*$/, "") + "]";
 
             const response = await search
                 .collections("users")

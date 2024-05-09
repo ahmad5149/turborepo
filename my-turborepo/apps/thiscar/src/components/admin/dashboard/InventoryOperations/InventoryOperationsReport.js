@@ -171,7 +171,7 @@ function InventoryOperationsReport() {
                                         {data?.map((IORrecord, index) => (
                                             <tr key={index}>
                                                 <td className="text-start pe-0">
-                                                    {IORrecord.name?.replace(/^"(.*)"$/, "$1")}
+                                                    {IORrecord.name??.replace(/^"(.*)"$/, "$1")}
                                                 </td>
                                                 <td className="text-center pe-0"> {IORrecord.TotalUnitsReceived} </td>
                                                 <td className="text-center pe-0"> {IORrecord.LiveonTHIScar} </td>

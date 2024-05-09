@@ -15,8 +15,7 @@ export async function createFBFSUser(data, role) {
             userData["firebaseId"] = userRecord.uid;
             userData["rule"] = role;
 
-            dealerCollection.add(userData).then((res) => {
-            });
+            dealerCollection.add(userData).then((res) => {});
         })
         .catch((error) => {
             console.error("Error creating user:", error);
@@ -33,7 +32,7 @@ export async function sendLoginLink(email) {
         if (dealerData && dealerData.subDomain != "") {
             const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
             const dealerSub = dealerData.subDomain;
-            const fullHostName = baseURL.replace(/^http:\/\//, "http://" + dealerSub + ".");
+            const fullHostName = baseURL?.replace(/^http:\/\//, "http://" + dealerSub + ".");
 
             const actionCodeSettings = {
                 // URL you want to redirect back to. The domain (www.example.com) for this

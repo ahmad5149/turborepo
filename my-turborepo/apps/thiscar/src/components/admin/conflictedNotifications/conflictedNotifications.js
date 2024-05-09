@@ -190,7 +190,7 @@ function ThisCarNotifications({ notifications, notificationFound }) {
 
     const getNotificationColorForType = (value) => {
         if (value != null) {
-            value = value.replace(/\s/g, ""); // Removes spaces - 24 hour hold
+            value = value?.replace(/\s/g, ""); // Removes spaces - 24 hour hold
 
             switch (value.toLowerCase()) {
                 case "available":

@@ -327,7 +327,7 @@ const RenderMakeAndModelDropdowns = (props) => {
                                 {props.make.every((item) => item.label != make.label) && (
                                     <img
                                         src={`/media/maker-icons/${(make.value.includes(" ")
-                                            ? make.value.replace(/ /g, "-")
+                                            ? make.value?.replace(/ /g, "-")
                                             : make.value
                                         ).toLowerCase()}.png`}
                                         width={25}
@@ -497,9 +497,9 @@ const RenderRangeFilter = ({
                 (hoverValue !== null || isDragging)
                     ? "$" + value
                     : (filterName.toLowerCase() !== "price" || filterName.toLowerCase() === "payment") &&
-                      (hoverValue !== null || isDragging)
-                    ? value
-                    : null}
+                        (hoverValue !== null || isDragging)
+                      ? value
+                      : null}
             </div>
         );
     };

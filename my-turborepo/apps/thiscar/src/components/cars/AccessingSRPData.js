@@ -347,7 +347,7 @@ export default function SRP({ allFacets, contactDetails, queryParams }) {
         var path = "";
         if (params) {
             params.set("showComingSoonCars", showComingSoonCars);
-            path = pathname + "?" + params.toString().replace(/\+/g, "%20");
+            path = pathname + "?" + params.toString()?.replace(/\+/g, "%20");
         }
         carsURL = path;
         //router.push(path, { scroll: false });
@@ -372,7 +372,7 @@ export default function SRP({ allFacets, contactDetails, queryParams }) {
     };
 
     const formatURL = (url) => {
-        const queryString = url.toString().replace(/%20/g, " ");
+        const queryString = url.toString()?.replace(/%20/g, " ");
         const splittedURL = queryString.split("?");
         if (splittedURL.length >= 2) {
             return splittedURL[1];

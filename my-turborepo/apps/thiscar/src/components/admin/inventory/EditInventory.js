@@ -214,7 +214,7 @@ function EditInventory({ carData, updateInventory, deletePhoto, uploadUnprocesse
     const handleNumericChange = (event, stateHandler) => {
         const rawValue = event.target.value;
         // Remove non-numeric characters from the input
-        const numericValue = Number(rawValue.replace(/[^0-9.]/g, ""));
+        const numericValue = Number(rawValue?.replace(/[^0-9.]/g, ""));
 
         stateHandler(numericValue);
     };

@@ -70,7 +70,7 @@ function OffsiteNotifications({ notifications, confirmSaleOrNoSale }) {
 
     const getNotificationColorForType = (value) => {
         if (value != null) {
-            value = value.replace(/\s/g, "");
+            value = value?.replace(/\s/g, "");
             switch (value.toLowerCase()) {
                 case "available":
                     return "type-available";
@@ -451,8 +451,8 @@ function OffsiteNotifications({ notifications, confirmSaleOrNoSale }) {
                     response.toLowerCase() === "saleconfirmed"
                         ? confirmSaleOrNoSale.saleConfirmed
                         : response.toLowerCase() === "vehicleunavailable"
-                        ? confirmSaleOrNoSale.vehicleUnavailable
-                        : "N/A"
+                          ? confirmSaleOrNoSale.vehicleUnavailable
+                          : "N/A"
                 } <br/> <br/></p>
                 <div class="label-data">
                     <div class="label">VIN:</div>
@@ -468,8 +468,8 @@ function OffsiteNotifications({ notifications, confirmSaleOrNoSale }) {
                     <div class="data"> ${
                         addSpaceToResponse
                             ? addSpaceToResponse
-                                  .replace(/([a-z])([A-Z])/g, "$1 $2")
-                                  .replace(/^\w/, (c) => c.toUpperCase())
+                                  ?.replace(/([a-z])([A-Z])/g, "$1 $2")
+                                  ?.replace(/^\w/, (c) => c.toUpperCase())
                             : "N/A"
                     }</div>
                 </div>
@@ -481,16 +481,16 @@ function OffsiteNotifications({ notifications, confirmSaleOrNoSale }) {
             </html>
             
         `;
-            // addSpaceToResponse ? addSpaceToResponse.replace(/([a-z])([A-Z])/g, "$1 $2") : "N/A"
+            // addSpaceToResponse ? addSpaceToResponse?.replace(/([a-z])([A-Z])/g, "$1 $2") : "N/A"
 
             const emailText = `VIN: ${vin ?? "N/A"}\n\nDeal Status: ${
-                addSpaceToResponse ? addSpaceToResponse.replace(/([a-z])([A-Z])/g, "$1 $2") : "N/A"
+                addSpaceToResponse ? addSpaceToResponse?.replace(/([a-z])([A-Z])/g, "$1 $2") : "N/A"
             }\n\nNotes: ${
                 response.toLowerCase() === "saleconfirmed"
                     ? confirmSaleOrNoSale.saleConfirmed
                     : response.toLowerCase() === "vehicleunavailable"
-                    ? confirmSaleOrNoSale.vehicleUnavailable
-                    : "N/A"
+                      ? confirmSaleOrNoSale.vehicleUnavailable
+                      : "N/A"
             }
                 \n\n`;
 
@@ -505,8 +505,8 @@ function OffsiteNotifications({ notifications, confirmSaleOrNoSale }) {
                         response.toLowerCase() === "saleconfirmed"
                             ? confirmSaleOrNoSale.saleConfirmed
                             : response.toLowerCase() === "vehicleunavailable"
-                            ? confirmSaleOrNoSale.vehicleUnavailable
-                            : result.message ?? "N/A",
+                              ? confirmSaleOrNoSale.vehicleUnavailable
+                              : result.message ?? "N/A",
                     confirmButtonText: "Close",
                     timer: 7000,
                     timerProgressBar: true

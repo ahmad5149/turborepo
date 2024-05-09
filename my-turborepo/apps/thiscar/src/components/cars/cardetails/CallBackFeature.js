@@ -28,7 +28,7 @@ const CallBackFeatureModal = ({ closeModal, vehicleName, images }) => {
     };
 
     const handlePhoneNumberChange = (e) => {
-        const rawPhoneNumber = e.target.value.replace(/\D/g, ""); // Remove non-digit characters
+        const rawPhoneNumber = e.target.value?.replace(/\D/g, ""); // Remove non-digit characters
         const formattedPhoneNumber = formatPhoneNumber(rawPhoneNumber);
 
         setPhoneNumber(formattedPhoneNumber);

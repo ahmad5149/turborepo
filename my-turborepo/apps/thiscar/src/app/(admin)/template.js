@@ -5,7 +5,7 @@ import { Header } from "../../components/admin/common/header/Header";
 import { Sidebar } from "../../components/admin/common/sidebar/Sidebar";
 export default function homeLayout({ children }) {
     const path = usePathname();
-    const name = path.replace(/\//g, "-");
+    const name = path?.replace(/\//g, "-");
     return (
         <>
             <div

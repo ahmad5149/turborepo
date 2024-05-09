@@ -32,9 +32,9 @@ function AverageResponseTimeForHoldAndPurchase({ dealerOptions }) {
         const [hoursStr, minutesStr, secondsStr] = timeString.split(" ");
 
         // Extract numerical values from the strings
-        const hours = parseInt(hoursStr.replace("h", ""), 10); // Remove 'h' and parse as integer
-        const minutes = parseInt(minutesStr.replace("m", ""), 10); // Remove 'm' and parse as integer
-        const seconds = parseInt(secondsStr.replace("s", ""), 10); // Remove 's' and parse as integer
+        const hours = parseInt(hoursStr?.replace("h", ""), 10); // Remove 'h' and parse as integer
+        const minutes = parseInt(minutesStr?.replace("m", ""), 10); // Remove 'm' and parse as integer
+        const seconds = parseInt(secondsStr?.replace("s", ""), 10); // Remove 's' and parse as integer
         return { hours, minutes, seconds };
     }
     const initChart = async (chartData) => {

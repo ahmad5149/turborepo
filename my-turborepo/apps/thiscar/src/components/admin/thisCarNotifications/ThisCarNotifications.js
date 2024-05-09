@@ -5,7 +5,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { Toolbar } from "../common/toolbar/Toolbar";
-import { fetchNotifications,fetchNotificationsForExport } from "../../../services/notificationsService";
+import { fetchNotifications, fetchNotificationsForExport } from "../../../services/notificationsService";
 import "../../../contents/admin/scss/notifications.scss";
 import { pusherClient } from "@/utils/pusher/client";
 import { NotificationLogs } from "./partials/NotificationLogs";
@@ -20,8 +20,6 @@ import moment from "moment-timezone";
 import "../../../../src/contents/admin/scss/mobileListings.scss";
 import { downloadXLS } from "../../../utils/downloadXLS";
 import Swal from "sweetalert2";
-
-
 
 function ThisCarNotifications({ notifications, notificationFound }) {
     const searchParams = useSearchParams();
@@ -149,7 +147,7 @@ function ThisCarNotifications({ notifications, notificationFound }) {
 
     const getNotificationColorForType = (value) => {
         if (value != null) {
-            value = value.replace(/\s/g, ""); // Removes spaces - 24 hour hold
+            value = value?.replace(/\s/g, ""); // Removes spaces - 24 hour hold
 
             switch (value.toLowerCase()) {
                 case "available":
@@ -403,7 +401,6 @@ function ThisCarNotifications({ notifications, notificationFound }) {
         setExportListingPopup(false);
     };
 
-   
     const findSearchResults = async (q) => {
         setHasSearchResults(true);
         setSortBy("dateOfAttempt._seconds");
@@ -1063,7 +1060,7 @@ function DownloadNotificationFilters({ closeExportListingModal }) {
 
         return number + suffixes[remainderTen <= 3 && remainderHundred !== 11 ? remainderTen : 0];
     }
-    
+
     const downloadNotifications = (allNotifications) => {
         const headers = [
             "Dealer",
@@ -1100,7 +1097,7 @@ function DownloadNotificationFilters({ closeExportListingModal }) {
                     : convertDateToLocalTime(item.document?.responseDate)
                 : "N/A",
 
-            item.document.responseMessage  || "N/A"
+            item.document.responseMessage || "N/A"
         ]);
         downloadXLS(extractedFields, headers, filename);
     };
@@ -1108,11 +1105,9 @@ function DownloadNotificationFilters({ closeExportListingModal }) {
     const fetchResults = () => {
         if (!startDate && !endDate) {
             setError("Please select valid dates.");
-        }
-        else if (startDate && !endDate) {
+        } else if (startDate && !endDate) {
             setError("Please select valid dates.");
-        } 
-        else {
+        } else {
             let utcStartInSeconds = "";
             let utcEndInSeconds = "";
             (async () => {
@@ -1127,22 +1122,18 @@ function DownloadNotificationFilters({ closeExportListingModal }) {
                     utcStartInSeconds = Math.floor(selectedStartDate.getTime() / 1000);
                     utcEndInSeconds = Math.floor(selectedEndDate.getTime() / 1000);
                 }
-                const filteredNotifications = await fetchNotificationsForExport(utcStartInSeconds, utcEndInSeconds);  
-                if(filteredNotifications && filteredNotifications.length > 0)
-                {
+                const filteredNotifications = await fetchNotificationsForExport(utcStartInSeconds, utcEndInSeconds);
+                if (filteredNotifications && filteredNotifications.length > 0) {
                     downloadNotifications(filteredNotifications);
                     closeExportListingModal();
-                }  
-                else
-                {
+                } else {
                     Swal.fire({
-                        title: 'No notifications found against the selected range',
+                        title: "No notifications found against the selected range",
                         icon: "error",
                         confirmButtonColor: "#3085d6",
                         cancelButtonColor: "#d33",
                         confirmButtonText: "Okay"
-                    }).then(async (result) => {
-                    });
+                    }).then(async (result) => {});
                 }
             })();
 

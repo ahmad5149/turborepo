@@ -90,11 +90,11 @@ function CarInformation({
 
     useEffect(() => {
         if (searchParams.get("windowSticker") && !showWindowSticker) {
-            router.replace(`${pathName}`);
+            router?.replace(`${pathName}`);
         }
 
         if (!searchParams.get("windowSticker") && showWindowSticker) {
-            router.replace(`${pathName}?windowSticker=true`);
+            router?.replace(`${pathName}?windowSticker=true`);
         }
     }, [searchParams, showWindowSticker]);
 
@@ -845,7 +845,7 @@ export function CopyURLModal({ path, basePath }) {
     };
 
     const handlePhoneNumberChange = (e) => {
-        const rawPhoneNumber = e.target.value.replace(/\D/g, ""); // Remove non-digit characters
+        const rawPhoneNumber = e.target.value?.replace(/\D/g, ""); // Remove non-digit characters
         const formattedPhoneNumber = formatPhoneNumber(rawPhoneNumber);
 
         setPhoneNumber(formattedPhoneNumber);

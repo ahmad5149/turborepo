@@ -205,7 +205,7 @@ export const CustomStyle = {
 };
 
 export const handlePhoneNumberFormat = (event) => {
-    const rawPhoneNumber = event.target.value.replace(/\D/g, ""); // Remove non-digit characters
+    const rawPhoneNumber = event.target.value?.replace(/\D/g, ""); // Remove non-digit characters
     const formattedPhoneNumber = formatPhoneNumber(rawPhoneNumber);
     return formattedPhoneNumber;
 };
@@ -235,5 +235,5 @@ const formatPhoneNumber = (value) => {
 };
 
 export const handleChromeId = (event) => {
-    return event.target.value.replace(/\D/g, ""); // Remove non-digit characters
+    return event.target.value?.replace(/\D/g, ""); // Remove non-digit characters
 };

@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-var core = require('@form-validation/core');
+var core = require("@form-validation/core");
 
 /**
  * FormValidation (https://formvalidation.io)
@@ -15,19 +15,19 @@ function grid() {
          * @see http://en.wikipedia.org/wiki/Global_Release_Identifier
          */
         validate: function (input) {
-            if (input.value === '') {
+            if (input.value === "") {
                 return { valid: true };
             }
             var v = input.value.toUpperCase();
             if (!/^[GRID:]*([0-9A-Z]{2})[-\s]*([0-9A-Z]{5})[-\s]*([0-9A-Z]{10})[-\s]*([0-9A-Z]{1})$/g.test(v)) {
                 return { valid: false };
             }
-            v = v.replace(/\s/g, '').replace(/-/g, '');
-            if ('GRID:' === v.substr(0, 5)) {
+            v = v?.replace(/\s/g, "")?.replace(/-/g, "");
+            if ("GRID:" === v.substr(0, 5)) {
                 v = v.substr(5);
             }
             return { valid: mod37And36(v) };
-        },
+        }
     };
 }
 

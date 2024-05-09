@@ -6,7 +6,7 @@ export const bigQueryClient = (query) => {
         projectId: appConfig.GOOGLE_PROJECT_ID,
         credentials: {
             client_email: appConfig.BIG_QUERY_CLIENT_EMAIL,
-            private_key: appConfig.BIG_QUERY_KEY.replace(/\\n/g, "\n")
+            private_key: appConfig.BIG_QUERY_KEY?.replace(/\\n/g, "\n")
         }
     });
 

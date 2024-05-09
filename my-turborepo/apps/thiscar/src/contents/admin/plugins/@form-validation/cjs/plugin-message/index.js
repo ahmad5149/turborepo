@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-var core = require('@form-validation/core');
+var core = require("@form-validation/core");
 
 /******************************************************************************
 Copyright (c) Microsoft Corporation.
@@ -18,10 +18,16 @@ PERFORMANCE OF THIS SOFTWARE.
 ***************************************************************************** */
 /* global Reflect, Promise */
 
-var extendStatics = function(d, b) {
-    extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+var extendStatics = function (d, b) {
+    extendStatics =
+        Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array &&
+            function (d, b) {
+                d.__proto__ = b;
+            }) ||
+        function (d, b) {
+            for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p];
+        };
     return extendStatics(d, b);
 };
 
@@ -29,8 +35,10 @@ function __extends(d, b) {
     if (typeof b !== "function" && b !== null)
         throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
     extendStatics(d, b);
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    function __() {
+        this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : ((__.prototype = b.prototype), new __());
 }
 
 /**
@@ -47,11 +55,17 @@ var Message = /** @class */ (function (_super) {
         // Map the field element to message container
         _this.messages = new Map();
         // By default, we will display error messages at the bottom of form
-        _this.defaultContainer = document.createElement('div');
+        _this.defaultContainer = document.createElement("div");
         _this.useDefaultContainer = !opts || !opts.container;
-        _this.opts = Object.assign({}, {
-            container: function (_field, _element) { return _this.defaultContainer; },
-        }, opts);
+        _this.opts = Object.assign(
+            {},
+            {
+                container: function (_field, _element) {
+                    return _this.defaultContainer;
+                }
+            },
+            opts
+        );
         _this.elementIgnoredHandler = _this.onElementIgnored.bind(_this);
         _this.fieldAddedHandler = _this.onFieldAdded.bind(_this);
         _this.fieldRemovedHandler = _this.onFieldRemoved.bind(_this);
@@ -101,38 +115,40 @@ var Message = /** @class */ (function (_super) {
             this.core.getFormElement().appendChild(this.defaultContainer);
         }
         this.core
-            .on('core.element.ignored', this.elementIgnoredHandler)
-            .on('core.field.added', this.fieldAddedHandler)
-            .on('core.field.removed', this.fieldRemovedHandler)
-            .on('core.validator.validated', this.validatorValidatedHandler)
-            .on('core.validator.notvalidated', this.validatorNotValidatedHandler);
+            .on("core.element.ignored", this.elementIgnoredHandler)
+            .on("core.field.added", this.fieldAddedHandler)
+            .on("core.field.removed", this.fieldRemovedHandler)
+            .on("core.validator.validated", this.validatorValidatedHandler)
+            .on("core.validator.notvalidated", this.validatorNotValidatedHandler);
     };
     Message.prototype.uninstall = function () {
         if (this.useDefaultContainer) {
             this.core.getFormElement().removeChild(this.defaultContainer);
         }
-        this.messages.forEach(function (message) { return message.parentNode.removeChild(message); });
+        this.messages.forEach(function (message) {
+            return message.parentNode.removeChild(message);
+        });
         this.messages.clear();
         this.core
-            .off('core.element.ignored', this.elementIgnoredHandler)
-            .off('core.field.added', this.fieldAddedHandler)
-            .off('core.field.removed', this.fieldRemovedHandler)
-            .off('core.validator.validated', this.validatorValidatedHandler)
-            .off('core.validator.notvalidated', this.validatorNotValidatedHandler);
+            .off("core.element.ignored", this.elementIgnoredHandler)
+            .off("core.field.added", this.fieldAddedHandler)
+            .off("core.field.removed", this.fieldRemovedHandler)
+            .off("core.validator.validated", this.validatorValidatedHandler)
+            .off("core.validator.notvalidated", this.validatorNotValidatedHandler);
     };
     Message.prototype.onEnabled = function () {
         this.messages.forEach(function (_element, message, _map) {
             classSet(message, {
-                'fv-plugins-message-container--enabled': true,
-                'fv-plugins-message-container--disabled': false,
+                "fv-plugins-message-container--enabled": true,
+                "fv-plugins-message-container--disabled": false
             });
         });
     };
     Message.prototype.onDisabled = function () {
         this.messages.forEach(function (_element, message, _map) {
             classSet(message, {
-                'fv-plugins-message-container--enabled': false,
-                'fv-plugins-message-container--disabled': true,
+                "fv-plugins-message-container--enabled": false,
+                "fv-plugins-message-container--disabled": true
             });
         });
     };
@@ -157,8 +173,8 @@ var Message = /** @class */ (function (_super) {
         if (!e.elements.length || !e.field) {
             return;
         }
-        var type = e.elements[0].getAttribute('type');
-        var elements = 'radio' === type || 'checkbox' === type ? [e.elements[0]] : e.elements;
+        var type = e.elements[0].getAttribute("type");
+        var elements = "radio" === type || "checkbox" === type ? [e.elements[0]] : e.elements;
         elements.forEach(function (ele) {
             if (_this.messages.has(ele)) {
                 var container = _this.messages.get(ele);
@@ -170,85 +186,86 @@ var Message = /** @class */ (function (_super) {
     Message.prototype.prepareFieldContainer = function (field, elements) {
         var _this = this;
         if (elements.length) {
-            var type = elements[0].getAttribute('type');
-            if ('radio' === type || 'checkbox' === type) {
+            var type = elements[0].getAttribute("type");
+            if ("radio" === type || "checkbox" === type) {
                 this.prepareElementContainer(field, elements[0], elements);
-            }
-            else {
-                elements.forEach(function (ele) { return _this.prepareElementContainer(field, ele, elements); });
+            } else {
+                elements.forEach(function (ele) {
+                    return _this.prepareElementContainer(field, ele, elements);
+                });
             }
         }
     };
     Message.prototype.prepareElementContainer = function (field, element, elements) {
         var container;
-        if ('string' === typeof this.opts.container) {
-            var selector = '#' === this.opts.container.charAt(0)
-                ? "[id=\"".concat(this.opts.container.substring(1), "\"]")
-                : this.opts.container;
+        if ("string" === typeof this.opts.container) {
+            var selector =
+                "#" === this.opts.container.charAt(0)
+                    ? '[id="'.concat(this.opts.container.substring(1), '"]')
+                    : this.opts.container;
             container = this.core.getFormElement().querySelector(selector);
-        }
-        else {
+        } else {
             container = this.opts.container(field, element);
         }
-        var message = document.createElement('div');
+        var message = document.createElement("div");
         container.appendChild(message);
         classSet(message, {
-            'fv-plugins-message-container': true,
-            'fv-plugins-message-container--enabled': this.isEnabled,
-            'fv-plugins-message-container--disabled': !this.isEnabled,
+            "fv-plugins-message-container": true,
+            "fv-plugins-message-container--enabled": this.isEnabled,
+            "fv-plugins-message-container--disabled": !this.isEnabled
         });
-        this.core.emit('plugins.message.placed', {
+        this.core.emit("plugins.message.placed", {
             element: element,
             elements: elements,
             field: field,
-            messageElement: message,
+            messageElement: message
         });
         this.messages.set(element, message);
     };
     Message.prototype.getMessage = function (result) {
-        return typeof result.message === 'string' ? result.message : result.message[this.core.getLocale()];
+        return typeof result.message === "string" ? result.message : result.message[this.core.getLocale()];
     };
     Message.prototype.onValidatorValidated = function (e) {
         var _a;
         var elements = e.elements;
-        var type = e.element.getAttribute('type');
-        var element = ('radio' === type || 'checkbox' === type) && elements.length > 0 ? elements[0] : e.element;
+        var type = e.element.getAttribute("type");
+        var element = ("radio" === type || "checkbox" === type) && elements.length > 0 ? elements[0] : e.element;
         if (this.messages.has(element)) {
             var container = this.messages.get(element);
-            var messageEle = container.querySelector("[data-field=\"".concat(e.field.replace(/"/g, '\\"'), "\"][data-validator=\"").concat(e.validator.replace(/"/g, '\\"'), "\"]"));
+            var messageEle = container.querySelector(
+                '[data-field="'
+                    .concat(e.field?.replace(/"/g, '\\"'), '"][data-validator="')
+                    .concat(e.validator?.replace(/"/g, '\\"'), '"]')
+            );
             if (!messageEle && !e.result.valid) {
-                var ele = document.createElement('div');
+                var ele = document.createElement("div");
                 ele.innerHTML = this.getMessage(e.result);
-                ele.setAttribute('data-field', e.field);
-                ele.setAttribute('data-validator', e.validator);
+                ele.setAttribute("data-field", e.field);
+                ele.setAttribute("data-validator", e.validator);
                 if (this.opts.clazz) {
-                    classSet(ele, (_a = {},
-                        _a[this.opts.clazz] = true,
-                        _a));
+                    classSet(ele, ((_a = {}), (_a[this.opts.clazz] = true), _a));
                 }
                 container.appendChild(ele);
-                this.core.emit('plugins.message.displayed', {
+                this.core.emit("plugins.message.displayed", {
                     element: e.element,
                     field: e.field,
                     message: e.result.message,
                     messageElement: ele,
                     meta: e.result.meta,
-                    validator: e.validator,
+                    validator: e.validator
                 });
-            }
-            else if (messageEle && !e.result.valid) {
+            } else if (messageEle && !e.result.valid) {
                 // The validator returns new message
                 messageEle.innerHTML = this.getMessage(e.result);
-                this.core.emit('plugins.message.displayed', {
+                this.core.emit("plugins.message.displayed", {
                     element: e.element,
                     field: e.field,
                     message: e.result.message,
                     messageElement: messageEle,
                     meta: e.result.meta,
-                    validator: e.validator,
+                    validator: e.validator
                 });
-            }
-            else if (messageEle && e.result.valid) {
+            } else if (messageEle && e.result.valid) {
                 // Field is valid
                 container.removeChild(messageEle);
             }
@@ -256,11 +273,15 @@ var Message = /** @class */ (function (_super) {
     };
     Message.prototype.onValidatorNotValidated = function (e) {
         var elements = e.elements;
-        var type = e.element.getAttribute('type');
-        var element = 'radio' === type || 'checkbox' === type ? elements[0] : e.element;
+        var type = e.element.getAttribute("type");
+        var element = "radio" === type || "checkbox" === type ? elements[0] : e.element;
         if (this.messages.has(element)) {
             var container = this.messages.get(element);
-            var messageEle = container.querySelector("[data-field=\"".concat(e.field.replace(/"/g, '\\"'), "\"][data-validator=\"").concat(e.validator.replace(/"/g, '\\"'), "\"]"));
+            var messageEle = container.querySelector(
+                '[data-field="'
+                    .concat(e.field?.replace(/"/g, '\\"'), '"][data-validator="')
+                    .concat(e.validator?.replace(/"/g, '\\"'), '"]')
+            );
             if (messageEle) {
                 container.removeChild(messageEle);
             }
@@ -268,17 +289,19 @@ var Message = /** @class */ (function (_super) {
     };
     Message.prototype.onElementIgnored = function (e) {
         var elements = e.elements;
-        var type = e.element.getAttribute('type');
-        var element = 'radio' === type || 'checkbox' === type ? elements[0] : e.element;
+        var type = e.element.getAttribute("type");
+        var element = "radio" === type || "checkbox" === type ? elements[0] : e.element;
         if (this.messages.has(element)) {
             var container_1 = this.messages.get(element);
-            var messageElements = [].slice.call(container_1.querySelectorAll("[data-field=\"".concat(e.field.replace(/"/g, '\\"'), "\"]")));
+            var messageElements = [].slice.call(
+                container_1.querySelectorAll('[data-field="'.concat(e.field?.replace(/"/g, '\\"'), '"]'))
+            );
             messageElements.forEach(function (messageEle) {
                 container_1.removeChild(messageEle);
             });
         }
     };
     return Message;
-}(core.Plugin));
+})(core.Plugin);
 
 exports.Message = Message;

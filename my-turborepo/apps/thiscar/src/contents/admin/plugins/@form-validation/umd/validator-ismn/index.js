@@ -1,8 +1,14 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, (global.FormValidation = global.FormValidation || {}, global.FormValidation.validators = global.FormValidation.validators || {}, global.FormValidation.validators.ismn = factory()));
-})(this, (function () { 'use strict';
+    typeof exports === "object" && typeof module !== "undefined"
+        ? (module.exports = factory())
+        : typeof define === "function" && define.amd
+          ? define(factory)
+          : ((global = typeof globalThis !== "undefined" ? globalThis : global || self),
+            ((global.FormValidation = global.FormValidation || {}),
+            (global.FormValidation.validators = global.FormValidation.validators || {}),
+            (global.FormValidation.validators.ismn = factory())));
+})(this, function () {
+    "use strict";
 
     /**
      * FormValidation (https://formvalidation.io)
@@ -16,10 +22,10 @@
              * @see http://en.wikipedia.org/wiki/International_Standard_Music_Number
              */
             validate: function (input) {
-                if (input.value === '') {
+                if (input.value === "") {
                     return {
                         meta: null,
-                        valid: true,
+                        valid: true
                     };
                 }
                 // Groups are separated by a hyphen or a space
@@ -28,25 +34,25 @@
                     case /^M\d{9}$/.test(input.value):
                     case /^M-\d{4}-\d{4}-\d{1}$/.test(input.value):
                     case /^M\s\d{4}\s\d{4}\s\d{1}$/.test(input.value):
-                        tpe = 'ISMN10';
+                        tpe = "ISMN10";
                         break;
                     case /^9790\d{9}$/.test(input.value):
                     case /^979-0-\d{4}-\d{4}-\d{1}$/.test(input.value):
                     case /^979\s0\s\d{4}\s\d{4}\s\d{1}$/.test(input.value):
-                        tpe = 'ISMN13';
+                        tpe = "ISMN13";
                         break;
                     default:
                         return {
                             meta: null,
-                            valid: false,
+                            valid: false
                         };
                 }
                 var v = input.value;
-                if ('ISMN10' === tpe) {
+                if ("ISMN10" === tpe) {
                     v = "9790".concat(v.substr(1));
                 }
                 // Replace all special characters except digits
-                v = v.replace(/[^0-9]/gi, '');
+                v = v?.replace(/[^0-9]/gi, "");
                 var sum = 0;
                 var length = v.length;
                 var weight = [1, 3];
@@ -56,14 +62,13 @@
                 sum = (10 - (sum % 10)) % 10;
                 return {
                     meta: {
-                        type: tpe,
+                        type: tpe
                     },
-                    valid: "".concat(sum) === v.charAt(length - 1),
+                    valid: "".concat(sum) === v.charAt(length - 1)
                 };
-            },
+            }
         };
     }
 
     return ismn;
-
-}));
+});

@@ -1,8 +1,14 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('@form-validation/core')) :
-    typeof define === 'function' && define.amd ? define(['@form-validation/core'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, (global.FormValidation = global.FormValidation || {}, global.FormValidation.validators = global.FormValidation.validators || {}, global.FormValidation.validators.id = factory(global.FormValidation)));
-})(this, (function (core) { 'use strict';
+    typeof exports === "object" && typeof module !== "undefined"
+        ? (module.exports = factory(require("@form-validation/core")))
+        : typeof define === "function" && define.amd
+          ? define(["@form-validation/core"], factory)
+          : ((global = typeof globalThis !== "undefined" ? globalThis : global || self),
+            ((global.FormValidation = global.FormValidation || {}),
+            (global.FormValidation.validators = global.FormValidation.validators || {}),
+            (global.FormValidation.validators.id = factory(global.FormValidation))));
+})(this, function (core) {
+    "use strict";
 
     /**
      * FormValidation (https://formvalidation.io)
@@ -17,10 +23,10 @@
      */
     function arId(value) {
         // Replace dot with empty space
-        var v = value.replace(/\./g, '');
+        var v = value?.replace(/\./g, "");
         return {
             meta: {},
-            valid: /^\d{7,8}$/.test(v),
+            valid: /^\d{7,8}$/.test(v)
         };
     }
 
@@ -77,15 +83,15 @@
         // 80-89: Serbian province of Vojvodina
         // 90-99: Kosovo
         switch (countryCode.toUpperCase()) {
-            case 'BA':
+            case "BA":
                 return 10 <= rr && rr <= 19;
-            case 'MK':
+            case "MK":
                 return 41 <= rr && rr <= 49;
-            case 'ME':
+            case "ME":
                 return 20 <= rr && rr <= 29;
-            case 'RS':
+            case "RS":
                 return 70 <= rr && rr <= 99;
-            case 'SI':
+            case "SI":
                 return 50 <= rr && rr <= 59;
             default:
                 return true;
@@ -103,7 +109,7 @@
     function baId(value) {
         return {
             meta: {},
-            valid: jmbg(value, 'BA'),
+            valid: jmbg(value, "BA")
         };
     }
 
@@ -123,10 +129,10 @@
         if (!/^\d{10}$/.test(value) && !/^\d{6}\s\d{3}\s\d{1}$/.test(value)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
-        var v = value.replace(/\s/g, '');
+        var v = value?.replace(/\s/g, "");
         // Check the birth date
         var year = parseInt(v.substr(0, 2), 10) + 1900;
         var month = parseInt(v.substr(2, 2), 10);
@@ -134,15 +140,14 @@
         if (month > 40) {
             year += 100;
             month -= 40;
-        }
-        else if (month > 20) {
+        } else if (month > 20) {
             year -= 100;
             month -= 20;
         }
         if (!isValidDate$d(year, month, day)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         var sum = 0;
@@ -153,7 +158,7 @@
         sum = (sum % 11) % 10;
         return {
             meta: {},
-            valid: "".concat(sum) === v.substr(9, 1),
+            valid: "".concat(sum) === v.substr(9, 1)
         };
     }
 
@@ -169,11 +174,11 @@
      * @returns {ValidateResult}
      */
     function brId(value) {
-        var v = value.replace(/\D/g, '');
+        var v = value?.replace(/\D/g, "");
         if (!/^\d{11}$/.test(v) || /^1{11}|2{11}|3{11}|4{11}|5{11}|6{11}|7{11}|8{11}|9{11}|0{11}$/.test(v)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         var d1 = 0;
@@ -188,7 +193,7 @@
         if ("".concat(d1) !== v.charAt(9)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         var d2 = 0;
@@ -201,7 +206,7 @@
         }
         return {
             meta: {},
-            valid: "".concat(d2) === v.charAt(10),
+            valid: "".concat(d2) === v.charAt(10)
         };
     }
 
@@ -221,10 +226,10 @@
         if (!/^756[.]{0,1}[0-9]{4}[.]{0,1}[0-9]{4}[.]{0,1}[0-9]{2}$/.test(value)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
-        var v = value.replace(/\D/g, '').substr(3);
+        var v = value?.replace(/\D/g, "").substr(3);
         var length = v.length;
         var weight = length === 8 ? [3, 1] : [1, 3];
         var sum = 0;
@@ -234,7 +239,7 @@
         sum = 10 - (sum % 10);
         return {
             meta: {},
-            valid: "".concat(sum) === v.charAt(length - 1),
+            valid: "".concat(sum) === v.charAt(length - 1)
         };
     }
 
@@ -254,10 +259,10 @@
         if (!/^\d{7,8}[-]{0,1}[0-9K]$/i.test(value)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
-        var v = value.replace(/-/g, '');
+        var v = value?.replace(/-/g, "");
         while (v.length < 9) {
             v = "0".concat(v);
         }
@@ -269,14 +274,13 @@
         sum = 11 - (sum % 11);
         var cd = "".concat(sum);
         if (sum === 11) {
-            cd = '0';
-        }
-        else if (sum === 10) {
-            cd = 'K';
+            cd = "0";
+        } else if (sum === 10) {
+            cd = "K";
         }
         return {
             meta: {},
-            valid: cd === v.charAt(8).toUpperCase(),
+            valid: cd === v.charAt(8).toUpperCase()
         };
     }
 
@@ -315,7 +319,7 @@
         if (!/^\d{15}$/.test(v) && !/^\d{17}[\dXx]{1}$/.test(v)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         // Check China PR Administrative division code
@@ -324,14 +328,14 @@
                 0: [0],
                 1: [
                     [0, 9],
-                    [11, 17],
+                    [11, 17]
                 ],
-                2: [0, 28, 29],
+                2: [0, 28, 29]
             },
             12: {
                 0: [0],
                 1: [[0, 16]],
-                2: [0, 21, 23, 25],
+                2: [0, 21, 23, 25]
             },
             13: {
                 0: [0],
@@ -339,27 +343,27 @@
                 2: [[0, 5], [7, 9], [23, 25], 27, 29, 30, 81, 83],
                 3: [
                     [0, 4],
-                    [21, 24],
+                    [21, 24]
                 ],
                 4: [[0, 4], 6, 21, [23, 35], 81],
                 5: [[0, 3], [21, 35], 81, 82],
                 6: [
                     [0, 4],
                     [21, 38],
-                    [81, 84],
+                    [81, 84]
                 ],
                 7: [[0, 3], 5, 6, [21, 33]],
                 8: [
                     [0, 4],
-                    [21, 28],
+                    [21, 28]
                 ],
                 9: [
                     [0, 3],
                     [21, 30],
-                    [81, 84],
+                    [81, 84]
                 ],
                 10: [[0, 3], [22, 26], 28, 81, 82],
-                11: [[0, 2], [21, 28], 81, 82],
+                11: [[0, 2], [21, 28], 81, 82]
             },
             14: {
                 0: [0],
@@ -370,57 +374,57 @@
                 5: [[0, 2], 21, 22, 24, 25, 81],
                 6: [
                     [0, 3],
-                    [21, 24],
+                    [21, 24]
                 ],
                 7: [[0, 2], [21, 29], 81],
                 8: [[0, 2], [21, 30], 81, 82],
                 9: [[0, 2], [21, 32], 81],
                 10: [[0, 2], [21, 34], 81, 82],
                 11: [[0, 2], [21, 30], 81, 82],
-                23: [[0, 3], 22, 23, [25, 30], 32, 33],
+                23: [[0, 3], 22, 23, [25, 30], 32, 33]
             },
             15: {
                 0: [0],
                 1: [
                     [0, 5],
-                    [21, 25],
+                    [21, 25]
                 ],
                 2: [
                     [0, 7],
-                    [21, 23],
+                    [21, 23]
                 ],
                 3: [[0, 4]],
                 4: [
                     [0, 4],
                     [21, 26],
-                    [28, 30],
+                    [28, 30]
                 ],
                 5: [[0, 2], [21, 26], 81],
                 6: [
                     [0, 2],
-                    [21, 27],
+                    [21, 27]
                 ],
                 7: [
                     [0, 3],
                     [21, 27],
-                    [81, 85],
+                    [81, 85]
                 ],
                 8: [
                     [0, 2],
-                    [21, 26],
+                    [21, 26]
                 ],
                 9: [[0, 2], [21, 29], 81],
                 22: [
                     [0, 2],
-                    [21, 24],
+                    [21, 24]
                 ],
                 25: [
                     [0, 2],
-                    [22, 31],
+                    [22, 31]
                 ],
                 26: [[0, 2], [24, 27], [29, 32], 34],
                 28: [0, 1, [22, 27]],
-                29: [0, [21, 23]],
+                29: [0, [21, 23]]
             },
             21: {
                 0: [0],
@@ -437,7 +441,7 @@
                 11: [[0, 3], 21, 22],
                 12: [[0, 2], 4, 21, 23, 24, 81, 82],
                 13: [[0, 3], 21, 22, 24, 81, 82],
-                14: [[0, 4], 21, 22, 81],
+                14: [[0, 4], 21, 22, 81]
             },
             22: {
                 0: [0],
@@ -449,7 +453,7 @@
                 6: [[0, 2], 4, 5, [21, 23], 25, 81],
                 7: [[0, 2], [21, 24], 81],
                 8: [[0, 2], 21, 22, 81, 82],
-                24: [[0, 6], 24, 26],
+                24: [[0, 6], 24, 26]
             },
             23: {
                 0: [0],
@@ -460,7 +464,7 @@
                 5: [[0, 3], 5, 6, [21, 24]],
                 6: [
                     [0, 6],
-                    [21, 24],
+                    [21, 24]
                 ],
                 7: [[0, 16], 22, 81],
                 8: [[0, 5], 11, 22, 26, 28, 33, 81, 82],
@@ -470,17 +474,17 @@
                 12: [
                     [0, 2],
                     [21, 26],
-                    [81, 83],
+                    [81, 83]
                 ],
                 27: [
                     [0, 4],
-                    [21, 23],
-                ],
+                    [21, 23]
+                ]
             },
             31: {
                 0: [0],
                 1: [0, 1, [3, 10], [12, 20]],
-                2: [0, 30],
+                2: [0, 30]
             },
             32: {
                 0: [0],
@@ -490,7 +494,7 @@
                 4: [[0, 2], 4, 5, 11, 12, 81, 82],
                 5: [
                     [0, 9],
-                    [81, 85],
+                    [81, 85]
                 ],
                 6: [[0, 2], 11, 12, 21, 23, [81, 84]],
                 7: [0, 1, 3, 5, 6, [21, 24]],
@@ -500,9 +504,9 @@
                 11: [[0, 2], 11, 12, [81, 83]],
                 12: [
                     [0, 4],
-                    [81, 84],
+                    [81, 84]
                 ],
-                13: [[0, 2], 11, [21, 24]],
+                13: [[0, 2], 11, [21, 24]]
             },
             33: {
                 0: [0],
@@ -512,14 +516,14 @@
                 4: [[0, 2], 11, 21, 24, [81, 83]],
                 5: [
                     [0, 3],
-                    [21, 23],
+                    [21, 23]
                 ],
                 6: [[0, 2], 21, 24, [81, 83]],
                 7: [[0, 3], 23, 26, 27, [81, 84]],
                 8: [[0, 3], 22, 24, 25, 81],
                 9: [[0, 3], 21, 22],
                 10: [[0, 4], [21, 24], 81, 82],
-                11: [[0, 2], [21, 27], 81],
+                11: [[0, 2], [21, 27], 81]
             },
             34: {
                 0: [0],
@@ -533,38 +537,38 @@
                 8: [[0, 3], 11, [22, 28], 81],
                 10: [
                     [0, 4],
-                    [21, 24],
+                    [21, 24]
                 ],
                 11: [[0, 3], 22, [24, 26], 81, 82],
                 12: [[0, 4], 21, 22, 25, 26, 82],
                 13: [
                     [0, 2],
-                    [21, 24],
+                    [21, 24]
                 ],
                 14: [
                     [0, 2],
-                    [21, 24],
+                    [21, 24]
                 ],
                 15: [
                     [0, 3],
-                    [21, 25],
+                    [21, 25]
                 ],
                 16: [
                     [0, 2],
-                    [21, 23],
+                    [21, 23]
                 ],
                 17: [
                     [0, 2],
-                    [21, 23],
+                    [21, 23]
                 ],
-                18: [[0, 2], [21, 25], 81],
+                18: [[0, 2], [21, 25], 81]
             },
             35: {
                 0: [0],
                 1: [[0, 5], 11, [21, 25], 28, 81, 82],
                 2: [
                     [0, 6],
-                    [11, 13],
+                    [11, 13]
                 ],
                 3: [[0, 5], 22],
                 4: [[0, 3], 21, [23, 30], 81],
@@ -573,10 +577,10 @@
                 7: [
                     [0, 2],
                     [21, 25],
-                    [81, 84],
+                    [81, 84]
                 ],
                 8: [[0, 2], [21, 25], 81],
-                9: [[0, 2], [21, 26], 81, 82],
+                9: [[0, 2], [21, 26], 81, 82]
             },
             36: {
                 0: [0],
@@ -591,13 +595,13 @@
                 9: [
                     [0, 2],
                     [21, 26],
-                    [81, 83],
+                    [81, 83]
                 ],
                 10: [
                     [0, 2],
-                    [21, 30],
+                    [21, 30]
                 ],
-                11: [[0, 2], [21, 30], 81],
+                11: [[0, 2], [21, 30], 81]
             },
             37: {
                 0: [0],
@@ -605,12 +609,12 @@
                 2: [[0, 3], 5, [11, 14], [81, 85]],
                 3: [
                     [0, 6],
-                    [21, 23],
+                    [21, 23]
                 ],
                 4: [[0, 6], 81],
                 5: [
                     [0, 3],
-                    [21, 23],
+                    [21, 23]
                 ],
                 6: [[0, 2], [11, 13], 34, [81, 87]],
                 7: [[0, 5], 24, 25, [81, 86]],
@@ -618,7 +622,7 @@
                 9: [[0, 3], 11, 21, 23, 82, 83],
                 10: [
                     [0, 2],
-                    [81, 83],
+                    [81, 83]
                 ],
                 11: [[0, 3], 21, 22],
                 12: [[0, 3]],
@@ -627,12 +631,12 @@
                 15: [[0, 2], [21, 26], 81],
                 16: [
                     [0, 2],
-                    [21, 26],
+                    [21, 26]
                 ],
                 17: [
                     [0, 2],
-                    [21, 28],
-                ],
+                    [21, 28]
+                ]
             },
             41: {
                 0: [0],
@@ -648,34 +652,34 @@
                 10: [[0, 2], [23, 25], 81, 82],
                 11: [
                     [0, 4],
-                    [21, 23],
+                    [21, 23]
                 ],
                 12: [[0, 2], 21, 22, 24, 81, 82],
                 13: [[0, 3], [21, 30], 81],
                 14: [[0, 3], [21, 26], 81],
                 15: [
                     [0, 3],
-                    [21, 28],
+                    [21, 28]
                 ],
                 16: [[0, 2], [21, 28], 81],
                 17: [
                     [0, 2],
-                    [21, 29],
+                    [21, 29]
                 ],
-                90: [0, 1],
+                90: [0, 1]
             },
             42: {
                 0: [0],
                 1: [
                     [0, 7],
-                    [11, 17],
+                    [11, 17]
                 ],
                 2: [[0, 5], 22, 81],
                 3: [[0, 3], [21, 25], 81],
                 5: [
                     [0, 6],
                     [25, 29],
-                    [81, 83],
+                    [81, 83]
                 ],
                 6: [[0, 2], 6, 7, [24, 26], [82, 84]],
                 7: [[0, 4]],
@@ -686,7 +690,7 @@
                 12: [[0, 2], [21, 24], 81],
                 13: [[0, 3], 21, 81],
                 28: [[0, 2], 22, 23, [25, 28]],
-                90: [0, [4, 6], 21],
+                90: [0, [4, 6], 21]
             },
             43: {
                 0: [0],
@@ -702,11 +706,11 @@
                 10: [[0, 3], [21, 28], 81],
                 11: [
                     [0, 3],
-                    [21, 29],
+                    [21, 29]
                 ],
                 12: [[0, 2], [21, 30], 81],
                 13: [[0, 2], 21, 22, 81, 82],
-                31: [0, 1, [22, 27], 30],
+                31: [0, 1, [22, 27], 30]
             },
             44: {
                 0: [0],
@@ -725,7 +729,7 @@
                 15: [[0, 2], 21, 23, 81],
                 16: [
                     [0, 2],
-                    [21, 25],
+                    [21, 25]
                 ],
                 17: [[0, 2], 21, 23, 81],
                 18: [[0, 3], 21, 23, [25, 27], 81, 82],
@@ -733,17 +737,17 @@
                 20: [0],
                 51: [[0, 3], 21, 22],
                 52: [[0, 3], 21, 22, 24, 81],
-                53: [[0, 2], [21, 23], 81],
+                53: [[0, 2], [21, 23], 81]
             },
             45: {
                 0: [0],
                 1: [
                     [0, 9],
-                    [21, 27],
+                    [21, 27]
                 ],
                 2: [
                     [0, 5],
-                    [21, 26],
+                    [21, 26]
                 ],
                 3: [[0, 5], 11, 12, [21, 32]],
                 4: [0, 1, [3, 6], 11, [21, 23], 81],
@@ -754,15 +758,15 @@
                 9: [[0, 3], [21, 24], 81],
                 10: [
                     [0, 2],
-                    [21, 31],
+                    [21, 31]
                 ],
                 11: [
                     [0, 2],
-                    [21, 23],
+                    [21, 23]
                 ],
                 12: [[0, 2], [21, 29], 81],
                 13: [[0, 2], [21, 24], 81],
-                14: [[0, 2], [21, 25], 81],
+                14: [[0, 2], [21, 25], 81]
             },
             46: {
                 0: [0],
@@ -772,14 +776,14 @@
                 90: [
                     [0, 3],
                     [5, 7],
-                    [21, 39],
-                ],
+                    [21, 39]
+                ]
             },
             50: {
                 0: [0],
                 1: [[0, 19]],
                 2: [0, [22, 38], [40, 43]],
-                3: [0, [81, 84]],
+                3: [0, [81, 84]]
             },
             51: {
                 0: [0],
@@ -792,33 +796,33 @@
                 8: [[0, 2], 11, 12, [21, 24]],
                 9: [
                     [0, 4],
-                    [21, 23],
+                    [21, 23]
                 ],
                 10: [[0, 2], 11, 24, 25, 28],
                 11: [[0, 2], [11, 13], 23, 24, 26, 29, 32, 33, 81],
                 13: [[0, 4], [21, 25], 81],
                 14: [
                     [0, 2],
-                    [21, 25],
+                    [21, 25]
                 ],
                 15: [
                     [0, 3],
-                    [21, 29],
+                    [21, 29]
                 ],
                 16: [[0, 3], [21, 23], 81],
                 17: [[0, 3], [21, 25], 81],
                 18: [
                     [0, 3],
-                    [21, 27],
+                    [21, 27]
                 ],
                 19: [
                     [0, 3],
-                    [21, 23],
+                    [21, 23]
                 ],
                 20: [[0, 2], 21, 22, 81],
                 32: [0, [21, 33]],
                 33: [0, [21, 38]],
-                34: [0, 1, [22, 37]],
+                34: [0, 1, [22, 37]]
             },
             52: {
                 0: [0],
@@ -827,21 +831,21 @@
                 3: [[0, 3], [21, 30], 81, 82],
                 4: [
                     [0, 2],
-                    [21, 25],
+                    [21, 25]
                 ],
                 5: [
                     [0, 2],
-                    [21, 27],
+                    [21, 27]
                 ],
                 6: [
                     [0, 3],
-                    [21, 28],
+                    [21, 28]
                 ],
                 22: [0, 1, [22, 30]],
                 23: [0, 1, [22, 28]],
                 24: [0, 1, [22, 28]],
                 26: [0, 1, [22, 36]],
-                27: [[0, 2], 22, 23, [25, 32]],
+                27: [[0, 2], 22, 23, [25, 32]]
             },
             53: {
                 0: [0],
@@ -849,32 +853,32 @@
                 3: [[0, 2], [21, 26], 28, 81],
                 4: [
                     [0, 2],
-                    [21, 28],
+                    [21, 28]
                 ],
                 5: [
                     [0, 2],
-                    [21, 24],
+                    [21, 24]
                 ],
                 6: [
                     [0, 2],
-                    [21, 30],
+                    [21, 30]
                 ],
                 7: [
                     [0, 2],
-                    [21, 24],
+                    [21, 24]
                 ],
                 8: [
                     [0, 2],
-                    [21, 29],
+                    [21, 29]
                 ],
                 9: [
                     [0, 2],
-                    [21, 27],
+                    [21, 27]
                 ],
                 23: [0, 1, [22, 29], 31],
                 25: [
                     [0, 4],
-                    [22, 32],
+                    [22, 32]
                 ],
                 26: [0, 1, [21, 28]],
                 27: [0, 1, [22, 30]],
@@ -883,20 +887,20 @@
                 31: [0, 2, 3, [22, 24]],
                 34: [0, [21, 23]],
                 33: [0, 21, [23, 25]],
-                35: [0, [21, 28]],
+                35: [0, [21, 28]]
             },
             54: {
                 0: [0],
                 1: [
                     [0, 2],
-                    [21, 27],
+                    [21, 27]
                 ],
                 21: [0, [21, 29], 32, 33],
                 22: [0, [21, 29], [31, 33]],
                 23: [0, 1, [22, 38]],
                 24: [0, [21, 31]],
                 25: [0, [21, 27]],
-                26: [0, [21, 27]],
+                26: [0, [21, 27]]
             },
             61: {
                 0: [0],
@@ -905,30 +909,30 @@
                 3: [
                     [0, 4],
                     [21, 24],
-                    [26, 31],
+                    [26, 31]
                 ],
                 4: [[0, 4], [22, 31], 81],
                 5: [[0, 2], [21, 28], 81, 82],
                 6: [
                     [0, 2],
-                    [21, 32],
+                    [21, 32]
                 ],
                 7: [
                     [0, 2],
-                    [21, 30],
+                    [21, 30]
                 ],
                 8: [
                     [0, 2],
-                    [21, 31],
+                    [21, 31]
                 ],
                 9: [
                     [0, 2],
-                    [21, 29],
+                    [21, 29]
                 ],
                 10: [
                     [0, 2],
-                    [21, 26],
-                ],
+                    [21, 26]
+                ]
             },
             62: {
                 0: [0],
@@ -937,47 +941,47 @@
                 3: [[0, 2], 21],
                 4: [
                     [0, 3],
-                    [21, 23],
+                    [21, 23]
                 ],
                 5: [
                     [0, 3],
-                    [21, 25],
+                    [21, 25]
                 ],
                 6: [
                     [0, 2],
-                    [21, 23],
+                    [21, 23]
                 ],
                 7: [
                     [0, 2],
-                    [21, 25],
+                    [21, 25]
                 ],
                 8: [
                     [0, 2],
-                    [21, 26],
+                    [21, 26]
                 ],
                 9: [[0, 2], [21, 24], 81, 82],
                 10: [
                     [0, 2],
-                    [21, 27],
+                    [21, 27]
                 ],
                 11: [
                     [0, 2],
-                    [21, 26],
+                    [21, 26]
                 ],
                 12: [
                     [0, 2],
-                    [21, 28],
+                    [21, 28]
                 ],
                 24: [0, 21, [24, 29]],
                 26: [0, 21, [23, 30]],
                 29: [0, 1, [21, 27]],
-                30: [0, 1, [21, 27]],
+                30: [0, 1, [21, 27]]
             },
             63: {
                 0: [0],
                 1: [
                     [0, 5],
-                    [21, 23],
+                    [21, 23]
                 ],
                 2: [0, 2, [21, 25]],
                 21: [0, [21, 23], [26, 28]],
@@ -988,8 +992,8 @@
                 27: [0, 1, [21, 26]],
                 28: [
                     [0, 2],
-                    [21, 23],
-                ],
+                    [21, 23]
+                ]
             },
             64: {
                 0: [0],
@@ -998,9 +1002,9 @@
                 3: [[0, 3], [21, 24], 81],
                 4: [
                     [0, 2],
-                    [21, 25],
+                    [21, 25]
                 ],
-                5: [[0, 2], 21, 22],
+                5: [[0, 2], 21, 22]
             },
             65: {
                 0: [0],
@@ -1018,11 +1022,11 @@
                 42: [[0, 2], 21, [23, 26]],
                 43: [0, 1, [21, 26]],
                 90: [[0, 4]],
-                27: [[0, 2], 22, 23],
+                27: [[0, 2], 22, 23]
             },
             71: { 0: [0] },
             81: { 0: [0] },
-            82: { 0: [0] },
+            82: { 0: [0] }
         };
         var provincial = parseInt(v.substr(0, 2), 10);
         var prefectural = parseInt(v.substr(2, 2), 10);
@@ -1030,15 +1034,17 @@
         if (!adminDivisionCodes[provincial] || !adminDivisionCodes[provincial][prefectural]) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         var inRange = false;
         var rangeDef = adminDivisionCodes[provincial][prefectural];
         var i;
         for (i = 0; i < rangeDef.length; i++) {
-            if ((Array.isArray(rangeDef[i]) && rangeDef[i][0] <= county && county <= rangeDef[i][1]) ||
-                (!Array.isArray(rangeDef[i]) && county === rangeDef[i])) {
+            if (
+                (Array.isArray(rangeDef[i]) && rangeDef[i][0] <= county && county <= rangeDef[i][1]) ||
+                (!Array.isArray(rangeDef[i]) && county === rangeDef[i])
+            ) {
                 inRange = true;
                 break;
             }
@@ -1046,15 +1052,14 @@
         if (!inRange) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         // Check date of birth
         var dob;
         if (v.length === 18) {
             dob = v.substr(6, 8);
-        } /* length == 15 */
-        else {
+        } /* length == 15 */ else {
             dob = "19".concat(v.substr(6, 6));
         }
         var year = parseInt(dob.substr(0, 4), 10);
@@ -1063,7 +1068,7 @@
         if (!isValidDate$c(year, month, day)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         // Check checksum (18-digit system only)
@@ -1074,15 +1079,15 @@
                 sum += parseInt(v.charAt(i), 10) * weight[i];
             }
             sum = (12 - (sum % 11)) % 11;
-            var checksum = v.charAt(17).toUpperCase() !== 'X' ? parseInt(v.charAt(17), 10) : 10;
+            var checksum = v.charAt(17).toUpperCase() !== "X" ? parseInt(v.charAt(17), 10) : 10;
             return {
                 meta: {},
-                valid: checksum === sum,
+                valid: checksum === sum
             };
         }
         return {
             meta: {},
-            valid: true,
+            valid: true
         };
     }
 
@@ -1097,11 +1102,11 @@
      * @returns {ValidateResult}
      */
     function coId(value) {
-        var v = value.replace(/\./g, '').replace('-', '');
+        var v = value?.replace(/\./g, "")?.replace("-", "");
         if (!/^\d{8,16}$/.test(v)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         var length = v.length;
@@ -1116,7 +1121,7 @@
         }
         return {
             meta: {},
-            valid: "".concat(sum) === v.substr(length - 1),
+            valid: "".concat(sum) === v.substr(length - 1)
         };
     }
 
@@ -1135,7 +1140,7 @@
         if (!/^\d{9,10}$/.test(value)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         var year = 1900 + parseInt(value.substr(0, 2), 10);
@@ -1148,17 +1153,16 @@
             if (year > 1953) {
                 return {
                     meta: {},
-                    valid: false,
+                    valid: false
                 };
             }
-        }
-        else if (year < 1954) {
+        } else if (year < 1954) {
             year += 100;
         }
         if (!isValidDate$b(year, month, day)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         // Check that the birth date is not in the future
@@ -1169,12 +1173,12 @@
             }
             return {
                 meta: {},
-                valid: "".concat(check) === value.substr(9, 1),
+                valid: "".concat(check) === value.substr(9, 1)
             };
         }
         return {
             meta: {},
-            valid: true,
+            valid: true
         };
     }
 
@@ -1194,19 +1198,19 @@
         if (!/^[0-9]{6}[-]{0,1}[0-9]{4}$/.test(value)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
-        var v = value.replace(/-/g, '');
+        var v = value?.replace(/-/g, "");
         var day = parseInt(v.substr(0, 2), 10);
         var month = parseInt(v.substr(2, 2), 10);
         var year = parseInt(v.substr(4, 2), 10);
         switch (true) {
-            case '5678'.indexOf(v.charAt(6)) !== -1 && year >= 58:
+            case "5678".indexOf(v.charAt(6)) !== -1 && year >= 58:
                 year += 1800;
                 break;
-            case '0123'.indexOf(v.charAt(6)) !== -1:
-            case '49'.indexOf(v.charAt(6)) !== -1 && year >= 37:
+            case "0123".indexOf(v.charAt(6)) !== -1:
+            case "49".indexOf(v.charAt(6)) !== -1 && year >= 37:
                 year += 1900;
                 break;
             default:
@@ -1215,7 +1219,7 @@
         }
         return {
             meta: {},
-            valid: isValidDate$a(year, month, day),
+            valid: isValidDate$a(year, month, day)
         };
     }
 
@@ -1238,33 +1242,32 @@
         if (!isDNI && !isNIE && !isCIF) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
-        var v = value.replace(/-/g, '');
+        var v = value?.replace(/-/g, "");
         var check;
         var tpe;
         var isValid = true;
         if (isDNI || isNIE) {
-            tpe = 'DNI';
-            var index = 'XYZ'.indexOf(v.charAt(0));
+            tpe = "DNI";
+            var index = "XYZ".indexOf(v.charAt(0));
             if (index !== -1) {
                 // It is NIE number
-                v = index + v.substr(1) + '';
-                tpe = 'NIE';
+                v = index + v.substr(1) + "";
+                tpe = "NIE";
             }
             check = parseInt(v.substr(0, 8), 10);
-            check = 'TRWAGMYFPDXBNJZSQVHLCKE'[check % 23];
+            check = "TRWAGMYFPDXBNJZSQVHLCKE"[check % 23];
             return {
                 meta: {
-                    type: tpe,
+                    type: tpe
                 },
-                valid: check === v.substr(8, 1),
+                valid: check === v.substr(8, 1)
             };
-        }
-        else {
+        } else {
             check = v.substr(1, 7);
-            tpe = 'CIF';
+            tpe = "CIF";
             var letter = v[0];
             var control = v.substr(-1);
             var sum = 0;
@@ -1275,9 +1278,8 @@
             for (var i = 0; i < check.length; i++) {
                 if (i % 2 !== 0) {
                     sum += parseInt(check[i], 10);
-                }
-                else {
-                    var tmp = '' + parseInt(check[i], 10) * 2;
+                } else {
+                    var tmp = "" + parseInt(check[i], 10) * 2;
                     sum += parseInt(tmp[0], 10);
                     if (tmp.length === 2) {
                         sum += parseInt(tmp[1], 10);
@@ -1290,23 +1292,21 @@
             if (lastDigit !== 0) {
                 lastDigit = 10 - lastDigit;
             }
-            if ('KQS'.indexOf(letter) !== -1) {
+            if ("KQS".indexOf(letter) !== -1) {
                 // If the CIF starts with a K, Q or S, the control digit must be a letter
-                isValid = control === 'JABCDEFGHI'[lastDigit];
-            }
-            else if ('ABEH'.indexOf(letter) !== -1) {
+                isValid = control === "JABCDEFGHI"[lastDigit];
+            } else if ("ABEH".indexOf(letter) !== -1) {
                 // If it starts with A, B, E or H, it has to be a number
-                isValid = control === '' + lastDigit;
-            }
-            else {
+                isValid = control === "" + lastDigit;
+            } else {
                 // In any other case, it doesn't matter
-                isValid = control === '' + lastDigit || control === 'JABCDEFGHI'[lastDigit];
+                isValid = control === "" + lastDigit || control === "JABCDEFGHI"[lastDigit];
             }
             return {
                 meta: {
-                    type: tpe,
+                    type: tpe
                 },
-                valid: isValid,
+                valid: isValid
             };
         }
     }
@@ -1326,35 +1326,35 @@
         if (!/^[0-9]{6}[-+A][0-9]{3}[0-9ABCDEFHJKLMNPRSTUVWXY]$/.test(value)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         var day = parseInt(value.substr(0, 2), 10);
         var month = parseInt(value.substr(2, 2), 10);
         var year = parseInt(value.substr(4, 2), 10);
         var centuries = {
-            '+': 1800,
-            '-': 1900,
-            A: 2000,
+            "+": 1800,
+            "-": 1900,
+            A: 2000
         };
         year = centuries[value.charAt(6)] + year;
         if (!isValidDate$9(year, month, day)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         var individual = parseInt(value.substr(7, 3), 10);
         if (individual < 2) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
-        var n = parseInt(value.substr(0, 6) + value.substr(7, 3) + '', 10);
+        var n = parseInt(value.substr(0, 6) + value.substr(7, 3) + "", 10);
         return {
             meta: {},
-            valid: '0123456789ABCDEFHJKLMNPRSTUVWXY'.charAt(n % 31) === value.charAt(10),
+            valid: "0123456789ABCDEFHJKLMNPRSTUVWXY".charAt(n % 31) === value.charAt(10)
         };
     }
 
@@ -1375,7 +1375,7 @@
         if (!/^(1|2)\d{2}\d{2}(\d{2}|\d[A-Z]|\d{3})\d{2,3}\d{3}\d{2}$/.test(v)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         // The COG group can be 2 digits or 2A or 2B
@@ -1384,23 +1384,23 @@
             case /^\d{2}$/.test(cog):
                 v = value;
                 break;
-            case cog === '2A':
+            case cog === "2A":
                 v = "".concat(value.substr(0, 5), "19").concat(value.substr(7));
                 break;
-            case cog === '2B':
+            case cog === "2B":
                 v = "".concat(value.substr(0, 5), "18").concat(value.substr(7));
                 break;
             default:
                 return {
                     meta: {},
-                    valid: false,
+                    valid: false
                 };
         }
         var mod = 97 - (parseInt(v.substr(0, 13), 10) % 97);
         var prefixWithZero = mod < 10 ? "0".concat(mod) : "".concat(mod);
         return {
             meta: {},
-            valid: prefixWithZero === v.substr(13),
+            valid: prefixWithZero === v.substr(13)
         };
     }
 
@@ -1420,10 +1420,10 @@
         if (!/^[A-MP-Z]{1,2}[0-9]{6}[0-9A]$/.test(v)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
-        var alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         var firstChar = v.charAt(0);
         var secondChar = v.charAt(1);
         var sum = 0;
@@ -1432,8 +1432,7 @@
             sum += 9 * (10 + alphabet.indexOf(firstChar));
             sum += 8 * (10 + alphabet.indexOf(secondChar));
             digitParts = v.substr(2);
-        }
-        else {
+        } else {
             sum += 9 * 36;
             sum += 8 * (10 + alphabet.indexOf(firstChar));
             digitParts = v.substr(1);
@@ -1443,10 +1442,10 @@
             sum += (7 - i) * parseInt(digitParts.charAt(i), 10);
         }
         var remaining = sum % 11;
-        var checkDigit = remaining === 0 ? '0' : 11 - remaining === 10 ? 'A' : "".concat(11 - remaining);
+        var checkDigit = remaining === 0 ? "0" : 11 - remaining === 10 ? "A" : "".concat(11 - remaining);
         return {
             meta: {},
-            valid: checkDigit === digitParts.charAt(length - 1),
+            valid: checkDigit === digitParts.charAt(length - 1)
         };
     }
 
@@ -1464,7 +1463,7 @@
     function hrId(value) {
         return {
             meta: {},
-            valid: /^[0-9]{11}$/.test(value) && mod11And10(value),
+            valid: /^[0-9]{11}$/.test(value) && mod11And10(value)
         };
     }
 
@@ -1483,13 +1482,15 @@
         if (!/^[2-9]\d{11}$/.test(value)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
-        var converted = value.split('').map(function (item) { return parseInt(item, 10); });
+        var converted = value.split("").map(function (item) {
+            return parseInt(item, 10);
+        });
         return {
             meta: {},
-            valid: verhoeff(converted),
+            valid: verhoeff(converted)
         };
     }
 
@@ -1508,7 +1509,7 @@
         if (!/^\d{7}[A-W][AHWTX]?$/.test(value)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         var getCheckDigit = function (v) {
@@ -1516,7 +1517,7 @@
             while (input.length < 7) {
                 input = "0".concat(input);
             }
-            var alphabet = 'WABCDEFGHIJKLMNOPQRSTUV';
+            var alphabet = "WABCDEFGHIJKLMNOPQRSTUV";
             var sum = 0;
             for (var i = 0; i < 7; i++) {
                 sum += parseInt(input.charAt(i), 10) * (8 - i);
@@ -1525,13 +1526,14 @@
             return alphabet[sum % 23];
         };
         // 2013 format
-        var isValid = value.length === 9 && ('A' === value.charAt(8) || 'H' === value.charAt(8))
-            ? value.charAt(7) === getCheckDigit(value.substr(0, 7) + value.substr(8) + '')
-            : // The old format
-                value.charAt(7) === getCheckDigit(value.substr(0, 7));
+        var isValid =
+            value.length === 9 && ("A" === value.charAt(8) || "H" === value.charAt(8))
+                ? value.charAt(7) === getCheckDigit(value.substr(0, 7) + value.substr(8) + "")
+                : // The old format
+                  value.charAt(7) === getCheckDigit(value.substr(0, 7));
         return {
             meta: {},
-            valid: isValid,
+            valid: isValid
         };
     }
 
@@ -1552,12 +1554,12 @@
         if (!/^\d{1,9}$/.test(value)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         return {
             meta: {},
-            valid: luhn$2(value),
+            valid: luhn$2(value)
         };
     }
 
@@ -1577,10 +1579,10 @@
         if (!/^[0-9]{6}[-]{0,1}[0-9]{4}$/.test(value)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
-        var v = value.replace(/-/g, '');
+        var v = value?.replace(/-/g, "");
         var day = parseInt(v.substr(0, 2), 10);
         var month = parseInt(v.substr(2, 2), 10);
         var year = parseInt(v.substr(4, 2), 10);
@@ -1589,7 +1591,7 @@
         if (!isValidDate$8(year, month, day, true)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         // Validate the check digit
@@ -1601,7 +1603,7 @@
         sum = 11 - (sum % 11);
         return {
             meta: {},
-            valid: "".concat(sum) === v.charAt(8),
+            valid: "".concat(sum) === v.charAt(8)
         };
     }
 
@@ -1618,11 +1620,11 @@
      * @returns {ValidateResult}
      */
     function krId(value) {
-        var v = value.replace('-', '');
+        var v = value?.replace("-", "");
         if (!/^\d{13}$/.test(v)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         // Check the date of birth
@@ -1631,16 +1633,16 @@
         var month = parseInt(v.substr(2, 2), 10);
         var day = parseInt(v.substr(4, 2), 10);
         switch (sDigit) {
-            case '1':
-            case '2':
-            case '5':
-            case '6':
+            case "1":
+            case "2":
+            case "5":
+            case "6":
                 year += 1900;
                 break;
-            case '3':
-            case '4':
-            case '7':
-            case '8':
+            case "3":
+            case "4":
+            case "7":
+            case "8":
                 year += 2000;
                 break;
             default:
@@ -1650,7 +1652,7 @@
         if (!isValidDate$7(year, month, day)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         // Calculate the check digit
@@ -1663,7 +1665,7 @@
         var checkDigit = (11 - (sum % 11)) % 10;
         return {
             meta: {},
-            valid: "".concat(checkDigit) === v.charAt(length - 1),
+            valid: "".concat(checkDigit) === v.charAt(length - 1)
         };
     }
 
@@ -1684,7 +1686,7 @@
         if (!/^[0-9]{11}$/.test(value)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         var gender = parseInt(value.charAt(0), 10);
@@ -1696,7 +1698,7 @@
         if (!isValidDate$6(year, month, day, true)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         // Validate the check digit
@@ -1710,7 +1712,7 @@
         if (sum !== 10) {
             return {
                 meta: {},
-                valid: "".concat(sum) === value.charAt(10),
+                valid: "".concat(sum) === value.charAt(10)
             };
         }
         // Re-calculate the check digit
@@ -1725,7 +1727,7 @@
         }
         return {
             meta: {},
-            valid: "".concat(sum) === value.charAt(10),
+            valid: "".concat(sum) === value.charAt(10)
         };
     }
 
@@ -1745,10 +1747,10 @@
         if (!/^[0-9]{6}[-]{0,1}[0-9]{5}$/.test(value)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
-        var v = value.replace(/\D/g, '');
+        var v = value?.replace(/\D/g, "");
         // Check birth date
         var day = parseInt(v.substr(0, 2), 10);
         var month = parseInt(v.substr(2, 2), 10);
@@ -1757,7 +1759,7 @@
         if (!isValidDate$5(year, month, day, true)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         // Check personal code
@@ -1769,7 +1771,7 @@
         sum = ((sum + 1) % 11) % 10;
         return {
             meta: {},
-            valid: "".concat(sum) === v.charAt(10),
+            valid: "".concat(sum) === v.charAt(10)
         };
     }
 
@@ -1784,7 +1786,7 @@
     function meId(value) {
         return {
             meta: {},
-            valid: jmbg(value, 'ME'),
+            valid: jmbg(value, "ME")
         };
     }
 
@@ -1799,7 +1801,7 @@
     function mkId(value) {
         return {
             meta: {},
-            valid: jmbg(value, 'MK'),
+            valid: jmbg(value, "MK")
         };
     }
 
@@ -1820,7 +1822,7 @@
         if (!/^[A-Z]{4}\d{6}[A-Z]{6}[0-9A-Z]\d$/.test(v)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         // Check if the combination of initial names belongs to a back list
@@ -1828,93 +1830,93 @@
         // http://quemamadera.blogspot.com/2008/02/las-palabras-inconvenientes-del-curp.html
         // https://www.reddit.com/r/mexico/comments/bo8cv/hoy_aprendi_que_existe_un_catalogo_de_palabras/
         var blacklistNames = [
-            'BACA',
-            'BAKA',
-            'BUEI',
-            'BUEY',
-            'CACA',
-            'CACO',
-            'CAGA',
-            'CAGO',
-            'CAKA',
-            'CAKO',
-            'COGE',
-            'COGI',
-            'COJA',
-            'COJE',
-            'COJI',
-            'COJO',
-            'COLA',
-            'CULO',
-            'FALO',
-            'FETO',
-            'GETA',
-            'GUEI',
-            'GUEY',
-            'JETA',
-            'JOTO',
-            'KACA',
-            'KACO',
-            'KAGA',
-            'KAGO',
-            'KAKA',
-            'KAKO',
-            'KOGE',
-            'KOGI',
-            'KOJA',
-            'KOJE',
-            'KOJI',
-            'KOJO',
-            'KOLA',
-            'KULO',
-            'LILO',
-            'LOCA',
-            'LOCO',
-            'LOKA',
-            'LOKO',
-            'MAME',
-            'MAMO',
-            'MEAR',
-            'MEAS',
-            'MEON',
-            'MIAR',
-            'MION',
-            'MOCO',
-            'MOKO',
-            'MULA',
-            'MULO',
-            'NACA',
-            'NACO',
-            'PEDA',
-            'PEDO',
-            'PENE',
-            'PIPI',
-            'PITO',
-            'POPO',
-            'PUTA',
-            'PUTO',
-            'QULO',
-            'RATA',
-            'ROBA',
-            'ROBE',
-            'ROBO',
-            'RUIN',
-            'SENO',
-            'TETA',
-            'VACA',
-            'VAGA',
-            'VAGO',
-            'VAKA',
-            'VUEI',
-            'VUEY',
-            'WUEI',
-            'WUEY',
+            "BACA",
+            "BAKA",
+            "BUEI",
+            "BUEY",
+            "CACA",
+            "CACO",
+            "CAGA",
+            "CAGO",
+            "CAKA",
+            "CAKO",
+            "COGE",
+            "COGI",
+            "COJA",
+            "COJE",
+            "COJI",
+            "COJO",
+            "COLA",
+            "CULO",
+            "FALO",
+            "FETO",
+            "GETA",
+            "GUEI",
+            "GUEY",
+            "JETA",
+            "JOTO",
+            "KACA",
+            "KACO",
+            "KAGA",
+            "KAGO",
+            "KAKA",
+            "KAKO",
+            "KOGE",
+            "KOGI",
+            "KOJA",
+            "KOJE",
+            "KOJI",
+            "KOJO",
+            "KOLA",
+            "KULO",
+            "LILO",
+            "LOCA",
+            "LOCO",
+            "LOKA",
+            "LOKO",
+            "MAME",
+            "MAMO",
+            "MEAR",
+            "MEAS",
+            "MEON",
+            "MIAR",
+            "MION",
+            "MOCO",
+            "MOKO",
+            "MULA",
+            "MULO",
+            "NACA",
+            "NACO",
+            "PEDA",
+            "PEDO",
+            "PENE",
+            "PIPI",
+            "PITO",
+            "POPO",
+            "PUTA",
+            "PUTO",
+            "QULO",
+            "RATA",
+            "ROBA",
+            "ROBE",
+            "ROBO",
+            "RUIN",
+            "SENO",
+            "TETA",
+            "VACA",
+            "VAGA",
+            "VAGO",
+            "VAKA",
+            "VUEI",
+            "VUEY",
+            "WUEI",
+            "WUEY"
         ];
         var name = v.substr(0, 4);
         if (blacklistNames.indexOf(name) >= 0) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         // Check the date of birth
@@ -1923,70 +1925,69 @@
         var day = parseInt(v.substr(6, 2), 10);
         if (/^[0-9]$/.test(v.charAt(16))) {
             year += 1900;
-        }
-        else {
+        } else {
             year += 2000;
         }
         if (!isValidDate$4(year, month, day)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         // Check the gender
         var gender = v.charAt(10);
-        if (gender !== 'H' && gender !== 'M') {
+        if (gender !== "H" && gender !== "M") {
             // H for male, M for female
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         // Check the state
         var state = v.substr(11, 2);
         var states = [
-            'AS',
-            'BC',
-            'BS',
-            'CC',
-            'CH',
-            'CL',
-            'CM',
-            'CS',
-            'DF',
-            'DG',
-            'GR',
-            'GT',
-            'HG',
-            'JC',
-            'MC',
-            'MN',
-            'MS',
-            'NE',
-            'NL',
-            'NT',
-            'OC',
-            'PL',
-            'QR',
-            'QT',
-            'SL',
-            'SP',
-            'SR',
-            'TC',
-            'TL',
-            'TS',
-            'VZ',
-            'YN',
-            'ZS',
+            "AS",
+            "BC",
+            "BS",
+            "CC",
+            "CH",
+            "CL",
+            "CM",
+            "CS",
+            "DF",
+            "DG",
+            "GR",
+            "GT",
+            "HG",
+            "JC",
+            "MC",
+            "MN",
+            "MS",
+            "NE",
+            "NL",
+            "NT",
+            "OC",
+            "PL",
+            "QR",
+            "QT",
+            "SL",
+            "SP",
+            "SR",
+            "TC",
+            "TL",
+            "TS",
+            "VZ",
+            "YN",
+            "ZS"
         ];
         if (states.indexOf(state) === -1) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         // Calculate the check digit
-        var alphabet = '0123456789ABCDEFGHIJKLMN&OPQRSTUVWXYZ';
+        var alphabet = "0123456789ABCDEFGHIJKLMN&OPQRSTUVWXYZ";
         var sum = 0;
         var length = v.length;
         for (var i = 0; i < length - 1; i++) {
@@ -1995,7 +1996,7 @@
         sum = (10 - (sum % 10)) % 10;
         return {
             meta: {},
-            valid: "".concat(sum) === v.charAt(length - 1),
+            valid: "".concat(sum) === v.charAt(length - 1)
         };
     }
 
@@ -2015,7 +2016,7 @@
         if (!/^\d{12}$/.test(value)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         // Validate date of birth
@@ -2025,15 +2026,15 @@
         if (!isValidDate$3(year + 1900, month, day) && !isValidDate$3(year + 2000, month, day)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         // Validate place of birth
         var placeOfBirth = value.substr(6, 2);
-        var notAvailablePlaces = ['17', '18', '19', '20', '69', '70', '73', '80', '81', '94', '95', '96', '97'];
+        var notAvailablePlaces = ["17", "18", "19", "20", "69", "70", "73", "80", "81", "94", "95", "96", "97"];
         return {
             meta: {},
-            valid: notAvailablePlaces.indexOf(placeOfBirth) === -1,
+            valid: notAvailablePlaces.indexOf(placeOfBirth) === -1
         };
     }
 
@@ -2052,7 +2053,7 @@
         if (value.length < 8) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         var v = value;
@@ -2062,14 +2063,14 @@
         if (!/^[0-9]{4}[.]{0,1}[0-9]{2}[.]{0,1}[0-9]{3}$/.test(v)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
-        v = v.replace(/\./g, '');
+        v = v?.replace(/\./g, "");
         if (parseInt(v, 10) === 0) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         var sum = 0;
@@ -2083,7 +2084,7 @@
         }
         return {
             meta: {},
-            valid: "".concat(sum) === v.charAt(length - 1),
+            valid: "".concat(sum) === v.charAt(length - 1)
         };
     }
 
@@ -2102,7 +2103,7 @@
         if (!/^\d{11}$/.test(value)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         // Calculate the first check digit
@@ -2125,7 +2126,7 @@
         };
         return {
             meta: {},
-            valid: "".concat(firstCd(value)) === value.substr(-2, 1) && "".concat(secondCd(value)) === value.substr(-1),
+            valid: "".concat(firstCd(value)) === value.substr(-2, 1) && "".concat(secondCd(value)) === value.substr(-1)
         };
     }
 
@@ -2144,13 +2145,13 @@
         if (!/^\d{8}[0-9A-Z]*$/.test(value)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         if (value.length === 8) {
             return {
                 meta: {},
-                valid: true,
+                valid: true
             };
         }
         var weight = [3, 2, 7, 6, 5, 4, 3, 2];
@@ -2160,10 +2161,10 @@
         }
         var cd = sum % 11;
         var checkDigit = [6, 5, 4, 3, 2, 1, 1, 0, 9, 8, 7][cd];
-        var checkChar = 'KJIHGFEDCBA'.charAt(cd);
+        var checkChar = "KJIHGFEDCBA".charAt(cd);
         return {
             meta: {},
-            valid: value.charAt(8) === "".concat(checkDigit) || value.charAt(8) === checkChar,
+            valid: value.charAt(8) === "".concat(checkDigit) || value.charAt(8) === checkChar
         };
     }
 
@@ -2183,7 +2184,7 @@
         if (!/^[0-9]{11}$/.test(value)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         var sum = 0;
@@ -2199,7 +2200,7 @@
         sum = 10 - sum;
         return {
             meta: {},
-            valid: "".concat(sum) === value.charAt(length - 1),
+            valid: "".concat(sum) === value.charAt(length - 1)
         };
     }
 
@@ -2219,14 +2220,14 @@
         if (!/^[0-9]{13}$/.test(value)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         var gender = parseInt(value.charAt(0), 10);
         if (gender === 0 || gender === 7 || gender === 8) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         // Determine the date of birth
@@ -2240,20 +2241,20 @@
             3: 1800,
             4: 1800,
             5: 2000,
-            6: 2000, // Female born after 2000
+            6: 2000 // Female born after 2000
         };
         if (day > 31 && month > 12) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         if (gender !== 9) {
-            year = centuries[gender + ''] + year;
+            year = centuries[gender + ""] + year;
             if (!isValidDate$2(year, month, day)) {
                 return {
                     meta: {},
-                    valid: false,
+                    valid: false
                 };
             }
         }
@@ -2270,7 +2271,7 @@
         }
         return {
             meta: {},
-            valid: "".concat(sum) === value.charAt(length - 1),
+            valid: "".concat(sum) === value.charAt(length - 1)
         };
     }
 
@@ -2285,7 +2286,7 @@
     function rsId(value) {
         return {
             meta: {},
-            valid: jmbg(value, 'RS'),
+            valid: jmbg(value, "RS")
         };
     }
 
@@ -2306,23 +2307,23 @@
         if (!/^[0-9]{10}$/.test(value) && !/^[0-9]{6}[-|+][0-9]{4}$/.test(value)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
-        var v = value.replace(/[^0-9]/g, '');
+        var v = value?.replace(/[^0-9]/g, "");
         var year = parseInt(v.substr(0, 2), 10) + 1900;
         var month = parseInt(v.substr(2, 2), 10);
         var day = parseInt(v.substr(4, 2), 10);
         if (!isValidDate$1(year, month, day)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         // Validate the last check digit
         return {
             meta: {},
-            valid: luhn$1(v),
+            valid: luhn$1(v)
         };
     }
 
@@ -2337,7 +2338,7 @@
     function siId(value) {
         return {
             meta: {},
-            valid: jmbg(value, 'SI'),
+            valid: jmbg(value, "SI")
         };
     }
 
@@ -2355,7 +2356,7 @@
     function smId(value) {
         return {
             meta: {},
-            valid: /^\d{5}$/.test(value),
+            valid: /^\d{5}$/.test(value)
         };
     }
 
@@ -2374,7 +2375,7 @@
         if (value.length !== 13) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         var sum = 0;
@@ -2383,7 +2384,7 @@
         }
         return {
             meta: {},
-            valid: (11 - (sum % 11)) % 10 === parseInt(value.charAt(12), 10),
+            valid: (11 - (sum % 11)) % 10 === parseInt(value.charAt(12), 10)
         };
     }
 
@@ -2402,7 +2403,7 @@
         if (value.length !== 11) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         var sum = 0;
@@ -2411,7 +2412,7 @@
         }
         return {
             meta: {},
-            valid: sum % 10 === parseInt(value.charAt(10), 10),
+            valid: sum % 10 === parseInt(value.charAt(10), 10)
         };
     }
 
@@ -2431,11 +2432,11 @@
         if (!/^[A-Z][12][0-9]{8}$/.test(v)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         var length = v.length;
-        var alphabet = 'ABCDEFGHJKLMNPQRSTUVXYWZIO';
+        var alphabet = "ABCDEFGHJKLMNPQRSTUVXYWZIO";
         var letterIndex = alphabet.indexOf(v.charAt(0)) + 10;
         var letterValue = Math.floor(letterIndex / 10) + (letterIndex % 10) * (length - 1);
         var sum = 0;
@@ -2444,7 +2445,7 @@
         }
         return {
             meta: {},
-            valid: (letterValue + sum + parseInt(v.charAt(length - 1), 10)) % 10 === 0,
+            valid: (letterValue + sum + parseInt(v.charAt(length - 1), 10)) % 10 === 0
         };
     }
 
@@ -2463,7 +2464,7 @@
         if (!/^\d{8}$/.test(value)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         var weight = [2, 9, 8, 7, 6, 3, 4];
@@ -2477,7 +2478,7 @@
         }
         return {
             meta: {},
-            valid: "".concat(sum) === value.charAt(7),
+            valid: "".concat(sum) === value.charAt(7)
         };
     }
 
@@ -2498,7 +2499,7 @@
         if (!/^[0-9]{10}[0|1][8|9][0-9]$/.test(value)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         var year = parseInt(value.substr(0, 2), 10);
@@ -2509,13 +2510,13 @@
         if (!isValidDate(year, month, day)) {
             return {
                 meta: {},
-                valid: false,
+                valid: false
             };
         }
         // Validate the last check digit
         return {
             meta: {},
-            valid: luhn(value),
+            valid: luhn(value)
         };
     }
 
@@ -2524,52 +2525,53 @@
      * The best validation library for JavaScript
      * (c) 2013 - 2023 Nguyen Huu Phuoc <me@phuoc.ng>
      */
-    var format = core.utils.format, removeUndefined = core.utils.removeUndefined;
+    var format = core.utils.format,
+        removeUndefined = core.utils.removeUndefined;
     function id() {
         // Supported country codes
         var COUNTRY_CODES = [
-            'AR',
-            'BA',
-            'BG',
-            'BR',
-            'CH',
-            'CL',
-            'CN',
-            'CO',
-            'CZ',
-            'DK',
-            'EE',
-            'ES',
-            'FI',
-            'FR',
-            'HK',
-            'HR',
-            'ID',
-            'IE',
-            'IL',
-            'IS',
-            'KR',
-            'LT',
-            'LV',
-            'ME',
-            'MK',
-            'MX',
-            'MY',
-            'NL',
-            'NO',
-            'PE',
-            'PL',
-            'RO',
-            'RS',
-            'SE',
-            'SI',
-            'SK',
-            'SM',
-            'TH',
-            'TR',
-            'TW',
-            'UY',
-            'ZA',
+            "AR",
+            "BA",
+            "BG",
+            "BR",
+            "CH",
+            "CL",
+            "CN",
+            "CO",
+            "CZ",
+            "DK",
+            "EE",
+            "ES",
+            "FI",
+            "FR",
+            "HK",
+            "HR",
+            "ID",
+            "IE",
+            "IL",
+            "IS",
+            "KR",
+            "LT",
+            "LV",
+            "ME",
+            "MK",
+            "MX",
+            "MY",
+            "NL",
+            "NO",
+            "PE",
+            "PL",
+            "RO",
+            "RS",
+            "SE",
+            "SI",
+            "SK",
+            "SM",
+            "TH",
+            "TR",
+            "TW",
+            "UY",
+            "ZA"
         ];
         return {
             /**
@@ -2577,15 +2579,14 @@
              * @see http://en.wikipedia.org/wiki/National_identification_number
              */
             validate: function (input) {
-                if (input.value === '') {
+                if (input.value === "") {
                     return { valid: true };
                 }
-                var opts = Object.assign({}, { message: '' }, removeUndefined(input.options));
+                var opts = Object.assign({}, { message: "" }, removeUndefined(input.options));
                 var country = input.value.substr(0, 2);
-                if ('function' === typeof opts.country) {
+                if ("function" === typeof opts.country) {
                     country = opts.country.call(this);
-                }
-                else {
+                } else {
                     country = opts.country;
                 }
                 if (COUNTRY_CODES.indexOf(country) === -1) {
@@ -2593,149 +2594,151 @@
                 }
                 var result = {
                     meta: {},
-                    valid: true,
+                    valid: true
                 };
                 switch (country.toLowerCase()) {
-                    case 'ar':
+                    case "ar":
                         result = arId(input.value);
                         break;
-                    case 'ba':
+                    case "ba":
                         result = baId(input.value);
                         break;
-                    case 'bg':
+                    case "bg":
                         result = bgId(input.value);
                         break;
-                    case 'br':
+                    case "br":
                         result = brId(input.value);
                         break;
-                    case 'ch':
+                    case "ch":
                         result = chId(input.value);
                         break;
-                    case 'cl':
+                    case "cl":
                         result = clId(input.value);
                         break;
-                    case 'cn':
+                    case "cn":
                         result = cnId(input.value);
                         break;
-                    case 'co':
+                    case "co":
                         result = coId(input.value);
                         break;
-                    case 'cz':
+                    case "cz":
                         result = czId(input.value);
                         break;
-                    case 'dk':
+                    case "dk":
                         result = dkId(input.value);
                         break;
                     // Validate Estonian Personal Identification Code (isikukood)
                     // Use the same format as Lithuanian Personal Code
                     // See http://et.wikipedia.org/wiki/Isikukood
-                    case 'ee':
+                    case "ee":
                         result = ltId(input.value);
                         break;
-                    case 'es':
+                    case "es":
                         result = esId(input.value);
                         break;
-                    case 'fi':
+                    case "fi":
                         result = fiId(input.value);
                         break;
-                    case 'fr':
+                    case "fr":
                         result = frId(input.value);
                         break;
-                    case 'hk':
+                    case "hk":
                         result = hkId(input.value);
                         break;
-                    case 'hr':
+                    case "hr":
                         result = hrId(input.value);
                         break;
-                    case 'id':
+                    case "id":
                         result = idId(input.value);
                         break;
-                    case 'ie':
+                    case "ie":
                         result = ieId(input.value);
                         break;
-                    case 'il':
+                    case "il":
                         result = ilId(input.value);
                         break;
-                    case 'is':
+                    case "is":
                         result = isId(input.value);
                         break;
-                    case 'kr':
+                    case "kr":
                         result = krId(input.value);
                         break;
-                    case 'lt':
+                    case "lt":
                         result = ltId(input.value);
                         break;
-                    case 'lv':
+                    case "lv":
                         result = lvId(input.value);
                         break;
-                    case 'me':
+                    case "me":
                         result = meId(input.value);
                         break;
-                    case 'mk':
+                    case "mk":
                         result = mkId(input.value);
                         break;
-                    case 'mx':
+                    case "mx":
                         result = mxId(input.value);
                         break;
-                    case 'my':
+                    case "my":
                         result = myId(input.value);
                         break;
-                    case 'nl':
+                    case "nl":
                         result = nlId(input.value);
                         break;
-                    case 'no':
+                    case "no":
                         result = noId(input.value);
                         break;
-                    case 'pe':
+                    case "pe":
                         result = peId(input.value);
                         break;
-                    case 'pl':
+                    case "pl":
                         result = plId(input.value);
                         break;
-                    case 'ro':
+                    case "ro":
                         result = roId(input.value);
                         break;
-                    case 'rs':
+                    case "rs":
                         result = rsId(input.value);
                         break;
-                    case 'se':
+                    case "se":
                         result = seId(input.value);
                         break;
-                    case 'si':
+                    case "si":
                         result = siId(input.value);
                         break;
                     // Validate Slovak national identifier number (RC)
                     // Slovakia uses the same format as Czech Republic
-                    case 'sk':
+                    case "sk":
                         result = czId(input.value);
                         break;
-                    case 'sm':
+                    case "sm":
                         result = smId(input.value);
                         break;
-                    case 'th':
+                    case "th":
                         result = thId(input.value);
                         break;
-                    case 'tr':
+                    case "tr":
                         result = trId(input.value);
                         break;
-                    case 'tw':
+                    case "tw":
                         result = twId(input.value);
                         break;
-                    case 'uy':
+                    case "uy":
                         result = uyId(input.value);
                         break;
-                    case 'za':
+                    case "za":
                         result = zaId(input.value);
                         break;
                 }
-                var message = format(input.l10n && input.l10n.id ? opts.message || input.l10n.id.country : opts.message, input.l10n && input.l10n.id && input.l10n.id.countries
-                    ? input.l10n.id.countries[country.toUpperCase()]
-                    : country.toUpperCase());
+                var message = format(
+                    input.l10n && input.l10n.id ? opts.message || input.l10n.id.country : opts.message,
+                    input.l10n && input.l10n.id && input.l10n.id.countries
+                        ? input.l10n.id.countries[country.toUpperCase()]
+                        : country.toUpperCase()
+                );
                 return Object.assign({}, { message: message }, result);
-            },
+            }
         };
     }
 
     return id;
-
-}));
+});

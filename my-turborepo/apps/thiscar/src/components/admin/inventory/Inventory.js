@@ -397,32 +397,32 @@ export function NotifyDealerModal({
             ) {
                 var modifiedMessage = popupData.notificationContent.emailContent.firstAttempt.available;
                 if (modifiedMessage.includes("[YMM Dealer Stock #]")) {
-                    modifiedMessage = popupData.notificationContent.emailContent.firstAttempt.available.replace(
+                    modifiedMessage = popupData.notificationContent.emailContent.firstAttempt.available?.replace(
                         /\[YMM Dealer Stock #\]/g,
                         `${carYear} ${carMake} ${carModel} & Stock ${dealerStockNumber}`
                     );
                 } else if (modifiedMessage.includes("[YMM & DEALER STOCK #]")) {
-                    modifiedMessage = popupData.notificationContent.emailContent.firstAttempt.available.replace(
+                    modifiedMessage = popupData.notificationContent.emailContent.firstAttempt.available?.replace(
                         /\[YMM & DEALER STOCK #\]/g,
                         `${carYear} ${carMake} ${carModel} & Stock ${dealerStockNumber}`
                     );
                 } else if (modifiedMessage.includes("[YMM DEALER STOCK #]")) {
-                    modifiedMessage = popupData.notificationContent.emailContent.firstAttempt.available.replace(
+                    modifiedMessage = popupData.notificationContent.emailContent.firstAttempt.available?.replace(
                         /\[YMM DEALER STOCK #\]/g,
                         `${carYear} ${carMake} ${carModel} & Stock ${dealerStockNumber}`
                     );
                 } else if (modifiedMessage.includes("YMM Dealer Stock #")) {
-                    modifiedMessage = popupData.notificationContent.emailContent.firstAttempt.available.replace(
+                    modifiedMessage = popupData.notificationContent.emailContent.firstAttempt.available?.replace(
                         /YMM Dealer Stock #/g,
                         `${carYear} ${carMake} ${carModel} & Stock ${dealerStockNumber}`
                     );
                 } else if (modifiedMessage.includes("YMM & DEALER STOCK #")) {
-                    modifiedMessage = popupData.notificationContent.emailContent.firstAttempt.available.replace(
+                    modifiedMessage = popupData.notificationContent.emailContent.firstAttempt.available?.replace(
                         /YMM & DEALER STOCK #/g,
                         `${carYear} ${carMake} ${carModel} & Stock ${dealerStockNumber}`
                     );
                 } else if (modifiedMessage.includes("YMM DEALER STOCK #")) {
-                    modifiedMessage = popupData.notificationContent.emailContent.firstAttempt.available.replace(
+                    modifiedMessage = popupData.notificationContent.emailContent.firstAttempt.available?.replace(
                         /YMM DEALER STOCK #/g,
                         `${carYear} ${carMake} ${carModel} & Stock ${dealerStockNumber}`
                     );
@@ -440,32 +440,32 @@ export function NotifyDealerModal({
             ) {
                 var modifiedMessage = popupData.notificationContent.emailContent.firstAttempt.hourhold;
                 if (modifiedMessage.includes("[YMM Dealer Stock #]")) {
-                    modifiedMessage = popupData.notificationContent.emailContent.firstAttempt.hourhold.replace(
+                    modifiedMessage = popupData.notificationContent.emailContent.firstAttempt.hourhold?.replace(
                         /\[YMM Dealer Stock #\]/g,
                         `${carYear} ${carMake} ${carModel} & Stock ${dealerStockNumber}`
                     );
                 } else if (modifiedMessage.includes("[YMM & DEALER STOCK #]")) {
-                    modifiedMessage = popupData.notificationContent.emailContent.firstAttempt.hourhold.replace(
+                    modifiedMessage = popupData.notificationContent.emailContent.firstAttempt.hourhold?.replace(
                         /\[YMM & DEALER STOCK #\]/g,
                         `${carYear} ${carMake} ${carModel} & Stock ${dealerStockNumber}`
                     );
                 } else if (modifiedMessage.includes("[YMM DEALER STOCK #]")) {
-                    modifiedMessage = popupData.notificationContent.emailContent.firstAttempt.hourhold.replace(
+                    modifiedMessage = popupData.notificationContent.emailContent.firstAttempt.hourhold?.replace(
                         /\[YMM DEALER STOCK #\]/g,
                         `${carYear} ${carMake} ${carModel} & Stock ${dealerStockNumber}`
                     );
                 } else if (modifiedMessage.includes("YMM Dealer Stock #")) {
-                    modifiedMessage = popupData.notificationContent.emailContent.firstAttempt.hourhold.replace(
+                    modifiedMessage = popupData.notificationContent.emailContent.firstAttempt.hourhold?.replace(
                         /YMM Dealer Stock #/g,
                         `${carYear} ${carMake} ${carModel} & Stock ${dealerStockNumber}`
                     );
                 } else if (modifiedMessage.includes("YMM & DEALER STOCK #")) {
-                    modifiedMessage = popupData.notificationContent.emailContent.firstAttempt.hourhold.replace(
+                    modifiedMessage = popupData.notificationContent.emailContent.firstAttempt.hourhold?.replace(
                         /YMM & DEALER STOCK #/g,
                         `${carYear} ${carMake} ${carModel} & Stock ${dealerStockNumber}`
                     );
                 } else if (modifiedMessage.includes("YMM DEALER STOCK #")) {
-                    modifiedMessage = popupData.notificationContent.emailContent.firstAttempt.hourhold.replace(
+                    modifiedMessage = popupData.notificationContent.emailContent.firstAttempt.hourhold?.replace(
                         /YMM DEALER STOCK #/g,
                         `${carYear} ${carMake} ${carModel} & Stock ${dealerStockNumber}`
                     );
@@ -483,32 +483,32 @@ export function NotifyDealerModal({
             ) {
                 var modifiedMessage = popupData.notificationContent.emailContent.firstAttempt.purchase;
                 if (modifiedMessage.includes("[YMM Dealer Stock #]")) {
-                    modifiedMessage = popupData.notificationContent.emailContent.firstAttempt.purchase.replace(
+                    modifiedMessage = popupData.notificationContent.emailContent.firstAttempt.purchase?.replace(
                         /\[YMM Dealer Stock #\]/g,
                         `${carYear} ${carMake} ${carModel} & Stock ${dealerStockNumber}`
                     );
                 } else if (modifiedMessage.includes("[YMM & DEALER STOCK #]")) {
-                    modifiedMessage = popupData.notificationContent.emailContent.firstAttempt.purchase.replace(
+                    modifiedMessage = popupData.notificationContent.emailContent.firstAttempt.purchase?.replace(
                         /\[YMM & DEALER STOCK #\]/g,
                         `${carYear} ${carMake} ${carModel} & Stock ${dealerStockNumber}`
                     );
                 } else if (modifiedMessage.includes("[YMM DEALER STOCK #]")) {
-                    modifiedMessage = popupData.notificationContent.emailContent.firstAttempt.purchase.replace(
+                    modifiedMessage = popupData.notificationContent.emailContent.firstAttempt.purchase?.replace(
                         /\[YMM DEALER STOCK #\]/g,
                         `${carYear} ${carMake} ${carModel} & Stock ${dealerStockNumber}`
                     );
                 } else if (modifiedMessage.includes("YMM Dealer Stock #")) {
-                    modifiedMessage = popupData.notificationContent.emailContent.firstAttempt.purchase.replace(
+                    modifiedMessage = popupData.notificationContent.emailContent.firstAttempt.purchase?.replace(
                         /YMM Dealer Stock #/g,
                         `${carYear} ${carMake} ${carModel} & Stock ${dealerStockNumber}`
                     );
                 } else if (modifiedMessage.includes("YMM & DEALER STOCK #")) {
-                    modifiedMessage = popupData.notificationContent.emailContent.firstAttempt.purchase.replace(
+                    modifiedMessage = popupData.notificationContent.emailContent.firstAttempt.purchase?.replace(
                         /YMM & DEALER STOCK #/g,
                         `${carYear} ${carMake} ${carModel} & Stock ${dealerStockNumber}`
                     );
                 } else if (modifiedMessage.includes("YMM DEALER STOCK #")) {
-                    modifiedMessage = popupData.notificationContent.emailContent.firstAttempt.purchase.replace(
+                    modifiedMessage = popupData.notificationContent.emailContent.firstAttempt.purchase?.replace(
                         /YMM DEALER STOCK #/g,
                         `${carYear} ${carMake} ${carModel} & Stock ${dealerStockNumber}`
                     );

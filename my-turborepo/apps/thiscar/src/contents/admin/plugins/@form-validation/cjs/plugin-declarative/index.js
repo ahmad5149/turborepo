@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-var core = require('@form-validation/core');
+var core = require("@form-validation/core");
 
 /******************************************************************************
 Copyright (c) Microsoft Corporation.
@@ -18,10 +18,16 @@ PERFORMANCE OF THIS SOFTWARE.
 ***************************************************************************** */
 /* global Reflect, Promise */
 
-var extendStatics = function(d, b) {
-    extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+var extendStatics = function (d, b) {
+    extendStatics =
+        Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array &&
+            function (d, b) {
+                d.__proto__ = b;
+            }) ||
+        function (d, b) {
+            for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p];
+        };
     return extendStatics(d, b);
 };
 
@@ -29,8 +35,10 @@ function __extends(d, b) {
     if (typeof b !== "function" && b !== null)
         throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
     extendStatics(d, b);
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    function __() {
+        this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : ((__.prototype = b.prototype), new __());
 }
 
 /**
@@ -53,11 +61,15 @@ var Declarative = /** @class */ (function (_super) {
     function Declarative(opts) {
         var _this = _super.call(this, opts) || this;
         _this.addedFields = new Map();
-        _this.opts = Object.assign({}, {
-            html5Input: false,
-            pluginPrefix: 'data-fvp-',
-            prefix: 'data-fv-',
-        }, opts);
+        _this.opts = Object.assign(
+            {},
+            {
+                html5Input: false,
+                pluginPrefix: "data-fvp-",
+                prefix: "data-fv-"
+            },
+            opts
+        );
         _this.fieldAddedHandler = _this.onFieldAdded.bind(_this);
         _this.fieldRemovedHandler = _this.onFieldRemoved.bind(_this);
         return _this;
@@ -73,11 +85,11 @@ var Declarative = /** @class */ (function (_super) {
             }
             _this.core.addField(field, opts[field]);
         });
-        this.core.on('core.field.added', this.fieldAddedHandler).on('core.field.removed', this.fieldRemovedHandler);
+        this.core.on("core.field.added", this.fieldAddedHandler).on("core.field.removed", this.fieldRemovedHandler);
     };
     Declarative.prototype.uninstall = function () {
         this.addedFields.clear();
-        this.core.off('core.field.added', this.fieldAddedHandler).off('core.field.removed', this.fieldRemovedHandler);
+        this.core.off("core.field.added", this.fieldAddedHandler).off("core.field.removed", this.fieldRemovedHandler);
     };
     Declarative.prototype.onFieldAdded = function (e) {
         var _this = this;
@@ -94,7 +106,7 @@ var Declarative = /** @class */ (function (_super) {
                 // Update validator options
                 var mergeOptions = {
                     selector: e.options.selector,
-                    validators: Object.assign({}, e.options.validators || {}, declarativeOptions.validators),
+                    validators: Object.assign({}, e.options.validators || {}, declarativeOptions.validators)
                 };
                 _this.core.setFieldOptions(e.field, mergeOptions);
             }
@@ -119,7 +131,7 @@ var Declarative = /** @class */ (function (_super) {
             // For instance, there are multiple elements having the same name,
             // we only set the HTML attribute to one of them
             if (!_this.isEmptyOption(validators)) {
-                var field = ele.getAttribute('name') || ele.getAttribute("".concat(prefix, "field"));
+                var field = ele.getAttribute("name") || ele.getAttribute("".concat(prefix, "field"));
                 opts[field] = Object.assign({}, opts[field], validators);
             }
         });
@@ -137,14 +149,14 @@ var Declarative = /** @class */ (function (_super) {
         return Object.assign({}, fields, opts);
     };
     Declarative.prototype.createPluginInstance = function (clazz, opts) {
-        var arr = clazz.split('.');
+        var arr = clazz.split(".");
         // TODO: Find a safer way to create a plugin instance from the class
         // Currently, I have to use `any` here instead of a construtable interface
         var fn = window || this; // eslint-disable-line @typescript-eslint/no-explicit-any
         for (var i = 0, len = arr.length; i < len; i++) {
             fn = fn[arr[i]];
         }
-        if (typeof fn !== 'function') {
+        if (typeof fn !== "function") {
             throw new Error("the plugin ".concat(clazz, " doesn't exist"));
         }
         return new fn(opts);
@@ -162,16 +174,22 @@ var Declarative = /** @class */ (function (_super) {
             var items = reg.exec(name_1);
             if (items && items.length === 4) {
                 var pluginName = this.toCamelCase(items[1]);
-                plugins[pluginName] = Object.assign({}, items[3] ? (_a = {}, _a[this.toCamelCase(items[3])] = value, _a) : { enabled: '' === value || 'true' === value }, plugins[pluginName]);
+                plugins[pluginName] = Object.assign(
+                    {},
+                    items[3]
+                        ? ((_a = {}), (_a[this.toCamelCase(items[3])] = value), _a)
+                        : { enabled: "" === value || "true" === value },
+                    plugins[pluginName]
+                );
             }
         }
         Object.keys(plugins).forEach(function (pluginName) {
             var opts = plugins[pluginName];
-            var enabled = opts['enabled'];
-            var clazz = opts['class'];
+            var enabled = opts["enabled"];
+            var clazz = opts["class"];
             if (enabled && clazz) {
-                delete opts['enabled'];
-                delete opts['clazz'];
+                delete opts["enabled"];
+                delete opts["clazz"];
                 var p = _this.createPluginInstance(clazz, opts);
                 _this.core.registerPlugin(pluginName, p);
             }
@@ -185,71 +203,111 @@ var Declarative = /** @class */ (function (_super) {
         var reg = new RegExp("^".concat(this.opts.prefix, "([a-z0-9-]+)(___)*([a-z0-9-]+)*$"));
         var numAttributes = ele.attributes.length;
         var opts = {};
-        var type = ele.getAttribute('type');
+        var type = ele.getAttribute("type");
         for (var i = 0; i < numAttributes; i++) {
             var name_2 = ele.attributes[i].name;
             var value = ele.attributes[i].value;
             if (this.opts.html5Input) {
                 switch (true) {
-                    case 'minlength' === name_2:
-                        opts['stringLength'] = Object.assign({}, {
-                            enabled: true,
-                            min: parseInt(value, 10),
-                        }, opts['stringLength']);
+                    case "minlength" === name_2:
+                        opts["stringLength"] = Object.assign(
+                            {},
+                            {
+                                enabled: true,
+                                min: parseInt(value, 10)
+                            },
+                            opts["stringLength"]
+                        );
                         break;
-                    case 'maxlength' === name_2:
-                        opts['stringLength'] = Object.assign({}, {
-                            enabled: true,
-                            max: parseInt(value, 10),
-                        }, opts['stringLength']);
+                    case "maxlength" === name_2:
+                        opts["stringLength"] = Object.assign(
+                            {},
+                            {
+                                enabled: true,
+                                max: parseInt(value, 10)
+                            },
+                            opts["stringLength"]
+                        );
                         break;
-                    case 'pattern' === name_2:
-                        opts['regexp'] = Object.assign({}, {
-                            enabled: true,
-                            regexp: value,
-                        }, opts['regexp']);
+                    case "pattern" === name_2:
+                        opts["regexp"] = Object.assign(
+                            {},
+                            {
+                                enabled: true,
+                                regexp: value
+                            },
+                            opts["regexp"]
+                        );
                         break;
-                    case 'required' === name_2:
-                        opts['notEmpty'] = Object.assign({}, {
-                            enabled: true,
-                        }, opts['notEmpty']);
+                    case "required" === name_2:
+                        opts["notEmpty"] = Object.assign(
+                            {},
+                            {
+                                enabled: true
+                            },
+                            opts["notEmpty"]
+                        );
                         break;
-                    case 'type' === name_2 && 'color' === value:
+                    case "type" === name_2 && "color" === value:
                         // Only accept 6 hex character values due to the HTML 5 spec
                         // See http://www.w3.org/TR/html-markup/input.color.html#input.color.attrs.value
-                        opts['color'] = Object.assign({}, {
-                            enabled: true,
-                            type: 'hex',
-                        }, opts['color']);
+                        opts["color"] = Object.assign(
+                            {},
+                            {
+                                enabled: true,
+                                type: "hex"
+                            },
+                            opts["color"]
+                        );
                         break;
-                    case 'type' === name_2 && 'email' === value:
-                        opts['emailAddress'] = Object.assign({}, {
-                            enabled: true,
-                        }, opts['emailAddress']);
+                    case "type" === name_2 && "email" === value:
+                        opts["emailAddress"] = Object.assign(
+                            {},
+                            {
+                                enabled: true
+                            },
+                            opts["emailAddress"]
+                        );
                         break;
-                    case 'type' === name_2 && 'url' === value:
-                        opts['uri'] = Object.assign({}, {
-                            enabled: true,
-                        }, opts['uri']);
+                    case "type" === name_2 && "url" === value:
+                        opts["uri"] = Object.assign(
+                            {},
+                            {
+                                enabled: true
+                            },
+                            opts["uri"]
+                        );
                         break;
-                    case 'type' === name_2 && 'range' === value:
-                        opts['between'] = Object.assign({}, {
-                            enabled: true,
-                            max: parseFloat(ele.getAttribute('max')),
-                            min: parseFloat(ele.getAttribute('min')),
-                        }, opts['between']);
+                    case "type" === name_2 && "range" === value:
+                        opts["between"] = Object.assign(
+                            {},
+                            {
+                                enabled: true,
+                                max: parseFloat(ele.getAttribute("max")),
+                                min: parseFloat(ele.getAttribute("min"))
+                            },
+                            opts["between"]
+                        );
                         break;
-                    case 'min' === name_2 && type !== 'date' && type !== 'range':
-                        opts['greaterThan'] = Object.assign({}, {
-                            enabled: true,
-                            min: parseFloat(value),
-                        }, opts['greaterThan']);
+                    case "min" === name_2 && type !== "date" && type !== "range":
+                        opts["greaterThan"] = Object.assign(
+                            {},
+                            {
+                                enabled: true,
+                                min: parseFloat(value)
+                            },
+                            opts["greaterThan"]
+                        );
                         break;
-                    case 'max' === name_2 && type !== 'date' && type !== 'range':
-                        opts['lessThan'] = Object.assign({}, {
-                            enabled: true,
-                            max: parseFloat(value),
-                        }, opts['lessThan']);
+                    case "max" === name_2 && type !== "date" && type !== "range":
+                        opts["lessThan"] = Object.assign(
+                            {},
+                            {
+                                enabled: true,
+                                max: parseFloat(value)
+                            },
+                            opts["lessThan"]
+                        );
                         break;
                 }
             }
@@ -261,9 +319,8 @@ var Declarative = /** @class */ (function (_super) {
                 }
                 if (items[3]) {
                     opts[v][this.toCamelCase(items[3])] = this.normalizeValue(value);
-                }
-                else if (opts[v]['enabled'] !== true || opts[v]['enabled'] !== false) {
-                    opts[v]['enabled'] = '' === value || 'true' === value;
+                } else if (opts[v]["enabled"] !== true || opts[v]["enabled"] !== false) {
+                    opts[v]["enabled"] = "" === value || "true" === value;
                 }
             }
         }
@@ -272,15 +329,15 @@ var Declarative = /** @class */ (function (_super) {
     // Many validators accept `boolean` options, for example
     // `data-fv-between___inclusive="false"` should be identical to `inclusive: false`, not `inclusive: 'false'`
     Declarative.prototype.normalizeValue = function (value) {
-        return value === 'true' || value === '' ? true : value === 'false' ? false : value;
+        return value === "true" || value === "" ? true : value === "false" ? false : value;
     };
     Declarative.prototype.toUpperCase = function (input) {
         return input.charAt(1).toUpperCase();
     };
     Declarative.prototype.toCamelCase = function (input) {
-        return input.replace(/-./g, this.toUpperCase);
+        return input?.replace(/-./g, this.toUpperCase);
     };
     return Declarative;
-}(core.Plugin));
+})(core.Plugin);
 
 exports.Declarative = Declarative;

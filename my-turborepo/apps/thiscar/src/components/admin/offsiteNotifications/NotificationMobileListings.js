@@ -67,7 +67,7 @@ function NotificationMobileListings({ notifications }) {
 
     const getNotificationColorForType = (value) => {
         if (value != null) {
-            value = value.replace(/\s/g, "");
+            value = value?.replace(/\s/g, "");
             switch (value.toLowerCase()) {
                 case "available":
                     return "type-available";

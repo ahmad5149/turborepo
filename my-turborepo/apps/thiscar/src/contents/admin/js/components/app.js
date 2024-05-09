@@ -314,7 +314,7 @@ var KTApp = (function () {
                 var options = {};
 
                 var value = element.getAttribute("data-kt-countup-value");
-                value = parseFloat(value.replace(/,/g, ""));
+                value = parseFloat(value?.replace(/,/g, ""));
 
                 if (element.hasAttribute("data-kt-countup-start-val")) {
                     options.startVal = parseFloat(element.getAttribute("data-kt-countup-start-val"));
@@ -425,15 +425,15 @@ var KTApp = (function () {
             // more options; https://github.com/ganlanyuan/tiny-slider#options
             if (/^data-tns-.*/g.test(attrName)) {
                 let optionName = attrName
-                    .replace("data-tns-", "")
+                    ?.replace("data-tns-", "")
                     .toLowerCase()
-                    .replace(/(?:[\s-])\w/g, function (match) {
-                        return match.replace("-", "").toUpperCase();
+                    ?.replace(/(?:[\s-])\w/g, function (match) {
+                        return match?.replace("-", "").toUpperCase();
                     });
 
                 if (attrName === "data-tns-responsive") {
                     // fix string with a valid json
-                    const jsonStr = el.getAttribute(attrName).replace(/(\w+:)|(\w+ :)/g, function (matched) {
+                    const jsonStr = el.getAttribute(attrName)?.replace(/(\w+:)|(\w+ :)/g, function (matched) {
                         return '"' + matched.substring(0, matched.length - 1) + '":';
                     });
                     try {

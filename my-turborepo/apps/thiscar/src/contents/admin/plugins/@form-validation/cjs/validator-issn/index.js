@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /**
  * FormValidation (https://formvalidation.io)
@@ -12,7 +12,7 @@ function issn() {
          * @see http://en.wikipedia.org/wiki/International_Standard_Serial_Number
          */
         validate: function (input) {
-            if (input.value === '') {
+            if (input.value === "") {
                 return { valid: true };
             }
             // Groups are separated by a hyphen or a space
@@ -20,17 +20,17 @@ function issn() {
                 return { valid: false };
             }
             // Replace all special characters except digits and X
-            var chars = input.value.replace(/[^0-9X]/gi, '').split('');
+            var chars = input.value?.replace(/[^0-9X]/gi, "").split("");
             var length = chars.length;
             var sum = 0;
-            if (chars[7] === 'X') {
-                chars[7] = '10';
+            if (chars[7] === "X") {
+                chars[7] = "10";
             }
             for (var i = 0; i < length; i++) {
                 sum += parseInt(chars[i], 10) * (8 - i);
             }
             return { valid: sum % 11 === 0 };
-        },
+        }
     };
 }
 

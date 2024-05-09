@@ -82,7 +82,7 @@ var KTApp = (function () {
                         if ("1" === e.getAttribute("data-kt-initialized")) return;
                         var t = {},
                             n = e.getAttribute("data-kt-countup-value");
-                        (n = parseFloat(n.replace(/,/g, ""))),
+                        (n = parseFloat(n?.replace(/,/g, ""))),
                             e.hasAttribute("data-kt-countup-start-val") &&
                                 (t.startVal = parseFloat(e.getAttribute("data-kt-countup-start-val"))),
                             e.hasAttribute("data-kt-countup-duration") &&
@@ -107,13 +107,13 @@ var KTApp = (function () {
             e.getAttributeNames().forEach(function (n) {
                 if (/^data-tns-.*/g.test(n)) {
                     let r = n
-                        .replace("data-tns-", "")
+                        ?.replace("data-tns-", "")
                         .toLowerCase()
-                        .replace(/(?:[\s-])\w/g, function (e) {
-                            return e.replace("-", "").toUpperCase();
+                        ?.replace(/(?:[\s-])\w/g, function (e) {
+                            return e?.replace("-", "").toUpperCase();
                         });
                     if ("data-tns-responsive" === n) {
-                        const i = e.getAttribute(n).replace(/(\w+:)|(\w+ :)/g, function (e) {
+                        const i = e.getAttribute(n)?.replace(/(\w+:)|(\w+ :)/g, function (e) {
                             return '"' + e.substring(0, e.length - 1) + '":';
                         });
                         try {
@@ -429,7 +429,7 @@ var KTBlockUI = function (e, t) {
 var KTCookie = {
     get: function (e) {
         var t = document.cookie.match(
-            new RegExp("(?:^|; )" + e.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, "\\$1") + "=([^;]*)")
+            new RegExp("(?:^|; )" + e?.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, "\\$1") + "=([^;]*)")
         );
         return t ? decodeURIComponent(t[1]) : null;
     },
@@ -466,7 +466,7 @@ var KTDialer = function (e, t) {
                     c("step") && (n.options.step = parseFloat(c("step"))),
                     c("min") && (n.options.min = parseFloat(c("min"))),
                     c("max") && (n.options.max = parseFloat(c("max"))),
-                    (n.value = parseFloat(n.inputElement.value.replace(/[^\d.]/g, ""))),
+                    (n.value = parseFloat(n.inputElement.value?.replace(/[^\d.]/g, ""))),
                     s(),
                     o(),
                     KTUtil.data(n.element).set("dialer", n);
@@ -512,10 +512,10 @@ var KTDialer = function (e, t) {
             u = function (e) {
                 return (
                     (e = e
-                        .replace(/[^0-9.-]/g, "")
-                        .replace(/(\..*)\./g, "$1")
-                        .replace(/(?!^)-/g, "")
-                        .replace(/^0+(\d)/gm, "$1")),
+                        ?.replace(/[^0-9.-]/g, "")
+                        ?.replace(/(\..*)\./g, "$1")
+                        ?.replace(/(?!^)-/g, "")
+                        ?.replace(/^0+(\d)/gm, "$1")),
                     (e = parseFloat(e)),
                     isNaN(e) && (e = 0),
                     e
@@ -1100,10 +1100,10 @@ var KTMenuHandlersInitialized = !1,
                     null !== e
                         ? (n.triggerElement = e)
                         : n.element.closest("[data-kt-menu-trigger]")
-                        ? (n.triggerElement = n.element.closest("[data-kt-menu-trigger]"))
-                        : n.element.parentNode &&
-                          KTUtil.child(n.element.parentNode, "[data-kt-menu-trigger]") &&
-                          (n.triggerElement = KTUtil.child(n.element.parentNode, "[data-kt-menu-trigger]")),
+                          ? (n.triggerElement = n.element.closest("[data-kt-menu-trigger]"))
+                          : n.element.parentNode &&
+                            KTUtil.child(n.element.parentNode, "[data-kt-menu-trigger]") &&
+                            (n.triggerElement = KTUtil.child(n.element.parentNode, "[data-kt-menu-trigger]")),
                         n.triggerElement && KTUtil.data(n.triggerElement).set("menu", n);
                 },
                 c = function (e) {
@@ -1128,10 +1128,10 @@ var KTMenuHandlersInitialized = !1,
                     return !0 === c(e)
                         ? n.element
                         : !0 === e.classList.contains("menu-sub")
-                        ? e
-                        : KTUtil.data(e).has("sub")
-                        ? KTUtil.data(e).get("sub")
-                        : KTUtil.child(e, ".menu-sub");
+                          ? e
+                          : KTUtil.data(e).has("sub")
+                            ? KTUtil.data(e).get("sub")
+                            : KTUtil.child(e, ".menu-sub");
                 },
                 v = function (e) {
                     var t = g(e);
@@ -1142,12 +1142,12 @@ var KTMenuHandlersInitialized = !1,
                     return c(e) || e.hasAttribute("data-kt-menu-trigger")
                         ? e
                         : KTUtil.data(e).has("item")
-                        ? KTUtil.data(e).get("item")
-                        : (t = e.closest(".menu-item"))
-                        ? t
-                        : (n = e.closest(".menu-sub")) && !0 === KTUtil.data(n).has("item")
-                        ? KTUtil.data(n).get("item")
-                        : void 0;
+                          ? KTUtil.data(e).get("item")
+                          : (t = e.closest(".menu-item"))
+                            ? t
+                            : (n = e.closest(".menu-sub")) && !0 === KTUtil.data(n).has("item")
+                              ? KTUtil.data(n).get("item")
+                              : void 0;
                 },
                 h = function (e) {
                     var t,
@@ -1155,8 +1155,8 @@ var KTMenuHandlersInitialized = !1,
                     return n && KTUtil.data(n).has("item")
                         ? KTUtil.data(n).get("item")
                         : n && (t = n.closest(".menu-item[data-kt-menu-trigger]"))
-                        ? t
-                        : null;
+                          ? t
+                          : null;
                 },
                 K = function (e) {
                     var t,
@@ -1267,8 +1267,8 @@ var KTMenuHandlersInitialized = !1,
                         !0 === L(e, "expand")
                             ? (i = !0)
                             : !1 === L(e, "expand")
-                            ? (i = !1)
-                            : !0 === L(n.element, "expand") && (i = !0),
+                              ? (i = !1)
+                              : !0 === L(n.element, "expand") && (i = !0),
                             !1 === i && I(e),
                             !0 === KTUtil.data(e).has("popper") && w(e),
                             KTUtil.addClass(e, "hover"),
@@ -1765,8 +1765,8 @@ var KTScrollHandlersInitialized = !1,
                     return e instanceof Function
                         ? e.call()
                         : null !== e && "string" == typeof e && "auto" === e.toLowerCase()
-                        ? d()
-                        : e;
+                          ? d()
+                          : e;
                 },
                 d = function () {
                     var e,
@@ -1823,10 +1823,10 @@ var KTScrollHandlersInitialized = !1,
                     return f("height")
                         ? "height"
                         : f("min-height")
-                        ? "min-height"
-                        : f("max-height")
-                        ? "max-height"
-                        : void 0;
+                          ? "min-height"
+                          : f("max-height")
+                            ? "max-height"
+                            : void 0;
                 };
             KTUtil.data(e).has("scroll") ? (n = KTUtil.data(e).get("scroll")) : r(),
                 (n.update = function () {
@@ -2965,7 +2965,7 @@ var KTUtil = (function () {
                 if (e.classList) for (var i = 0; i < n.length; i++) e.classList.remove(KTUtil.trim(n[i]));
                 else if (KTUtil.hasClass(e, t))
                     for (var r = 0; r < n.length; r++)
-                        e.className = e.className.replace(new RegExp("\\b" + KTUtil.trim(n[r]) + "\\b", "g"), "");
+                        e.className = e.className?.replace(new RegExp("\\b" + KTUtil.trim(n[r]) + "\\b", "g"), "");
             }
         },
         triggerCustomEvent: function (e, t, n) {
@@ -3070,8 +3070,8 @@ var KTUtil = (function () {
                         return void 0 === e.customDataTag
                             ? null
                             : this.has(t)
-                            ? window.KTUtilElementDataStore[e.customDataTag][t]
-                            : null;
+                              ? window.KTUtilElementDataStore[e.customDataTag][t]
+                              : null;
                 },
                 has: function (t) {
                     return (
@@ -3201,12 +3201,12 @@ var KTUtil = (function () {
                     var r = (e.ownerDocument || document).defaultView;
                     if (r && r.getComputedStyle)
                         return (
-                            (t = t.replace(/([A-Z])/g, "-$1").toLowerCase()),
+                            (t = t?.replace(/([A-Z])/g, "-$1").toLowerCase()),
                             r.getComputedStyle(e, null).getPropertyValue(t)
                         );
                     if (e.currentStyle)
                         return (
-                            (t = t.replace(/\-(\w)/g, function (e, t) {
+                            (t = t?.replace(/\-(\w)/g, function (e, t) {
                                 return t.toUpperCase();
                             })),
                             (n = e.currentStyle[t]),
@@ -3454,14 +3454,14 @@ var KTUtil = (function () {
                 r.test(n);
 
             )
-                n = n.replace(r, "$1,$2");
+                n = n?.replace(r, "$1,$2");
             return n + i;
         },
         isRTL: function () {
             return "rtl" === document.querySelector("html").getAttribute("direction");
         },
         snakeToCamel: function (e) {
-            return e.replace(/(\-\w)/g, function (e) {
+            return e?.replace(/(\-\w)/g, function (e) {
                 return e[1].toUpperCase();
             });
         },
@@ -3517,7 +3517,7 @@ var KTUtil = (function () {
         },
         parseJson: function (e) {
             if ("string" == typeof e) {
-                var t = (e = e.replace(/'/g, '"')).replace(/(\w+:)|(\w+ :)/g, function (e) {
+                var t = (e = e?.replace(/'/g, '"'))?.replace(/(\w+:)|(\w+ :)/g, function (e) {
                     return '"' + e.substring(0, e.length - 1) + '":';
                 });
                 try {
@@ -3864,10 +3864,10 @@ var KTThemeMode = (function () {
             return document.documentElement.hasAttribute("data-bs-theme")
                 ? document.documentElement.getAttribute("data-bs-theme")
                 : null !== localStorage.getItem("data-bs-theme")
-                ? localStorage.getItem("data-bs-theme")
-                : "system" === r()
-                ? o()
-                : "light";
+                  ? localStorage.getItem("data-bs-theme")
+                  : "system" === r()
+                    ? o()
+                    : "light";
         },
         i = function (i, r) {
             var l = n();
@@ -3888,12 +3888,12 @@ var KTThemeMode = (function () {
             return t && t.getAttribute("data-kt-value")
                 ? t.getAttribute("data-kt-value")
                 : document.documentElement.hasAttribute("data-bs-theme-mode")
-                ? document.documentElement.getAttribute("data-bs-theme-mode")
-                : null !== localStorage.getItem("data-bs-theme-mode")
-                ? localStorage.getItem("data-bs-theme-mode")
-                : "undefined" != typeof defaultThemeMode
-                ? defaultThemeMode
-                : "light";
+                  ? document.documentElement.getAttribute("data-bs-theme-mode")
+                  : null !== localStorage.getItem("data-bs-theme-mode")
+                    ? localStorage.getItem("data-bs-theme-mode")
+                    : "undefined" != typeof defaultThemeMode
+                      ? defaultThemeMode
+                      : "light";
         },
         o = function () {
             return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";

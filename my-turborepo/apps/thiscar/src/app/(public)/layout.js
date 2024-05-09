@@ -17,6 +17,7 @@ import GoogleAnalytics from "@/components/google-analytics";
 import GoogleTags from "@/components/google-tags";
 import GoogleAdTrack from "@/components/google-ad-track";
 import { LoadTradePending } from "@/components/trade-pending/trade-pending-hook";
+import { Shared } from "../../../../../packages/ui/src/Shared";
 
 export const metadata = {
     title: "THISCar",
@@ -109,7 +110,7 @@ fbq('track', 'PageView');
                 {appConfig.ANALYTICS_ID ? <GoogleAnalytics ga_id={appConfig.ANALYTICS_ID} /> : null}
                 {appConfig.GOOGLE_AW_ID ? <GoogleTags gtag_aw_id={appConfig.GOOGLE_AW_ID} /> : null}
                 {appConfig.GOOGLE_AD_ID ? <GoogleAdTrack gtag_ad_id={appConfig.GOOGLE_AD_ID} /> : null}
-
+                <Shared />
                 <AppProvider routes={routes}>
                     <AuthProvider>
                         {/* <RecaptchaProviders> */}

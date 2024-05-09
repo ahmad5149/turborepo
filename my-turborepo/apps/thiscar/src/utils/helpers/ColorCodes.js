@@ -22,7 +22,7 @@ const copper = "#B87333";
 const turquoise = "#40e0d0";
 
 const ReturnColorCode = (obj, propName) => {
-    const formattedPropName = propName.toLowerCase().replace(/\s/g, "").replace(/\//g, "");
+    const formattedPropName = propName.toLowerCase()?.replace(/\s/g, "")?.replace(/\//g, "");
 
     if (obj.hasOwnProperty(formattedPropName)) {
         return obj[formattedPropName];
