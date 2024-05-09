@@ -1,0 +1,25 @@
+.btn-chng {
+    border: none;
+    background-color: transparent;
+}
+.custom-toast-progress {
+    background-color: #53119b; /* Change this to your desired color */
+}
+/* Change the color of the checkmark (tick) */
+.custom-toast .Toastify__toast--success .Toastify__close-button {
+    background: #53119b; /* Change this to your desired color for the checkmark */
+}
+.custom-toast .Toastify__toast--success svg {
+    fill: #53119b; /* Change this to your desired color for the checkmark */
+}
+
+.share-btn-mobile {
+    @media (min-width: 576px) {
+        display: none;
+    }
+}
+.share-btn-desktop {
+    @media (max-width: 575px) {
+        display: none;
+    }
+}

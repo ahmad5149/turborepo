@@ -23,7 +23,7 @@ import {
     ProspectStatus
 } from "../../../models/support/SupportModel";
 import { generateADFXMLString } from "../../../utils/helpers/generateADFXMLString";
-import { last } from "lodash";
+import { GAEvent } from "@/components/google-analytics/index";
 
 const ConfirmAvailability = ({ closeModal, vehicleName, stockNo, confirmAvailability }) => {
     const [firstName, setFirstName] = useState("");
@@ -121,26 +121,57 @@ const ConfirmAvailability = ({ closeModal, vehicleName, stockNo, confirmAvailabi
             const currErrors = {};
             if (!firstName.trim()) {
                 currErrors.firstName = "Please enter your first name";
+                if (appConfig.ANALYTICS_ID) {
+                    GAEvent({
+                        action: "check_availability_firstName_empty",
+                        category: "ecommerce",
+                        label: "Check Availability First Name"
+                    });
+                }
             }
             if (!lastName.trim()) {
                 currErrors.lastName = "Please enter your last name";
+                if (appConfig.ANALYTICS_ID) {
+                    GAEvent({
+                        action: "check_availability_lastName_empty",
+                        category: "ecommerce",
+                        label: "Check Availability Last Name"
+                    });
+                }
             }
 
-            if (!phoneNumber) {
-                currErrors.phoneNumber = "Please enter your phone number";
-            } else if (!isValidPhone(phoneNumber)) {
-                currErrors.phoneNumber = "Please enter valid phone number in format 1-123-456-7890";
+            if (!phoneNumber || !isValidPhone(phoneNumber)) {
+                currErrors.phoneNumber = "Please enter a valid phone number";
+                if (appConfig.ANALYTICS_ID) {
+                    GAEvent({
+                        action: "check_availability_phone_empty",
+                        category: "ecommerce",
+                        label: "Check Availability Phone"
+                    });
+                }
             }
 
-            if (!email) {
+            if (!email || !isValidEmail(email)) {
                 currErrors.email = "Please enter your email";
-            } else if (!isValidEmail(email)) {
-                currErrors.email = "Invalid email address : example@THISCar.com";
+                if (appConfig.ANALYTICS_ID) {
+                    GAEvent({
+                        action: "check_availability_email_empty",
+                        category: "ecommerce",
+                        label: "Check Availability Email"
+                    });
+                }
             }
 
             if (Object.keys(currErrors).length > 0) {
                 setErrors(currErrors);
                 //  setIsChecked(false);
+                if (appConfig.ANALYTICS_ID) {
+                    GAEvent({
+                        action: "check_availability_firstName_empty",
+                        category: "ecommerce",
+                        label: "Check Availability First Name"
+                    });
+                }
                 return;
             }
         }
@@ -167,7 +198,13 @@ const ConfirmAvailability = ({ closeModal, vehicleName, stockNo, confirmAvailabi
                     };
                     await SubmitHeroLeadInformation(data).then((response) => {
                         if (response.status == 200) {
-                            //   setCompleted(true);
+                            if (appConfig.ANALYTICS_ID) {
+                                GAEvent({
+                                    action: "check_availability_complete",
+                                    category: "ecommerce",
+                                    label: "Check Availability Complete"
+                                });
+                            }
                         } else if (response.status == 500) {
                         } else {
                         }

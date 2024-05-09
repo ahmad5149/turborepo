@@ -1,0 +1,142 @@
+@import "./variable.scss";
+
+input {
+    @media screen and (max-width: 1600px) {
+        font-size: map-get($font-size, xxxsmall);
+    }
+
+    @media screen and (max-width: 1090px) {
+        font-size: 10px;
+    }
+}
+.custom_btn {
+    font-family: "Avenir-Roman";
+    background-color: map-get($color, primary-1);
+    font-size: 15px;
+    border-radius: 25px;
+    color: white;
+    position: relative;
+    padding-right: 25px;
+    padding-left: 25px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 240px;
+    height: 37px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    &:focus {
+        background-color: #53119b !important;
+        color: white;
+        outline: none;
+    }
+
+    svg {
+        position: absolute;
+        // right: 0%;
+        right: 10px;
+        float: right;
+
+        path {
+            fill: map-get($color, border-color);
+        }
+
+        @media (max-width: 425px) {
+            position: absolute;
+            right: 7px;
+        }
+    }
+
+    @media screen and (max-width: 1600px) {
+        // font-size: map-get($font-size , xxxsmall);
+    }
+
+    @media screen and (max-width: 1090px) {
+        // font-size: 10px;
+    }
+
+    @media screen and (max-width: 860px) {
+        svg {
+            width: 20px;
+            height: 20px;
+        }
+    }
+
+    @media screen and (max-width: 575px) {
+        min-width: unset;
+        width: 100%;
+    }
+}
+
+.input_btn {
+    margin-left: -30px;
+    height: 25px;
+    width: 25px;
+    border-radius: 100%;
+    border: 0;
+    background-color: map-get($color, primary-1);
+    -webkit-appearance: none;
+    padding: 0;
+
+    svg {
+        path {
+            fill: map-get($color, border-color);
+        }
+    }
+
+    @media screen and (max-width: 1090px) {
+        height: 20px;
+        width: 20px;
+
+        svg {
+            width: 20px;
+            height: 20px;
+            vertical-align: top;
+        }
+    }
+}
+
+h1 {
+    // font-size: map-get($font-size , xxlarge);
+    font-size: calc(22px + (48 - 22) * ((100vw - 320px) / (1920 - 320)));
+    color: map-get($color, primary-1);
+}
+
+h2 {
+    font-size: calc(20px + (40 - 20) * ((100vw - 320px) / (1920 - 320)));
+    color: map-get($color, primary-1);
+}
+p {
+    font-size: calc(15px + (20 - 15) * ((100vw - 320px) / (1920 - 320)));
+    font-family: "Avenir-Medium";
+    line-height: 1.2;
+}
+
+hr {
+    border: 5px solid map-get($color, border-color);
+    width: 50%;
+    margin-left: auto;
+    opacity: 0.75;
+    @media screen and (max-width: 770px) {
+        margin-left: unset;
+    }
+}
+
+li {
+    font-size: calc(10px + (18 - 10) * ((100vw - 320px) / (1920 - 320)));
+}
+.btn {
+    &:hover {
+        background-color: map-get($color, primary-1);
+        color: white;
+    }
+}
+
+.large-margins {
+    @media (min-width: 991px) {
+        margin-top: 1rem !important;
+    }
+}
+
+.nav-anchor {
+    text-decoration: none !important;
+}

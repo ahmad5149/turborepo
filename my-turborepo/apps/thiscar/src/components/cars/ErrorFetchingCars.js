@@ -96,9 +96,9 @@ const sendErrorEmailFunction = async (errors, currentPath) => {
         process.env.NEXT_PUBLIC_ENVIRONMENT?.toLowerCase() === "production"
             ? ""
             : `[${process.env.NEXT_PUBLIC_ENVIRONMENT?.toUpperCase() ?? "DEV"}] - `;
-    const receivers_to = process.env.NEXT_PUBLIC_RECEIVER_TO_ERROR_EMAIL.split(",").map((email) => email.trim());
-    const receivers_cc = process.env.NEXT_PUBLIC_RECEIVER_CC_ERROR_EMAIL.split(",").map((email) => email.trim());
-    const receivers_bcc = process.env.NEXT_PUBLIC_RECEIVER_BCC_ERROR_EMAIL.split(",").map((email) => email.trim());
+    const receivers_to = process.env.NEXT_PUBLIC_RECEIVER_TO_ERROR_EMAIL?.split(",").map((email) => email.trim());
+    const receivers_cc = process.env.NEXT_PUBLIC_RECEIVER_CC_ERROR_EMAIL?.split(",").map((email) => email.trim());
+    const receivers_bcc = process.env.NEXT_PUBLIC_RECEIVER_BCC_ERROR_EMAIL?.split(",").map((email) => email.trim());
 
     const emailSubject = `${errorEnvironment}Exception Occurred On ${convertDateToLocalTime(new Date())}`;
 

@@ -168,24 +168,6 @@ async function GetAllCars(query, showComingSoonCars = true) {
             maxPage: Math.ceil(response.found / response.request_params.per_page)
         };
         return { pagination, items: response.hits };
-
-        // if (appConfig.API_URL) {
-        //   const url = new URL("/v2/listings", appConfig.API_URL);
-        //   url.search = new URLSearchParams(query).toString();
-
-        //   const response = await Api.Get(url);
-        //   if (
-        //     response === undefined ||
-        //     response === null ||
-        //     (response.hasOwnProperty("error") && response.error)
-        //   ) {
-        //     return null;
-        //   }
-        //   return response;
-        // }
-
-        // const response = await Api.Get(`${appConfig.API_URL}/listings`);
-        // return response;
     } catch (error) {
         throw error;
     }

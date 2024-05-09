@@ -1,0 +1,25 @@
+.buttonSection {
+    display: none;
+    @media screen and (max-width: 565px) {
+        display: block;
+    }
+    span {
+        margin-right: auto;
+    }
+    a {
+        text-decoration: none;
+    }
+}
+
+.custom-btn-fill {
+    svg {
+        width: 25px;
+        height: 25px;
+        path {
+            fill: transparent !important;
+        }
+    }
+}
+.home-page-overflow {
+    overflow-x: hidden;
+}

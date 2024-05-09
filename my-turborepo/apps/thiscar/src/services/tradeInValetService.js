@@ -1,3 +1,30 @@
+import { db } from "./firebase-admin";
+import { object, string, number, array } from "yup";
+
+export const appraisalSchema = object({
+    vin: string().required(),
+    year: number().required(),
+    make: string().required(),
+    model: string().required(),
+    trim: string().required(),
+    bodyStyle: string().required(),
+    engine: string().required(),
+    driveline: string().required(),
+    transmission: string().required(),
+    odometer: number().required(),
+    conditionType: string()
+        .required()
+        .oneOf(["Nicest One Ever", "Better Than Most", "Average", "A Few Issues", "Clunker"]),
+    conditionOwners: string().required().oneOf(["Single Owner", "Multi-Owner"]),
+    options: array().ensure(),
+    customerComments: string().default(""),
+    firstName: string().required(),
+    lastName: string().required(),
+    mobile: string().required(),
+    email: string().email().required(),
+    zipcode: string().required()
+});
+
 export class TIV {
     constructor() {
         this.accessToken = "";

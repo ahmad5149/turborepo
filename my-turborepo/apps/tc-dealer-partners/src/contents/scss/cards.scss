@@ -1,0 +1,117 @@
+@import "./global_fonts.scss";
+.careers {
+  .col-lg-4 {
+    margin-bottom: 25px;
+
+    .card_career {
+      height: 100%;
+      border-radius: 10px;
+      border: 1px solid transparent;
+      // width: 80%;
+      margin-bottom: 23px;
+
+      .card-body {
+        padding: 30px;
+        position: relative;
+
+        .card-title {
+          color: #2a0a4d;
+          font-size: 26px;
+          font-weight: 800;
+          line-height: 32px;
+          letter-spacing: 0em;
+          text-align: left;
+        }
+
+        //This class is not being used for the time being due to the client requirement
+        .job-card-title {
+          color: #2a0a4d;
+          font-size: 26px;
+          font-weight: 800;
+          line-height: 32px;
+          letter-spacing: 0em;
+          text-align: left;
+          height: 20%;
+        }
+
+        .card-text {
+          font-size: 15px;
+          font-weight: 500;
+          line-height: 21px;
+          letter-spacing: 0em;
+          text-align: left;
+          color: #1a1919;
+          margin-top: 16px;
+          margin-bottom: 24px;
+        }
+        //This class is not being used for the time being due to the client requirement
+
+        .job-card-text {
+          font-size: 15px;
+          font-weight: 500;
+          line-height: 21px;
+          letter-spacing: 0em;
+          text-align: left;
+          color: #1a1919;
+          margin-top: 16px;
+          margin-bottom: 24px;
+          height: 30%;
+          overflow: hidden;
+        }
+        .card-list {
+          li {
+            color: #1a1919;
+            font-size: 15px;
+            line-height: 21px;
+            letter-spacing: 0em;
+            text-align: left;
+            p {
+              font-size: 15px;
+            }
+          }
+        }
+
+        .border-purple {
+          border: 1px solid #2a0a4d !important;
+          color: #2a0a4d !important;
+          width: 78%;
+          border-radius: 23px;
+          position: absolute;
+          bottom: 23px;
+
+          &:hover {
+            color: white !important;
+          }
+          &:focus {
+            color: white !important;
+          }
+
+          svg {
+            fill: #e2e42b;
+            position: absolute;
+            right: 4px;
+            background: #2a0a4d;
+            border-radius: 50%;
+            top: 2px;
+          }
+
+          @media (max-width: 991px) {
+            width: 30%;
+          }
+
+          @media (max-width: 575px) {
+            width: 78%;
+          }
+        }
+      }
+    }
+
+    .bg-yellow {
+      background-color: #e2e42b;
+    }
+  }
+
+  @media (min-width: 1360px) {
+    padding: 0 160px;
+  }
+}

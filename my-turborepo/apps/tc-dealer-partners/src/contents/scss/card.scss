@@ -1,0 +1,37 @@
+@import "./global_fonts.scss";
+.card_p {
+    p {
+        font-size: 15px;
+        margin-bottom: 0;
+        padding-top: 2px;
+
+        @media screen and (max-width: 525px) {
+            font-size: 13px;
+            padding-top: 5px;
+        }
+    }
+}
+
+button {
+    transition: background-color 0.3s ease, color 0.3s ease;
+    background-color: white;
+    color: black;
+}
+
+button:focus {
+    background-color: #2a0a4d !important;
+    border-color: #2a0a4d;
+    outline: none;
+    color: white !important;
+}
+
+button:hover,
+button:focus:hover {
+    //background-color: #2a0a4d;
+    //color: white !important;
+}
+
+button:active {
+    background-color: white !important;
+    color: #2a0a4d;
+}
