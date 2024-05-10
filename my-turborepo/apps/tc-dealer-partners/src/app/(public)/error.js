@@ -42,6 +42,7 @@ export default function Error({ error, reset }) {
     useEffect(() => {
         // Trigger the email sending logic when currentPath is updated
         if (!emailSent && currentPath !== "") {
+            debugger;
             sendErrorEmailFunction([error], currentPath, user);
             setEmailSent(true);
         }
@@ -63,7 +64,7 @@ export default function Error({ error, reset }) {
                                 alt=""
                                 width={410}
                                 height={360}
-                                //   className="img-fluid mx-auto default-page-image"
+                            //   className="img-fluid mx-auto default-page-image"
                             />
                         ) : (
                             <img
@@ -102,18 +103,18 @@ const convertDateToLocalTime = (date) => {
 };
 
 const sendErrorEmailFunction = async (errors, currentPath, user) => {
+    debugger
     const errorEnvironment =
         process.env.NEXT_PUBLIC_ENVIRONMENT?.toLowerCase() === "production"
             ? ""
             : `[${process.env.NEXT_PUBLIC_ENVIRONMENT?.toUpperCase() ?? "DEV"}] - `;
-    const receivers_to = process.env.NEXT_PUBLIC_RECEIVER_TO_ERROR_EMAIL?.split(",").map((email) => email.trim());
-    const receivers_cc = process.env.NEXT_PUBLIC_RECEIVER_CC_ERROR_EMAIL?.split(",").map((email) => email.trim());
-    const receivers_bcc = process.env.NEXT_PUBLIC_RECEIVER_BCC_ERROR_EMAIL?.split(",").map((email) => email.trim());
+    const receivers_to = process.env.NEXT_PUBLIC_RECEIVER_TO_ERROR_EMAIL.split(",").map((email) => email.trim());
+    const receivers_cc = process.env.NEXT_PUBLIC_RECEIVER_CC_ERROR_EMAIL.split(",").map((email) => email.trim());
+    const receivers_bcc = process.env.NEXT_PUBLIC_RECEIVER_BCC_ERROR_EMAIL.split(",").map((email) => email.trim());
     const emailSubject = `${errorEnvironment}Exception Occurred On ${convertDateToLocalTime(new Date())}`;
 
-    const emailText = `Error Details:\n\n${"Error stack: " + (errors[0]?.stack ?? "N/A")}\n\n${
-        "Error message: " + (errors[0]?.message ?? "N/A")
-    }\n\n${"More details & digest: " + (errors[0] ?? "N/A") + (" & " + " " + errors[0].digest ?? "N/A")}\n\n`;
+    const emailText = `Error Details:\n\n${"Error stack: " + (errors[0]?.stack ?? "N/A")}\n\n${"Error message: " + (errors[0]?.message ?? "N/A")
+        }\n\n${"More details & digest: " + (errors[0] ?? "N/A") + (" & " + " " + errors[0].digest ?? "N/A")}\n\n`;
     const emailHtml = `<!DOCTYPE html>
     <html lang="en">
     <head>

@@ -1,0 +1,60 @@
+.icon-container {
+    position: relative;
+    width: fit-content;
+}
+
+.ki-arrows-circle {
+    cursor: pointer;
+}
+
+/* Define animation for rotating */
+@keyframes rotateAnimation {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.rotate {
+    animation: rotateAnimation 1s linear;
+}
+.zero-count {
+    width: 280px;
+}
+.response-dealer-select > div {
+    width: 160px;
+}
+.error{
+    color: red;
+    margin-top: 5px;
+}
+.status-circle {
+    display: inline-block;
+    width: 10px;
+    //    position: absolute;
+    //   left: 0;
+    height: 10px;
+    border-radius: 50%;
+    margin-left: 0;
+    margin-right: 3px;
+}
+
+.hr-declined {
+    background-color: #4747d1;
+}
+.hr-expired {
+    background-color: #FFC700;
+}
+.hr-purch-accepted {
+    background-color: #d14747;
+}
+.hr-purch-declined {
+    background-color: #8cd147;
+}
+.hr-purch-expired {
+    background-color: #48d1cc;
+}
+
+

@@ -104,9 +104,10 @@ export default function SRP({
     }, []);
 
     useEffect(() => {
-        if (!user) {
-            router.push("/");
-        }
+      if(!user)
+      {
+        router.push("/");
+      }
     }, [user]);
 
     useEffect(() => {
@@ -124,7 +125,7 @@ export default function SRP({
     useEffect(() => {
         const fetchModelData = async () => {
             try {
-                const modelsData = await GetModels(dealerConfig?.chromeDealerId);
+                const modelsData = await GetModels(dealerConfig.chromeDealerId);
                 setAllModels(modelsData);
             } catch (error) {
                 console.error("Error fetching models:", error);
@@ -792,7 +793,7 @@ export default function SRP({
         };
 
         fetchData();
-    }, [linkAllCars, sortDropDown, showComingSoonCars, filterApplied]);
+    }, [linkAllCars, sortDropDown, showComingSoonCars,filterApplied]);
 
     useEffect(() => {
         setUrlParams();

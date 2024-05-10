@@ -21,7 +21,7 @@ const CarsPage = async ({ searchParams }) => {
     const findYourRideData = await offsiteFindYourRidePageContent();
     const dealerData = await GetDealerData(user.dealer);
 
-    const allFacets = await GetAllFacets(dealerData?.chromeDealerId);
+    const allFacets = await GetAllFacets(dealerData.chromeDealerId);
 
     let dealerPackAmount = dealerData?.packAmount ?? 500;
     return (
@@ -34,7 +34,7 @@ const CarsPage = async ({ searchParams }) => {
                     carTileContactInfo={findYourRideData.contactDetailsText}
                     dealerConfig={dealerData}
                     packAmount={dealerPackAmount}
-                    dealerName={dealerData?.name ?? "THIScar.com"}
+                    dealerName={dealerData.name ?? "THIScar.com"}
                 />
             )}
             {!findYourRideData && <CarWithInvalidVIN message={"No sanity data found!"}></CarWithInvalidVIN>}
